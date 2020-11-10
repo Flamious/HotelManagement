@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement"
+        xmlns:viewmodels="clr-namespace:HotelManagement.ViewModels"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         
         >
-
+    <Page.DataContext>
+        <viewmodels:VMGuestPage />
+    </Page.DataContext>
     <Grid>
         <Grid Background="#673ab7">
             <materialDesign:Card Background="#673ab7"  Margin="5">
@@ -39,10 +42,10 @@
                                     <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3" VerticalAlignment="Bottom" Margin="0 0 5 0">Логин</TextBlock>
                                     <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4" VerticalAlignment="Bottom" Margin="0 0 5 0">Пароль</TextBlock>
 
-                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"></TextBlock>
-                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
-                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom"></TextBlock>
-                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}"  Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding StringBirthDate}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding PhoneNumber}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding Login}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding Password}"  Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom"></TextBlock>
                                     <Button Grid.Column="2" Grid.Row="5" Width="150" HorizontalAlignment="Center">Изменить</Button>
                                     <Border Grid.Row="6" Grid.ColumnSpan="2" BorderThickness="0 1 0 0"  BorderBrush="Gray" Padding="0 1 0 0">
                                         <Grid Margin="0 5 0 0">

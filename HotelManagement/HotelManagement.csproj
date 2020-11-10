@@ -78,6 +78,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\LoginDataMultiConverter.cs" />
+    <Compile Include="Guest\CurrentGuest.cs" />
+    <Compile Include="Guest\IGuest.cs" />
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="IoC\NinjectRegistrations.cs" />
     <Compile Include="Navigation\INavigation.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Structures\LoginData.cs" />
     <Compile Include="ViewModels\VMBase.cs" />
+    <Compile Include="ViewModels\VMGuestPage.cs" />
     <Compile Include="ViewModels\VMLoginPage.cs" />
     <Compile Include="ViewModels\VMMainWindow.cs" />
     <Compile Include="Views\Pages\Tables\CheckInTable.xaml.cs">

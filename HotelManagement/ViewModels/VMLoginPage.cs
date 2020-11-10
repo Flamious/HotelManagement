@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using BLL.Services;
+using HotelManagement.Guest;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
 using System;
@@ -16,6 +17,8 @@ namespace HotelManagement.ViewModels
     {
         private readonly INavigation navigation;
         private readonly IAuthorizationService authorization;
+        private readonly IGuest guest;
+
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
         {
@@ -33,6 +36,7 @@ namespace HotelManagement.ViewModels
                     switch (account.Modifier.Trim(' '))
                     {
                         case "Guest":
+                            guest.ChangeGuest(authorization.FindGuest(account.AccountID));
                             navigation.Navigate(new GuestPage());
                             break;
                         default:
@@ -45,8 +49,12 @@ namespace HotelManagement.ViewModels
 
         public VMLoginPage()
         {
-            this.navigation = IoC.Get<INavigation>();
+            navigation = IoC.Get<INavigation>();
+            guest = IoC.Get<IGuest>();
             authorization = BLL.ServiceModules.IoC.Get<IAuthorizationService>();
+            navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            guest.CurrentGuestChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
     }
 }
