@@ -1,0 +1,104 @@
+﻿<Page x:Class="HotelManagement.Pages.RegistrationPage"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManagement"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignLightBackground}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        >
+
+    <Grid>
+        <materialDesign:Card Margin="7" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.62*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.62*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="0">ФИО</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="0" Grid.Column="1">Фамилия И.О.</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1">Дата рождения</TextBlock>
+                <Border BorderBrush="Gray" BorderThickness="0 0 0 1" Grid.Row="1" Grid.ColumnSpan="2"></Border>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" Grid.Column="1">08.03.1990</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="2">Паспорт</TextBlock>
+                <TextBox FontSize="17" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}" Grid.Row="2" Grid.Column="1"></TextBox>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3">Тип комнаты</TextBlock>
+                <ComboBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignComboBox}" FontSize="17" Grid.Row="3" Grid.Column="1">
+                    <ComboBoxItem IsSelected="True">
+                        <TextBlock >Не выбрано</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>Люкс</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>Стандарт</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>Бюджет</TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4">Номер комнаты</TextBlock>
+                <ComboBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignComboBox}" FontSize="17" Grid.Row="4" Grid.Column="1">
+                    <ComboBoxItem IsSelected="True">
+                        <TextBlock >Не выбрано</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>1</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>2</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>3</TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="5">Доп. услуги</TextBlock>
+                <ComboBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignComboBox}" FontSize="17" Grid.Row="5" Grid.Column="1">
+                    <ComboBoxItem IsSelected="True">
+                        <TextBlock>Нажмите, чтобы выбрать</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <CheckBox>1</CheckBox>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <CheckBox>2</CheckBox>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <CheckBox>3</CheckBox>
+                    </ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="6">Дата начала</TextBlock>
+                <DatePicker VerticalAlignment="Center" Style="{DynamicResource MaterialDesignDatePicker}" Grid.Row="6" Grid.Column="1"></DatePicker>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="7">Дата окончания</TextBlock>
+                <DatePicker VerticalAlignment="Center" Style="{DynamicResource MaterialDesignDatePicker}" Grid.Row="7" Grid.Column="1"></DatePicker>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="8">Стоимость</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="8" Grid.Column="1">12000 руб.</TextBlock>
+                <Button Grid.Row="9" Grid.Column="0" Margin="0 0 5 0">Отменить</Button>
+                <Button Grid.Row="9" Grid.Column="1" Margin="5 0 0 0">Регистрация</Button>
+                <Image  Margin="5" Source="/Images/Room.jpg" Grid.Column="3" Grid.Row="0" Grid.RowSpan="5"></Image>
+                <Image Margin="5" Source="/Images/View.jpg" Grid.Column="3" Grid.Row="5"  Grid.RowSpan="5"></Image>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Page>
