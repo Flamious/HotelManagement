@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace HotelManagement.Navigation
@@ -6,8 +7,10 @@ namespace HotelManagement.Navigation
     public class MainNavigation : INavigation
     {
         public event PropertyChangedEventHandler CurrentPageChanged;
+        public event PropertyChangedEventHandler VisibilityChanged;
 
         private Page currentPage;
+        private Visibility currentVisibility;
         public Page CurrentPage
         {
             get
@@ -21,9 +24,27 @@ namespace HotelManagement.Navigation
             }
         }
 
+        public Visibility CurrentVisibility
+        {
+            get
+            {
+                return currentVisibility;
+            }
+            set
+            {
+                currentVisibility = value;
+                VisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("CurrentVisibility"));
+            }
+        }
+
         public void Navigate(Page page)
         {
             CurrentPage = page;
+        }
+
+        public void ChangeVisibility(Visibility visibility)
+        {
+            CurrentVisibility = visibility;
         }
     }
 }

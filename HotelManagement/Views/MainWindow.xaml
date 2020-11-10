@@ -18,7 +18,17 @@
 
     <Grid>
         <Grid>
-            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" ></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Background="#673ab7">
+                <StackPanel Height="35" Grid.Row="0" Visibility="{Binding CurrentVisibility}" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <TextBlock Style="{DynamicResource  MaterialDesignTextBlock}" Foreground="White" Margin="5 3 5 2" VerticalAlignment="Center">Account</TextBlock>
+                    <Button Content="Выйти" BorderBrush="White" Margin="5 3 5 2" Height="30"></Button>
+                </StackPanel>
+            </Grid>
+            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Window>
