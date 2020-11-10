@@ -16,7 +16,7 @@ namespace HotelManagement.ViewModels
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.Navigate(new LoginPage());
-            navigation.ChangeVisibility(Visibility.Visible);
+            navigation.ChangeVisibility(Visibility.Hidden);
         }
     }
 }

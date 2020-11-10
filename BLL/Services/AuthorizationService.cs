@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
+using BLL.ServiceModules;
 using DAL.Interfaces;
 
 namespace BLL.Services
@@ -11,6 +12,7 @@ namespace BLL.Services
         public AuthorizationService(IDbManager repos)
         {
             db = repos;
+            convertationService = IoC.Get<IConvertationService>();
         }
         public FoundAccount FindAccount(string login, string password)
         {

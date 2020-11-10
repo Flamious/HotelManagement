@@ -7,10 +7,14 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:HotelManagement.ViewModels"
+    xmlns:Converter="clr-namespace:HotelManagement.Converters"
     Width="350"
     Height="250"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Converter:LoginDataMultiConverter x:Key="loginDataMultiConverter" />
+    </Page.Resources>
     <Page.DataContext>
         <viewmodels:VMLoginPage />
     </Page.DataContext>
@@ -30,6 +34,7 @@
                         Вход
                     </TextBlock>
                     <TextBox
+                        Name ="Login"
                         Height="30"
                         Margin="15"
                         materialDesign:HintAssist.Hint="Логин"
@@ -45,8 +50,15 @@
                     <Button
                         Width="180"
                         Command="{Binding LoginCommand}"
-                        Style="{DynamicResource MaterialDesignRaisedDarkButton}">
-                        Войти
+                        Style="{DynamicResource MaterialDesignRaisedDarkButton}"
+                        Content="Войти">
+
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource loginDataMultiConverter}">
+                                <Binding ElementName="Login" Path="Text" />
+                                <Binding ElementName="Password" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
                 </StackPanel>
             </Grid>

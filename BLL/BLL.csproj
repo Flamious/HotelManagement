@@ -52,6 +52,7 @@
     <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\ModifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceModules\IoC.cs" />
     <Compile Include="ServiceModules\ServiceModule.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
     <Compile Include="Services\ConvertationService.cs" />
