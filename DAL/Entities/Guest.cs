@@ -9,9 +9,15 @@ namespace DAL
     [Table("Guest")]
     public partial class Guest
     {
-        public int GuestID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Guest()
+        {
+            CheckIn = new HashSet<CheckIn>();
+        }
 
-        public int AccountID { get; set; }
+        public int GuestId { get; set; }
+
+        public int AccountId { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -33,5 +39,8 @@ namespace DAL
         public string PhoneNumber { get; set; }
 
         public virtual Account Account { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CheckIn> CheckIn { get; set; }
     }
 }

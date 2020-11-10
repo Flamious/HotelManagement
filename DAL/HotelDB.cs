@@ -13,8 +13,13 @@ namespace DAL
         }
 
         public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<CheckIn> CheckIn { get; set; }
         public virtual DbSet<Guest> Guest { get; set; }
         public virtual DbSet<Modifier> Modifier { get; set; }
+        public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<RoomType> RoomType { get; set; }
+        public virtual DbSet<Service> Service { get; set; }
+        public virtual DbSet<CheckInServices> CheckInServices { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -29,6 +34,11 @@ namespace DAL
             modelBuilder.Entity<Account>()
                 .HasMany(e => e.Guest)
                 .WithRequired(e => e.Account)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CheckIn>()
+                .HasMany(e => e.CheckInServices)
+                .WithRequired(e => e.CheckIn)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Guest>()
@@ -47,6 +57,11 @@ namespace DAL
                 .Property(e => e.PhoneNumber)
                 .IsFixedLength();
 
+            modelBuilder.Entity<Guest>()
+                .HasMany(e => e.CheckIn)
+                .WithRequired(e => e.Guest)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Modifier>()
                 .Property(e => e.ModifierName)
                 .IsFixedLength();
@@ -54,6 +69,24 @@ namespace DAL
             modelBuilder.Entity<Modifier>()
                 .HasMany(e => e.Account)
                 .WithRequired(e => e.Modifier)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<RoomType>()
+                .Property(e => e.TypeName)
+                .IsFixedLength();
+
+            modelBuilder.Entity<RoomType>()
+                .HasMany(e => e.Room)
+                .WithRequired(e => e.RoomType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Service>()
+                .Property(e => e.ServiceName)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Service>()
+                .HasMany(e => e.CheckInServices)
+                .WithRequired(e => e.Service)
                 .WillCascadeOnDelete(false);
         }
     }

@@ -15,9 +15,9 @@ namespace DAL.Repositories
         public AccountData FindAccount(string login, string password)
         {
             return db.Account
-                .Join(db.Modifier, i => i.ModifierID, j => j.ModifierID, (i, j) => new AccountData()
+                .Join(db.Modifier, i => i.ModifierId, j => j.ModifierId, (i, j) => new AccountData()
                 {
-                    AccountID = i.AccountID,
+                    AccountID = i.AccountId,
                     Login = i.Login,
                     Password = i.Password,
                     Modifier = j.ModifierName
@@ -28,15 +28,15 @@ namespace DAL.Repositories
         public GuestData FindGuest(int accountId)
         {
             return db.Guest
-                .Join(db.Account, i => i.AccountID, j => j.AccountID, (i, j) => new GuestData()
+                .Join(db.Account, i => i.AccountId, j => j.AccountId, (i, j) => new GuestData()
                 {
-                    GuestID = i.GuestID,
+                    GuestID = i.GuestId,
                     Surname = i.Surname,
                     GuestName = i.GuestName,
                     Patronymic = i.Patronymic,
                     BirthDate = i.BirthDate,
                     PhoneNumber = i.PhoneNumber,
-                    AccountID = j.AccountID,
+                    AccountID = j.AccountId,
                     Login = j.Login,
                     Password = j.Password
                 })
