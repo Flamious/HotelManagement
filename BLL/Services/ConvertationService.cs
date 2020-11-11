@@ -34,32 +34,52 @@ namespace BLL.Services
             };
         }
 
-        public List<FoundGuestCheckIns> Convert(List<CheckInDataGuest> checkInDataList)
+        public List<FoundGuestCheckIn> Convert(List<CheckInDataGuest> checkInDataList)
         {
             if (checkInDataList.Count == 0) return null;
-            FoundGuestCheckIns guestCheckIns;
-            List<FoundGuestCheckIns> result = new List<FoundGuestCheckIns>();
+            FoundGuestCheckIn guestCheckIns;
+            List<FoundGuestCheckIn> result = new List<FoundGuestCheckIn>();
             foreach (CheckInDataGuest checkInData in checkInDataList)
             {
-                guestCheckIns = new FoundGuestCheckIns()
-                {
-                    CheckInId = checkInData.CheckInId,
-                    RoomNumber = checkInData.RoomNumber,
-                    RoomPrice = checkInData.RoomPrice,
-                    ServicesPrice = checkInData.ServicesPrice,
-                    StartDate = checkInData.StartDate.ToString("dd.MM.yyyy"),
-                    EndDate = checkInData.EndDate.ToString("dd.MM.yyyy")
-                };
-
-                foreach (ServiceDataGuest service in checkInData.Services)
-                {
-                    if (!(guestCheckIns.Services == "")) guestCheckIns.Services += "\n"; 
-                    guestCheckIns.Services += service.ServiceName.Trim(' ') + "(" + service.Number.ToString() + ")";
-                }
+                guestCheckIns = Convert(checkInData);
                 result.Add(guestCheckIns);
             }
+            return result;
+        }
 
+        public FoundGuestCheckIn Convert(CheckInDataGuest checkInDataGuest)
+        {
+            if (checkInDataGuest == null) return null;
+            FoundGuestCheckIn result = new FoundGuestCheckIn()
+            {
+                GuestId = checkInDataGuest.GuestId,
+                RoomNumber = checkInDataGuest.RoomNumber,
+                CheckInId = checkInDataGuest.CheckInId,
+                RoomPrice = checkInDataGuest.RoomPrice,
+                ServicesPrice = checkInDataGuest.ServicesPrice,
+                StartDateString = checkInDataGuest.StartDate.ToString("dd.MM.yyyy"),
+                EndDateString = checkInDataGuest.EndDate.ToString("dd.MM.yyyy"),
+                StartDate = checkInDataGuest.StartDate,
+                EndDate = checkInDataGuest.EndDate,
+                Services = new List<FoundService>(),
+                ServicesString = ""
+
+            };
+
+            foreach (ServiceDataGuest service in checkInDataGuest.Services)
+            {
+                if (!(result.ServicesString == "")) result.ServicesString += "\n";
+                result.ServicesString += service.ServiceName.Trim(' ') + "(" + service.Number.ToString() + ")";
+
+                result.Services.Add(new FoundService()
+                {
+                    ServiceId = service.ServiceId,
+                    ServiceName = service.ServiceName,
+                    Number = service.Number
+                });
+            }
             return result;
         }
     }
 }
+

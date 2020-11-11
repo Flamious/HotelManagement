@@ -7,6 +7,7 @@ namespace BLL.Interfaces
     {
         FoundAccount FindAccount(string login, string password);
         FoundGuest FindGuest(int accountId);
-        List<FoundGuestCheckIns> FindAllCheckIns(int guestId);
+        List<FoundGuestCheckIn> FindAllCheckIns(int guestId);
+        FoundGuestCheckIn FindClosestCheckIn(int guestId);
     }
 }

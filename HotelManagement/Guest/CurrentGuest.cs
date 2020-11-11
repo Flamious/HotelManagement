@@ -12,8 +12,10 @@ namespace HotelManagement.Guest
     {
         public event PropertyChangedEventHandler CurrentGuestChanged;
         public event PropertyChangedEventHandler PreviousChecksInChanged;
+        public event PropertyChangedEventHandler ClosestCheckInChanged;
         private FoundGuest guest;
-        private List<FoundGuestCheckIns> allCheckIns;
+        private List<FoundGuestCheckIn> allCheckIns;
+        private FoundGuestCheckIn closestCheckin;
         public FoundGuest Guest
         {
             get
@@ -26,7 +28,7 @@ namespace HotelManagement.Guest
                 CurrentGuestChanged?.Invoke(null, new PropertyChangedEventArgs("Guest"));
             }
         }
-        public List<FoundGuestCheckIns> AllCheckIns
+        public List<FoundGuestCheckIn> AllCheckIns
         {
             get
             {
@@ -38,13 +40,29 @@ namespace HotelManagement.Guest
                 PreviousChecksInChanged?.Invoke(null, new PropertyChangedEventArgs("AllCheckIns"));
             }
         }
+        public FoundGuestCheckIn ClosestCheckIn
+        {
+            get
+            {
+                return closestCheckin;
+            }
+            set
+            {
+                closestCheckin = value;
+                ClosestCheckInChanged?.Invoke(null, new PropertyChangedEventArgs("ClosestCheckIn"));
+            }
+        }
         public void ChangeGuest(FoundGuest guest)
         {
             Guest = guest;
         }
-        public void FillPreviousCheckList(List<FoundGuestCheckIns> checkIns)
+        public void FillPreviousCheckList(List<FoundGuestCheckIn> checkIns)
         {
             AllCheckIns = checkIns;
+        }
+        public void FillClosestCheckIn(FoundGuestCheckIn foundGuestCheckIn)
+        {
+            ClosestCheckIn = foundGuestCheckIn;
         }
     }
 }

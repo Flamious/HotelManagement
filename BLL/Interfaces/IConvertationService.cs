@@ -8,6 +8,7 @@ namespace BLL.Interfaces
     {
         FoundAccount Convert(AccountData accountData);
         FoundGuest Convert(GuestData guestData);
-        List<FoundGuestCheckIns> Convert(List<CheckInDataGuest> checkInDataGuest);
+        List<FoundGuestCheckIn> Convert(List<CheckInDataGuest> checkInDataGuest);
+        FoundGuestCheckIn Convert(CheckInDataGuest checkInDataGuest);
     }
 }

@@ -60,6 +60,7 @@ namespace DAL.Repositories
                     Services = db.Service
                     .Join(db.CheckInServices, k => k.ServiceId, l => l.ServiceId, (k, l) => new
                     {
+                        ServicId = k.ServiceId,
                         ServiceName = k.ServiceName,
                         Number = l.Number,
                         CheckInId = l.CheckInId
@@ -67,11 +68,43 @@ namespace DAL.Repositories
                     .Where(k => k.CheckInId == i.CheckInId)
                     .Select(k => new ServiceDataGuest()
                     {
+                        ServiceId = k.ServicId,
                         ServiceName = k.ServiceName,
                         Number = k.Number
                     }).ToList()
 
                 }).ToList();
+        }
+        public CheckInDataGuest FindClosestCheckIn(int guestId)
+        {
+            return db.CheckIn
+                .Join(db.Room, i => i.RoomId, j => j.RoomId, (i, j) => new CheckInDataGuest
+                {
+                    GuestId = i.GuestId,
+                    CheckInId = i.CheckInId,
+                    RoomNumber = j.RoomNumber,
+                    StartDate = i.StartDate,
+                    EndDate = i.EndDate,
+                    RoomPrice = i.RoomCost,
+                    ServicesPrice = i.ServicesCost,
+                    Services = db.Service
+                    .Join(db.CheckInServices, k => k.ServiceId, l => l.ServiceId, (k, l) => new
+                    {
+                        ServicId = k.ServiceId,
+                        ServiceName = k.ServiceName,
+                        Number = l.Number,
+                        CheckInId = l.CheckInId
+                    })
+                    .Where(k => k.CheckInId == i.CheckInId)
+                    .Select(k => new ServiceDataGuest()
+                    {
+                        ServiceId = k.ServicId,
+                        ServiceName = k.ServiceName,
+                        Number = k.Number
+                    }).ToList()
+
+                })
+                .FirstOrDefault(i => i.GuestId == guestId && i.EndDate >= DateTime.Now);
         }
     }
 }

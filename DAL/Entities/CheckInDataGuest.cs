@@ -9,12 +9,14 @@ namespace DAL.Entities
 {
     public class ServiceDataGuest
     {
+        public int ServiceId { get; set; }
         public string ServiceName { get; set; }
         public int Number { get; set; }
     }
 
     public class CheckInDataGuest
     {
+        public int GuestId { get; set; }
         public int CheckInId { get; set; }
         public int RoomNumber { get; set; }
         public int ServicesPrice { get; set; }
