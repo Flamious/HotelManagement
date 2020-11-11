@@ -93,11 +93,7 @@
                     <TabItem Header="История" Style="{DynamicResource MaterialDesignNavigationRailTabItem}" BorderBrush="#673ab7" Width="200">
                         <Border BorderBrush="#673ab7" BorderThickness="1 0 0 0">
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <DataGrid ItemsSource ="{Binding FoundGuestCheckIns}" AutoGenerateColumns="False">
+                                <DataGrid IsReadOnly="True" ItemsSource ="{Binding FoundGuestCheckIns}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="*" Header="ID" Binding="{Binding Path=CheckInId}"></DataGridTextColumn>
                                         <DataGridTextColumn Width="*" Header="Комната" Binding="{Binding Path=RoomNumber}"></DataGridTextColumn>
@@ -108,7 +104,6 @@
                                         <DataGridTextColumn Width="*" Header="Оказанные доп. услуги" Binding="{Binding Path=Services}"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Button Grid.Row="1" IsEnabled="False" VerticalAlignment="Bottom">Посмотреть список доп. услуг</Button>
                             </Grid>
                         </Border>
                     </TabItem>

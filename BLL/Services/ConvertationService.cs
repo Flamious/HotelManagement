@@ -53,7 +53,8 @@ namespace BLL.Services
 
                 foreach (ServiceDataGuest service in checkInData.Services)
                 {
-                    guestCheckIns.Services += service.ServiceName.Trim(' ') + "(" + service.Number.ToString() + ")" + "\n";
+                    if (!(guestCheckIns.Services == "")) guestCheckIns.Services += "\n"; 
+                    guestCheckIns.Services += service.ServiceName.Trim(' ') + "(" + service.Number.ToString() + ")";
                 }
                 result.Add(guestCheckIns);
             }

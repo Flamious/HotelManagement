@@ -25,7 +25,18 @@ namespace HotelManagement.ViewModels
         public string StringBirthDate => guest.Guest.BirthDate.ToString("dd.MM.yyyy");
         public string PhoneNumber => guest.Guest.PhoneNumber.Trim(' ');
         public string Login => guest.Guest.Login.Trim(' ');
-        public string Password => guest.Guest.Password.Trim(' ');
+        public string Password
+        {
+            get
+            {
+                string password = "";
+                for (int i = 0; i < guest.Guest.Password.Trim(' ').Length; i++)
+                {
+                    password += "*";
+                }
+                return password;
+            }
+        }
         #endregion
 
         #region All Previous Checks In Info
