@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using DAL.Entities;
+using System.Collections.Generic;
 
 namespace BLL.Services
 {
@@ -31,6 +32,33 @@ namespace BLL.Services
                 Login = guestData.Login,
                 Password = guestData.Password
             };
+        }
+
+        public List<FoundGuestCheckIns> Convert(List<CheckInDataGuest> checkInDataList)
+        {
+            if (checkInDataList.Count == 0) return null;
+            FoundGuestCheckIns guestCheckIns;
+            List<FoundGuestCheckIns> result = new List<FoundGuestCheckIns>();
+            foreach (CheckInDataGuest checkInData in checkInDataList)
+            {
+                guestCheckIns = new FoundGuestCheckIns()
+                {
+                    CheckInId = checkInData.CheckInId,
+                    RoomNumber = checkInData.RoomNumber,
+                    RoomPrice = checkInData.RoomPrice,
+                    ServicesPrice = checkInData.ServicesPrice,
+                    StartDate = checkInData.StartDate.ToString("dd.MM.yyyy"),
+                    EndDate = checkInData.EndDate.ToString("dd.MM.yyyy")
+                };
+
+                foreach (ServiceDataGuest service in checkInData.Services)
+                {
+                    guestCheckIns.Services += service.ServiceName.Trim(' ') + "(" + service.Number.ToString() + ")" + "\n";
+                }
+                result.Add(guestCheckIns);
+            }
+
+            return result;
         }
     }
 }

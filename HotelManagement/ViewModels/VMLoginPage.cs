@@ -36,7 +36,9 @@ namespace HotelManagement.ViewModels
                     switch (account.Modifier.Trim(' '))
                     {
                         case "Guest":
-                            guest.ChangeGuest(authorization.FindGuest(account.AccountID));
+                            var currentGuest = authorization.FindGuest(account.AccountID);
+                            guest.ChangeGuest(currentGuest);
+                            guest.FillPreviousCheckList(authorization.FindAllCheckIns(currentGuest.GuestID) ?? new List<FoundGuestCheckIns>());
                             navigation.Navigate(new GuestPage());
                             break;
                         default:

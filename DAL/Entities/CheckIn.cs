@@ -19,7 +19,7 @@ namespace DAL
 
         public int GuestId { get; set; }
 
-        public int? RoomId { get; set; }
+        public int RoomId { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime StartDate { get; set; }

@@ -11,7 +11,9 @@ namespace HotelManagement.Guest
     public class CurrentGuest : IGuest
     {
         public event PropertyChangedEventHandler CurrentGuestChanged;
+        public event PropertyChangedEventHandler PreviousChecksInChanged;
         private FoundGuest guest;
+        private List<FoundGuestCheckIns> allCheckIns;
         public FoundGuest Guest
         {
             get
@@ -21,12 +23,28 @@ namespace HotelManagement.Guest
             set
             {
                 guest = value;
-                CurrentGuestChanged?.Invoke(null, new PropertyChangedEventArgs("CurrentGuest"));
+                CurrentGuestChanged?.Invoke(null, new PropertyChangedEventArgs("Guest"));
+            }
+        }
+        public List<FoundGuestCheckIns> AllCheckIns
+        {
+            get
+            {
+                return allCheckIns;
+            }
+            set
+            {
+                allCheckIns = value;
+                PreviousChecksInChanged?.Invoke(null, new PropertyChangedEventArgs("AllCheckIns"));
             }
         }
         public void ChangeGuest(FoundGuest guest)
         {
             Guest = guest;
+        }
+        public void FillPreviousCheckList(List<FoundGuestCheckIns> checkIns)
+        {
+            AllCheckIns = checkIns;
         }
     }
 }

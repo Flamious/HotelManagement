@@ -2,6 +2,7 @@
 using BLL.Models;
 using BLL.ServiceModules;
 using DAL.Interfaces;
+using System.Collections.Generic;
 
 namespace BLL.Services
 {
@@ -22,6 +23,11 @@ namespace BLL.Services
         public FoundGuest FindGuest(int accountId)
         {
             return convertationService.Convert(db.Login.FindGuest(accountId));
+        }
+
+        public List<FoundGuestCheckIns> FindAllCheckIns(int guestid)
+        {
+            return convertationService.Convert(db.Login.FindAllPreviousCheckIns(guestid));
         }
     }
 }

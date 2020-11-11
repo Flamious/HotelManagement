@@ -11,7 +11,10 @@ namespace HotelManagement.Guest
     public interface IGuest
     {
         event PropertyChangedEventHandler CurrentGuestChanged;
+        event PropertyChangedEventHandler PreviousChecksInChanged;
         FoundGuest Guest { get; set; }
+        List<FoundGuestCheckIns> AllCheckIns { get; set; }
         void ChangeGuest(FoundGuest guest);
+        void FillPreviousCheckList(List<FoundGuestCheckIns> checkIns);
     }
 }

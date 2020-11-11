@@ -97,14 +97,15 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition Height="0.2*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <DataGrid>
+                                <DataGrid ItemsSource ="{Binding FoundGuestCheckIns}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Width="*" Header="ID"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Комната"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Цена (без доп. услуг)"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Цена доп. услуг"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Дата начала"></DataGridTextColumn>
-                                        <DataGridTextColumn Width="*" Header="Дата окончания"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="ID" Binding="{Binding Path=CheckInId}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Комната" Binding="{Binding Path=RoomNumber}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Цена (без доп. услуг)" Binding="{Binding Path=RoomPrice}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Цена доп. услуг" Binding="{Binding Path=ServicesPrice}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Дата начала" Binding="{Binding Path=StartDate}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Дата окончания" Binding="{Binding Path=EndDate}"></DataGridTextColumn>
+                                        <DataGridTextColumn Width="*" Header="Оказанные доп. услуги" Binding="{Binding Path=Services}"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button Grid.Row="1" IsEnabled="False" VerticalAlignment="Bottom">Посмотреть список доп. услуг</Button>

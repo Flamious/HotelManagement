@@ -49,6 +49,7 @@
     <Compile Include="Models\FoundAccount.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\FoundGuest.cs" />
+    <Compile Include="Models\FoundGuestCheckIns.cs" />
     <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\ModifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

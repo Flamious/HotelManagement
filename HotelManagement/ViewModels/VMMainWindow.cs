@@ -1,6 +1,7 @@
 ﻿using BLL.Models;
 using HotelManagement.Guest;
 using HotelManagement.Navigation;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,6 +25,7 @@ namespace HotelManagement.ViewModels
                     if(CurrentPage is GuestPage)
                     {
                         guest.ChangeGuest(new FoundGuest());
+                        guest.FillPreviousCheckList(new List<FoundGuestCheckIns>());
                     }
                     navigation.Navigate(new LoginPage());
                     navigation.ChangeVisibility(Visibility.Hidden);
