@@ -55,10 +55,10 @@
   <ItemGroup>
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\CheckIn.cs" />
-    <Compile Include="Entities\CheckInDataGuest.cs" />
+    <Compile Include="Entities\Data\CheckInDataGuest.cs" />
     <Compile Include="Entities\CheckInServices.cs" />
-    <Compile Include="Entities\AccountData.cs" />
-    <Compile Include="Entities\GuestData.cs" />
+    <Compile Include="Entities\Data\AccountData.cs" />
+    <Compile Include="Entities\Data\GuestData.cs" />
     <Compile Include="Entities\Guest.cs" />
     <Compile Include="HotelDB.cs" />
     <Compile Include="Interfaces\IDbManager.cs" />

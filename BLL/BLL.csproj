@@ -44,14 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbCrud.cs" />
     <Compile Include="Interfaces\IAuthorizationService.cs" />
     <Compile Include="Interfaces\IConvertationService.cs" />
-    <Compile Include="Models\FoundAccount.cs" />
+    <Compile Include="Interfaces\IDbCrud.cs" />
+    <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckInServicesModel.cs" />
+    <Compile Include="Models\SearchModels\FoundAccount.cs" />
     <Compile Include="Models\AccountModel.cs" />
-    <Compile Include="Models\FoundGuest.cs" />
-    <Compile Include="Models\FoundGuestCheckIn.cs" />
+    <Compile Include="Models\SearchModels\FoundGuest.cs" />
+    <Compile Include="Models\SearchModels\FoundGuestCheckIn.cs" />
     <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\ModifierModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\RoomTypeModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModules\IoC.cs" />
     <Compile Include="ServiceModules\ServiceModule.cs" />
