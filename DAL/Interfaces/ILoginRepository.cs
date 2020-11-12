@@ -1,4 +1,5 @@
 ﻿using DAL.Entities;
+using System.Collections.Generic;
 
 namespace DAL.Interfaces
 {
@@ -6,5 +7,7 @@ namespace DAL.Interfaces
     {
         AccountData FindAccount(string login, string password);
         GuestData FindGuest(int accountId);
+        List<CheckInDataGuest> FindAllPreviousCheckIns(int guestId);
+        CheckInDataGuest FindClosestCheckIn(int guestId);
     }
 }

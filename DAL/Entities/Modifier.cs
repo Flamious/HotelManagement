@@ -15,7 +15,7 @@ namespace DAL
             Account = new HashSet<Account>();
         }
 
-        public int ModifierID { get; set; }
+        public int ModifierId { get; set; }
 
         [Required]
         [StringLength(10)]

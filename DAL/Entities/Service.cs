@@ -6,30 +6,24 @@ namespace DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Account")]
-    public partial class Account
+    [Table("Service")]
+    public partial class Service
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account()
+        public Service()
         {
-            Guest = new HashSet<Guest>();
+            CheckInServices = new HashSet<CheckInServices>();
         }
 
-        public int AccountId { get; set; }
+        public int ServiceId { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public string Login { get; set; }
+        [StringLength(20)]
+        public string ServiceName { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        public string Password { get; set; }
-
-        public int ModifierId { get; set; }
-
-        public virtual Modifier Modifier { get; set; }
+        public int PriceForOneProvision { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Guest> Guest { get; set; }
+        public virtual ICollection<CheckInServices> CheckInServices { get; set; }
     }
 }

@@ -54,20 +54,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\CheckIn.cs" />
+    <Compile Include="Entities\CheckInDataGuest.cs" />
+    <Compile Include="Entities\CheckInServices.cs" />
     <Compile Include="Entities\AccountData.cs" />
-    <Compile Include="Entities\Guest.cs" />
     <Compile Include="Entities\GuestData.cs" />
+    <Compile Include="Entities\Guest.cs" />
     <Compile Include="HotelDB.cs" />
-    <Compile Include="Entities\Modifier.cs" />
     <Compile Include="Interfaces\IDbManager.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Entities\Modifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\DbManager.cs" />
     <Compile Include="Repositories\GuestRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\ModifierRepository.cs" />
+    <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\RoomType.cs" />
+    <Compile Include="Entities\Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
