@@ -17,54 +17,6 @@ namespace BLL.Services
                 Modifier = accountData.Modifier
             };
         }
-
-
-        public List<CheckInFullData> Convert(List<CheckInDataGuest> checkInDataList)
-        {
-            if (checkInDataList.Count == 0) return null;
-            CheckInFullData guestCheckIns;
-            List<CheckInFullData> result = new List<CheckInFullData>();
-            foreach (CheckInDataGuest checkInData in checkInDataList)
-            {
-                guestCheckIns = Convert(checkInData);
-                result.Add(guestCheckIns);
-            }
-            return result;
-        }
-
-        public CheckInFullData Convert(CheckInDataGuest checkInDataGuest)
-        {
-            if (checkInDataGuest == null) return null;
-            CheckInFullData result = new CheckInFullData()
-            {
-                GuestId = checkInDataGuest.GuestId,
-                RoomNumber = checkInDataGuest.RoomNumber,
-                CheckInId = checkInDataGuest.CheckInId,
-                RoomPrice = checkInDataGuest.RoomPrice,
-                ServicesPrice = checkInDataGuest.ServicesPrice,
-                StartDateString = checkInDataGuest.StartDate.ToString("dd.MM.yyyy"),
-                EndDateString = checkInDataGuest.EndDate.ToString("dd.MM.yyyy"),
-                StartDate = checkInDataGuest.StartDate,
-                EndDate = checkInDataGuest.EndDate,
-                Services = new List<FoundService>(),
-                ServicesString = ""
-
-            };
-
-            foreach (ServiceDataGuest service in checkInDataGuest.Services)
-            {
-                if (!(result.ServicesString == "")) result.ServicesString += "\n";
-                result.ServicesString += service.ServiceName.Trim(' ') + "(" + service.Number.ToString() + ")";
-
-                result.Services.Add(new FoundService()
-                {
-                    ServiceId = service.ServiceId,
-                    ServiceName = service.ServiceName,
-                    Number = service.Number
-                });
-            }
-            return result;
-        }
     }
 }
 

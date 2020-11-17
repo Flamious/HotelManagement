@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class ChildModel
+    public class ChildModel : GuestModel
     {
+        public string BirthCertificate { get; set; }
     }
 }

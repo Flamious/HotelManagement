@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class GuestModel
+    public class GuestModel
     {
+        public int GuestId { get; set; }
+        public string Surname { get; set; }
+        public string GuestName { get; set; }
+        public string Patronymic { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

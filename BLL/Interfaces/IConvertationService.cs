@@ -7,7 +7,5 @@ namespace BLL.Interfaces
     public interface IConvertationService
     {
         AccountFullData Convert(AccountData accountData);
-        List<CheckInFullData> Convert(List<CheckInDataGuest> checkInDataGuest);
-        CheckInFullData Convert(CheckInDataGuest checkInDataGuest);
     }
 }

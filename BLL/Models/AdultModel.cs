@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class AdultModel
+    public class AdultModel : GuestModel
     {
+        public string PassportNumber { get; set; }
+        public string PassportInfo { get; set; }
     }
 }

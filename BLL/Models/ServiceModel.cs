@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class ServiceModel
+    public class ServiceModel
     {
+        public int ServiceId { get; set; }
+        public string ServiceName { get; set; }
+        public int PriceForOneProvision { get; set; }
     }
 }

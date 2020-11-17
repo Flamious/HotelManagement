@@ -9,25 +9,10 @@ namespace BLL.Interfaces
 {
     public interface IDbCrud
     {
-        List<AccountModel> GetAllAccounts();
-        List<GuestModel> GetAllGuests();
-        List<ModifierModel> GetAllModifiers();
-        List<RoomModel> GetAllRooms();
-        List<RoomTypeModel> GetAllRoomTypes();
-        List<CheckInModel> GetAllChecksIn();
-        List<ServiceModel> GetAllServices();
-        List<CheckInServicesModel> GetAllCheckInServices();
-
         void CreateGuest(GuestModel guest);
-        void CreateAccount(AccountModel account);
-        void CreateCheckIn(CheckInModel checkIn);
-        void CreateCheckInServicesConnection(CheckInServicesModel checkInServices);
-
+        void CreateCheckIn(CheckInModel checkIn, List<ServiceModel> services, List<GuestModel> guests);
         void UpdateGuest(GuestModel guest);
-        void UpdateAccount(AccountModel account);
-        void UpdateCheckIn(CheckInModel checkIn);
-        void UpdateCheckInServicesConnection(CheckInServicesModel checkInServices);
-
+        void UpdateCheckIn(CheckInModel checkIn, List<ServiceModel> services, List<GuestModel> guests);
         void DeleteCheckIn(int checkInid);
     }
 }
