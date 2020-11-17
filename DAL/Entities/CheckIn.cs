@@ -12,12 +12,11 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CheckIn()
         {
+            CheckInGuest = new HashSet<CheckInGuest>();
             CheckInServices = new HashSet<CheckInServices>();
         }
 
         public int CheckInId { get; set; }
-
-        public int GuestId { get; set; }
 
         public int RoomId { get; set; }
 
@@ -31,9 +30,14 @@ namespace DAL
 
         public int ServicesCost { get; set; }
 
-        public virtual Guest Guest { get; set; }
+        public int? LastEmployeeId { get; set; }
+
+        public virtual Account Account { get; set; }
 
         public virtual Room Room { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CheckInGuest> CheckInGuest { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckInServices> CheckInServices { get; set; }

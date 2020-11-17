@@ -15,9 +15,9 @@ namespace BLL.Models
         public RoomTypeModel() { }
         public RoomTypeModel(RoomType roomType)
         {
-            TypeId = roomType.TypeId;
-            TypeName = roomType.TypeName;
-            PriceForOnePerson = roomType.PriceForOnePerson;
+            //TypeId = roomType.TypeId;
+            //TypeName = roomType.TypeName;
+            //PriceForOnePerson = roomType.PriceForOnePerson;
         }
     }
 }

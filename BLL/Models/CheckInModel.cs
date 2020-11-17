@@ -19,13 +19,13 @@ namespace BLL.Models
         public CheckInModel() { }
         public CheckInModel(CheckIn checkIn)
         {
-            CheckInId = checkIn.CheckInId;
-            GuestId = checkIn.GuestId;
-            RoomId = checkIn.RoomId;
-            StartDate = checkIn.StartDate;
-            EndDate = checkIn.EndDate;
-            RoomCost = checkIn.RoomCost;
-            ServicesCost = checkIn.ServicesCost;
+            //CheckInId = checkIn.CheckInId;
+            //GuestId = checkIn.GuestId;
+            //RoomId = checkIn.RoomId;
+            //StartDate = checkIn.StartDate;
+            //EndDate = checkIn.EndDate;
+            //RoomCost = checkIn.RoomCost;
+            //ServicesCost = checkIn.ServicesCost;
         }
     }
 }

@@ -15,13 +15,13 @@ namespace BLL.Models
         public GuestModel() { }
         public GuestModel(Guest guest) 
         {
-            GuestId = guest.GuestId;
-            AccountId = guest.AccountId;
-            Surname = guest.Surname;
-            GuestName = guest.GuestName;
-            Patronymic = guest.Patronymic;
-            BirthDate = guest.BirthDate;
-            PhoneNumber = guest.PhoneNumber;
+            //GuestId = guest.GuestId;
+            //AccountId = guest.AccountId;
+            //Surname = guest.Surname;
+            //GuestName = guest.GuestName;
+            //Patronymic = guest.Patronymic;
+            //BirthDate = guest.BirthDate;
+            //PhoneNumber = guest.PhoneNumber;
         }
     }
 }

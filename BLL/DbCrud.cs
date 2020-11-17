@@ -54,16 +54,16 @@ namespace BLL
 
         public void CreateGuest(GuestModel guest)
         {
-            db.Guests.Create(new Guest()
-            {
-                Surname = guest.Surname,
-                GuestName = guest.GuestName,
-                Patronymic = guest.Patronymic,
-                AccountId = guest.AccountId,
-                BirthDate = guest.BirthDate,
-                PhoneNumber = guest.PhoneNumber
-            });
-            Save();
+            //db.Guests.Create(new Guest()
+            //{
+            //    Surname = guest.Surname,
+            //    GuestName = guest.GuestName,
+            //    Patronymic = guest.Patronymic,
+            //    AccountId = guest.AccountId,
+            //    BirthDate = guest.BirthDate,
+            //    PhoneNumber = guest.PhoneNumber
+            //});
+            //Save();
         }
         public void CreateAccount(AccountModel account)
         {
@@ -77,16 +77,16 @@ namespace BLL
         }
         public void CreateCheckIn(CheckInModel checkIn)
         {
-            db.ChecksIn.Create(new CheckIn()
-            {
-                GuestId = checkIn.GuestId,
-                EndDate = checkIn.EndDate,
-                RoomCost = checkIn.RoomCost,
-                RoomId = checkIn.RoomId,
-                ServicesCost = checkIn.ServicesCost,
-                StartDate = checkIn.StartDate
-            });
-            Save();
+            //db.ChecksIn.Create(new CheckIn()
+            //{
+            //    GuestId = checkIn.GuestId,
+            //    EndDate = checkIn.EndDate,
+            //    RoomCost = checkIn.RoomCost,
+            //    RoomId = checkIn.RoomId,
+            //    ServicesCost = checkIn.ServicesCost,
+            //    StartDate = checkIn.StartDate
+            //});
+            //Save();
         }
         public void CreateCheckInServicesConnection(CheckInServicesModel checkInServices)
         {
