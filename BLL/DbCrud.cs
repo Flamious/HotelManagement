@@ -23,6 +23,10 @@ namespace BLL
         {
             return db.Accounts.GetList().Select(i => new AccountModel(i)).ToList();
         }
+        public List<GuestModel> GetAllGuests()
+        {
+            return db.Guests.GetList().Select(i => new GuestModel(i)).ToList();
+        }
         public List<CheckInModel> GetAllChecksIn()
         {
             return db.ChecksIn.GetList().Select(i => new CheckInModel(i)).ToList();
@@ -48,6 +52,19 @@ namespace BLL
             return db.Modifiers.GetList().Select(i => new ModifierModel(i)).ToList();
         }
 
+        public void CreateGuest(GuestModel guest)
+        {
+            db.Guests.Create(new Guest()
+            {
+                Surname = guest.Surname,
+                GuestName = guest.GuestName,
+                Patronymic = guest.Patronymic,
+                AccountId = guest.AccountId,
+                BirthDate = guest.BirthDate,
+                PhoneNumber = guest.PhoneNumber
+            });
+            Save();
+        }
         public void CreateAccount(AccountModel account)
         {
             db.Accounts.Create(new Account()
@@ -82,6 +99,16 @@ namespace BLL
             Save();
         }
 
+        public void UpdateGuest(GuestModel guest)
+        {
+            Guest prevGuest = db.Guests.GetItem(guest.GuestId);
+            prevGuest.Surname = guest.Surname;
+            prevGuest.GuestName = guest.GuestName;
+            prevGuest.Patronymic = guest.Patronymic;
+            prevGuest.BirthDate = guest.BirthDate;
+            prevGuest.PhoneNumber = guest.PhoneNumber;
+            Save();
+        }
         public void UpdateAccount(AccountModel account)
         {
             Account prevAccount = db.Accounts.GetItem(account.AccountId);

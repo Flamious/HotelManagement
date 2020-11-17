@@ -6,6 +6,8 @@ namespace DAL.Interfaces
     public interface ILoginRepository
     {
         AccountData FindAccount(string login, string password);
-        List<CheckInData> FindAllPreviousCheckIns(int guestId);
+        GuestData FindGuest(int accountId);
+        List<CheckInDataGuest> FindAllPreviousCheckIns(int guestId);
+        CheckInDataGuest FindClosestCheckIn(int guestId);
     }
 }

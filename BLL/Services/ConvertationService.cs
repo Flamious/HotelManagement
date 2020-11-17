@@ -18,13 +18,28 @@ namespace BLL.Services
             };
         }
 
+        public GuestFullData Convert(GuestData guestData)
+        {
+            return new GuestFullData()
+            {
+                AccountID = guestData.AccountID,
+                GuestID = guestData.GuestID,
+                Surname = guestData.Surname,
+                GuestName = guestData.GuestName,
+                Patronymic = guestData.Patronymic,
+                BirthDate = guestData.BirthDate,
+                PhoneNumber = guestData.PhoneNumber,
+                Login = guestData.Login,
+                Password = guestData.Password
+            };
+        }
 
-        public List<CheckInFullData> Convert(List<CheckInData> checkInDataList)
+        public List<GuestCheckInFullData> Convert(List<CheckInDataGuest> checkInDataList)
         {
             if (checkInDataList.Count == 0) return null;
-            CheckInFullData guestCheckIns;
-            List<CheckInFullData> result = new List<CheckInFullData>();
-            foreach (CheckInData checkInData in checkInDataList)
+            GuestCheckInFullData guestCheckIns;
+            List<GuestCheckInFullData> result = new List<GuestCheckInFullData>();
+            foreach (CheckInDataGuest checkInData in checkInDataList)
             {
                 guestCheckIns = Convert(checkInData);
                 result.Add(guestCheckIns);
@@ -32,10 +47,10 @@ namespace BLL.Services
             return result;
         }
 
-        public CheckInFullData Convert(CheckInData checkInDataGuest)
+        public GuestCheckInFullData Convert(CheckInDataGuest checkInDataGuest)
         {
             if (checkInDataGuest == null) return null;
-            CheckInFullData result = new CheckInFullData()
+            GuestCheckInFullData result = new GuestCheckInFullData()
             {
                 GuestId = checkInDataGuest.GuestId,
                 RoomNumber = checkInDataGuest.RoomNumber,
