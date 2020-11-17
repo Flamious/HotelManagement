@@ -19,11 +19,11 @@ namespace BLL.Services
         }
 
 
-        public List<GuestCheckInFullData> Convert(List<CheckInDataGuest> checkInDataList)
+        public List<CheckInFullData> Convert(List<CheckInDataGuest> checkInDataList)
         {
             if (checkInDataList.Count == 0) return null;
-            GuestCheckInFullData guestCheckIns;
-            List<GuestCheckInFullData> result = new List<GuestCheckInFullData>();
+            CheckInFullData guestCheckIns;
+            List<CheckInFullData> result = new List<CheckInFullData>();
             foreach (CheckInDataGuest checkInData in checkInDataList)
             {
                 guestCheckIns = Convert(checkInData);
@@ -32,10 +32,10 @@ namespace BLL.Services
             return result;
         }
 
-        public GuestCheckInFullData Convert(CheckInDataGuest checkInDataGuest)
+        public CheckInFullData Convert(CheckInDataGuest checkInDataGuest)
         {
             if (checkInDataGuest == null) return null;
-            GuestCheckInFullData result = new GuestCheckInFullData()
+            CheckInFullData result = new CheckInFullData()
             {
                 GuestId = checkInDataGuest.GuestId,
                 RoomNumber = checkInDataGuest.RoomNumber,

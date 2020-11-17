@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class ServiceModel
+    class AdultModel
     {
     }
 }
