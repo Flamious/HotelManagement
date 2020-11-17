@@ -19,10 +19,10 @@ namespace DAL
         public int TypeId { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(15)]
         public string TypeName { get; set; }
 
-        public int PriceForOnePerson { get; set; }
+        public int PriceForOnePersonPerDay { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Room { get; set; }

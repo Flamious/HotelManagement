@@ -1,10 +1,8 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using BLL.Services;
-using HotelManagement.Guest;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
-using HotelManagement.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,6 @@ namespace HotelManagement.ViewModels
     {
         private readonly INavigation navigation;
         private readonly IAuthorizationService authorization;
-        private readonly IGuest guest;
 
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
@@ -38,11 +35,7 @@ namespace HotelManagement.ViewModels
                     switch (account.Modifier.Trim(' '))
                     {
                         case "Guest":
-                            var currentGuest = authorization.FindGuest(account.AccountID);
-                            guest.ChangeGuest(currentGuest);
-                            guest.FillPreviousCheckList(authorization.FindAllCheckIns(currentGuest.GuestID) ?? new List<GuestCheckInFullData>());
-                            guest.FillClosestCheckIn(authorization.FindClosestCheckIn(currentGuest.GuestID) ?? new GuestCheckInFullData());
-                            navigation.Navigate(new GuestPage());
+                            navigation.Navigate(new EmployeePage());
                             break;
                         default:
                             return;
@@ -52,25 +45,12 @@ namespace HotelManagement.ViewModels
             }
         }
 
-        private RelayCommand openRegistrationCommand;
-        public RelayCommand OpenRegistrationCommand
-        {
-            get
-            {
-                return openRegistrationCommand ?? (openRegistrationCommand = new RelayCommand(obj =>
-                {
-                    navigation.Navigate(new RegistrationPage());
-                }));
-            }
-        }
         public VMLoginPage()
         {
             navigation = IoC.Get<INavigation>();
-            guest = IoC.Get<IGuest>();
             authorization = BLL.ServiceModules.IoC.Get<IAuthorizationService>();
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
-            guest.CurrentGuestChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
     }
 }
