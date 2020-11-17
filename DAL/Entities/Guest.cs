@@ -12,12 +12,10 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Guest()
         {
-            CheckIn = new HashSet<CheckIn>();
+            CheckInGuest = new HashSet<CheckInGuest>();
         }
 
         public int GuestId { get; set; }
-
-        public int AccountId { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -34,13 +32,14 @@ namespace DAL
         [Column(TypeName = "date")]
         public DateTime BirthDate { get; set; }
 
-        [Required]
         [StringLength(11)]
         public string PhoneNumber { get; set; }
 
-        public virtual Account Account { get; set; }
+        public virtual Adult Adult { get; set; }
+
+        public virtual Child Child { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CheckIn> CheckIn { get; set; }
+        public virtual ICollection<CheckInGuest> CheckInGuest { get; set; }
     }
 }

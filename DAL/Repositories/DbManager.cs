@@ -14,7 +14,6 @@ namespace DAL.Repositories
         private RoomTypeRepository roomTypeRepository;
         private ServiceRepository serviceRepository;
         private LoginRepository loginRepository;
-        private RegistrationRepository registrationRepository;
 
         public DbManager()
         {
@@ -108,15 +107,6 @@ namespace DAL.Repositories
             }
         }
 
-        public IRegistrationRepository Registration
-        {
-            get
-            {
-                if (registrationRepository == null)
-                    registrationRepository = new RegistrationRepository(db);
-                return registrationRepository;
-            }
-        }
 
         public int Save()
         {

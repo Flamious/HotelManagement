@@ -12,7 +12,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
-            Guest = new HashSet<Guest>();
+            CheckIn = new HashSet<CheckIn>();
         }
 
         public int AccountId { get; set; }
@@ -27,9 +27,18 @@ namespace DAL
 
         public int ModifierId { get; set; }
 
+        [StringLength(30)]
+        public string Sruname { get; set; }
+
+        [StringLength(30)]
+        public string Username { get; set; }
+
+        [StringLength(30)]
+        public string Patronymic { get; set; }
+
         public virtual Modifier Modifier { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Guest> Guest { get; set; }
+        public virtual ICollection<CheckIn> CheckIn { get; set; }
     }
 }

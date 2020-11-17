@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Interfaces
+namespace DAL.Repositories
 {
-    public interface IRegistrationRepository
+    class AdultRepository
     {
-        bool IsLoginAbsent(string login);
     }
 }

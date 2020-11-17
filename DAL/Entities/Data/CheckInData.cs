@@ -14,7 +14,7 @@ namespace DAL.Entities
         public int Number { get; set; }
     }
 
-    public class CheckInDataGuest
+    public class CheckInData
     {
         public int GuestId { get; set; }
         public int CheckInId { get; set; }
