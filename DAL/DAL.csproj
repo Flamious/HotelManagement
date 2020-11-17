@@ -58,13 +58,11 @@
     <Compile Include="Entities\Data\CheckInDataGuest.cs" />
     <Compile Include="Entities\CheckInServices.cs" />
     <Compile Include="Entities\Data\AccountData.cs" />
-    <Compile Include="Entities\Data\GuestData.cs" />
     <Compile Include="Entities\Guest.cs" />
     <Compile Include="HotelDB.cs" />
     <Compile Include="Interfaces\IDbManager.cs" />
     <Compile Include="Interfaces\IDirectory.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
-    <Compile Include="Interfaces\IRegistrationRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Entities\Modifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,7 +76,6 @@
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\RoomType.cs" />
     <Compile Include="Entities\Service.cs" />
-    <Compile Include="Repositories\RegistrationRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
     <Compile Include="Repositories\RoomTypeRepository.cs" />
     <Compile Include="Repositories\ServiceRepository.cs" />

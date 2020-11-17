@@ -62,16 +62,6 @@
                         </Button.CommandParameter>
                     </Button>
                     
-                    <Button
-                        Width="90"
-                        Margin="5"
-                        Command="{Binding OpenRegistrationCommand}"
-                        Style="{DynamicResource MaterialDesignToolButton}"
-                        Content="Регистрация"
-                        FontSize="10"
-                        VerticalContentAlignment="Top"
-                        Height="22">
-                    </Button>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>

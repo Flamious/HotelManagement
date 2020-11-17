@@ -18,21 +18,6 @@ namespace BLL.Services
             };
         }
 
-        public GuestFullData Convert(GuestData guestData)
-        {
-            return new GuestFullData()
-            {
-                AccountID = guestData.AccountID,
-                GuestID = guestData.GuestID,
-                Surname = guestData.Surname,
-                GuestName = guestData.GuestName,
-                Patronymic = guestData.Patronymic,
-                BirthDate = guestData.BirthDate,
-                PhoneNumber = guestData.PhoneNumber,
-                Login = guestData.Login,
-                Password = guestData.Password
-            };
-        }
 
         public List<GuestCheckInFullData> Convert(List<CheckInDataGuest> checkInDataList)
         {

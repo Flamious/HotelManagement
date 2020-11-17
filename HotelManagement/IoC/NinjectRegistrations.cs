@@ -1,5 +1,4 @@
-﻿using HotelManagement.Guest;
-using HotelManagement.Navigation;
+﻿using HotelManagement.Navigation;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -14,8 +13,6 @@ namespace HotelManagement
         public override void Load()
         {
             Bind<INavigation>().To<MainNavigation>().InSingletonScope();
-            Bind<IGuest>().To<CurrentGuest>().InSingletonScope();
-            Bind<IRegistration>().To<CurrentRegistration>().InSingletonScope();
         }
     }
 }

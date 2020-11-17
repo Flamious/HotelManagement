@@ -11,7 +11,6 @@
         IRepository<Room> Rooms { get; }
         IRepository<RoomType> RoomTypes { get; }
         ILoginRepository Login { get; }
-        IRegistrationRepository Registration { get; }
         int Save();
     }
 }
