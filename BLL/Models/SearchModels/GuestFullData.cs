@@ -2,10 +2,9 @@
 
 namespace BLL.Models
 {
-    public class FoundGuest
+    public class GuestFullData
     {
         public int GuestID { get; set; }
-
         public int AccountID { get; set; }
         public string Surname { get; set; }
         public string GuestName { get; set; }

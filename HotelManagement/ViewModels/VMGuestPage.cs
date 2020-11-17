@@ -56,9 +56,29 @@ namespace HotelManagement.ViewModels
         public string Period => guest.ClosestCheckIn.StartDateString == "" ? guest.ClosestCheckIn.StartDateString : guest.ClosestCheckIn.StartDateString + " - " + guest.ClosestCheckIn.EndDateString;
         public string RoomPrice => guest.ClosestCheckIn.RoomPrice == -1 ? "" : guest.ClosestCheckIn.RoomPrice.ToString();
         public string ServicesPrice => guest.ClosestCheckIn.ServicesPrice == -1 ? "" : guest.ClosestCheckIn.ServicesPrice.ToString();
+        public string ButtonKind
+        {
+            get
+            {
+                if (guest.ClosestCheckIn.StartDateString == "") return "Add";
+                if (guest.ClosestCheckIn.StartDate > DateTime.Now) return "Create";
+                if (guest.ClosestCheckIn.StartDate < DateTime.Now) return "Create";
+                return "";
+            }
+        }
+        public string ButtonName
+        {
+            get
+            {
+                if (guest.ClosestCheckIn.StartDateString == "") return "Создать";
+                if (guest.ClosestCheckIn.StartDate > DateTime.Now) return "Редактировать";
+                if (guest.ClosestCheckIn.StartDate < DateTime.Now) return "";
+                return "";
+            }
+        }
         #endregion
         #region All Previous Checks In Info
-        public ICollection<FoundGuestCheckIn> FoundGuestCheckIns => guest.AllCheckIns.OrderBy(i=>i.StartDate).ToList();
+        public ICollection<GuestCheckInFullData> FoundGuestCheckIns => guest.AllCheckIns.OrderBy(i=>i.StartDate).ToList();
         #endregion
         public VMGuestPage()
         {

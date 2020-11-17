@@ -15,22 +15,22 @@ namespace BLL.Services
             db = repos;
             convertationService = IoC.Get<IConvertationService>();
         }
-        public FoundAccount FindAccount(string login, string password)
+        public AccountFullData FindAccount(string login, string password)
         {
             return convertationService.Convert(db.Login.FindAccount(login, password));
         }
 
-        public FoundGuest FindGuest(int accountId)
+        public GuestFullData FindGuest(int accountId)
         {
             return convertationService.Convert(db.Login.FindGuest(accountId));
         }
 
-        public List<FoundGuestCheckIn> FindAllCheckIns(int guestid)
+        public List<GuestCheckInFullData> FindAllCheckIns(int guestid)
         {
             return convertationService.Convert(db.Login.FindAllPreviousCheckIns(guestid));
         }
 
-        public FoundGuestCheckIn FindClosestCheckIn(int guestId)
+        public GuestCheckInFullData FindClosestCheckIn(int guestId)
         {
             return convertationService.Convert(db.Login.FindClosestCheckIn(guestId));
         }

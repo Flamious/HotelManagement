@@ -13,10 +13,10 @@ namespace HotelManagement.Guest
         public event PropertyChangedEventHandler CurrentGuestChanged;
         public event PropertyChangedEventHandler PreviousChecksInChanged;
         public event PropertyChangedEventHandler ClosestCheckInChanged;
-        private FoundGuest guest;
-        private List<FoundGuestCheckIn> allCheckIns;
-        private FoundGuestCheckIn closestCheckin;
-        public FoundGuest Guest
+        private GuestFullData guest;
+        private List<GuestCheckInFullData> allCheckIns;
+        private GuestCheckInFullData closestCheckin;
+        public GuestFullData Guest
         {
             get
             {
@@ -28,7 +28,7 @@ namespace HotelManagement.Guest
                 CurrentGuestChanged?.Invoke(null, new PropertyChangedEventArgs("Guest"));
             }
         }
-        public List<FoundGuestCheckIn> AllCheckIns
+        public List<GuestCheckInFullData> AllCheckIns
         {
             get
             {
@@ -40,7 +40,7 @@ namespace HotelManagement.Guest
                 PreviousChecksInChanged?.Invoke(null, new PropertyChangedEventArgs("AllCheckIns"));
             }
         }
-        public FoundGuestCheckIn ClosestCheckIn
+        public GuestCheckInFullData ClosestCheckIn
         {
             get
             {
@@ -52,15 +52,15 @@ namespace HotelManagement.Guest
                 ClosestCheckInChanged?.Invoke(null, new PropertyChangedEventArgs("ClosestCheckIn"));
             }
         }
-        public void ChangeGuest(FoundGuest guest)
+        public void ChangeGuest(GuestFullData guest)
         {
             Guest = guest;
         }
-        public void FillPreviousCheckList(List<FoundGuestCheckIn> checkIns)
+        public void FillPreviousCheckList(List<GuestCheckInFullData> checkIns)
         {
             AllCheckIns = checkIns;
         }
-        public void FillClosestCheckIn(FoundGuestCheckIn foundGuestCheckIn)
+        public void FillClosestCheckIn(GuestCheckInFullData foundGuestCheckIn)
         {
             ClosestCheckIn = foundGuestCheckIn;
         }

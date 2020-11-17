@@ -22,86 +22,100 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Page.Resources>
-        <Grid>
-            <Grid Background="#673ab7">
-                <materialDesign:Card Background="#673ab7"  Margin="5">
-                    <TabControl Style="{DynamicResource MaterialDesignNavigatilRailTabControl}" >
-                        <TabItem Header="Аккаунт" Style="{DynamicResource MaterialDesignNavigationRailTabItem}" Width="200">
-                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <Border BorderBrush="#673ab7" BorderThickness="1 0 0 0">
-                                    <Grid Margin="30 10 30 10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="0.42*"></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="0.2*"></RowDefinition>
-                                            <RowDefinition Height="0.15*"></RowDefinition>
-                                            <RowDefinition Height="0.15*"></RowDefinition>
-                                            <RowDefinition Height="0.15*"></RowDefinition>
-                                            <RowDefinition Height="0.15*"></RowDefinition>
-                                            <RowDefinition Height="0.15*"></RowDefinition>
-                                            <RowDefinition Height="0.8*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0 0 0 1" BorderBrush="Gray" Padding="0 0 0 5">
-                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline4TextBlock}" VerticalAlignment="Bottom" Text="{Binding FullName}"></TextBlock>
-                                        </Border>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 5 0">Дата рождения</TextBlock>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="2" VerticalAlignment="Bottom" Margin="0 0 5 0">Телефон</TextBlock>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3" VerticalAlignment="Bottom" Margin="0 0 5 0">Логин</TextBlock>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4" VerticalAlignment="Bottom" Margin="0 0 5 0">Пароль</TextBlock>
-
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding StringBirthDate}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"></TextBlock>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding PhoneNumber}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding Login}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom"></TextBlock>
-                                        <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding Password}"  Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom"></TextBlock>
-                                        <Button Grid.Column="2" Grid.Row="5" Width="150" HorizontalAlignment="Center">Изменить</Button>
-                                        <Border Grid.Row="6" Grid.ColumnSpan="2" Padding="0 1 0 0">
-                                            <Grid Margin="0 5 0 0">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.42*"></ColumnDefinition>
-                                                    <ColumnDefinition></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
-                                                <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0 0 0 1" BorderBrush="Gray" Padding="0 0 0 5">
-                                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline4TextBlock}" HorizontalAlignment="Left" Text="{Binding CheckInState}"></TextBlock>
-                                                </Border>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" VerticalAlignment="Top">ID</TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="2" VerticalAlignment="Top">Комната</TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3" VerticalAlignment="Top">Доп. услуги</TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4" VerticalAlignment="Top">Период</TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="5" VerticalAlignment="Top">Стоимость комнаты</TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="6" VerticalAlignment="Top">Стоимость услуг</TextBlock>
-
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CheckInId}"></TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Text="{Binding Room}"></TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Text="{Binding Services}"></TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" Text="{Binding Period}"></TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="5" VerticalAlignment="Top" Text="{Binding RoomPrice}"></TextBlock>
-                                                <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="6" VerticalAlignment="Top" Text="{Binding ServicesPrice}"></TextBlock>
-
-                                                <Button Grid.Row="7" Grid.Column="1" Width="150" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="Visible">Регистрация</Button>
-                                                <Button Grid.Row="7" Grid.Column="1" Width="150" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="Hidden">Изменить</Button>
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                            </ScrollViewer>
-                        </TabItem>
-                        <TabItem Header="История" Style="{DynamicResource MaterialDesignNavigationRailTabItem}" BorderBrush="#673ab7" Width="200">
+    <Grid>
+        <Grid Background="#673ab7">
+            <materialDesign:Card Background="#673ab7"  Margin="5">
+                <TabControl Style="{DynamicResource MaterialDesignNavigatilRailTabControl}" >
+                    <TabItem Header="Аккаунт" Style="{DynamicResource MaterialDesignNavigationRailTabItem}" Width="200">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Border BorderBrush="#673ab7" BorderThickness="1 0 0 0">
-                                <Grid>
-                                    <DataGrid IsReadOnly="True" ItemsSource ="{Binding FoundGuestCheckIns}" AutoGenerateColumns="False">
-                                        <DataGrid.Columns>
+                                <Grid Margin="30 10 30 10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.42*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.2*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.8*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0 0 0 1" BorderBrush="Gray" Padding="0 0 0 5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline4TextBlock}" VerticalAlignment="Bottom" Text="{Binding FullName}"></TextBlock>
+                                            <Button 
+                                                Margin="10 2"
+                                                VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                ToolTip="Редактировать">
+                                                <materialDesign:PackIcon Kind="Create" />
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 5 0">Дата рождения</TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="2" VerticalAlignment="Bottom" Margin="0 0 5 0">Телефон</TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3" VerticalAlignment="Bottom" Margin="0 0 5 0">Логин</TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4" VerticalAlignment="Bottom" Margin="0 0 5 0">Пароль</TextBlock>
+
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding StringBirthDate}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding PhoneNumber}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding Login}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom"></TextBlock>
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Text="{Binding Password}"  Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom"></TextBlock>
+                                    <Border Grid.Row="6" Grid.ColumnSpan="2" Padding="0 1 0 0">
+                                        <Grid Margin="0 5 0 0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.42*"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0 0 0 1" BorderBrush="Gray" Padding="0 0 0 5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline4TextBlock}" HorizontalAlignment="Left" Text="{Binding CheckInState}"></TextBlock>
+                                                    <Button 
+                                                        Margin="10 2"
+                                                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                        ToolTip="{Binding ButtonName}">
+                                                        <materialDesign:PackIcon Kind="{Binding ButtonKind}" />
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" VerticalAlignment="Top">ID</TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="2" VerticalAlignment="Top">Комната</TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3" VerticalAlignment="Top">Период</TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4" VerticalAlignment="Top">Стоимость комнаты</TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="5" VerticalAlignment="Top">Стоимость услуг</TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="6" VerticalAlignment="Top">Доп. услуги</TextBlock>
+
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Text="{Binding CheckInId}"></TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Text="{Binding Room}"></TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Text="{Binding Period}"></TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" Text="{Binding RoomPrice}"></TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="5" VerticalAlignment="Top" Text="{Binding ServicesPrice}"></TextBlock>
+                                            <TextBlock Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Column="1" Grid.Row="6" VerticalAlignment="Top" Text="{Binding Services}"></TextBlock>
+
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="История" Style="{DynamicResource MaterialDesignNavigationRailTabItem}" BorderBrush="#673ab7" Width="200">
+                        <Border BorderBrush="#673ab7" BorderThickness="1 0 0 0">
+                            <Grid>
+                                <DataGrid IsReadOnly="True" ItemsSource ="{Binding FoundGuestCheckIns}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
                                         <DataGridTextColumn ElementStyle="{StaticResource DataGridTextColumnCenter}" Width="*" MinWidth="50" Header="ID" Binding="{Binding Path=CheckInId}"></DataGridTextColumn>
                                         <DataGridTextColumn ElementStyle="{StaticResource DataGridTextColumnCenter}" Width="*" MinWidth="100" Header="Комната" Binding="{Binding Path=RoomNumber}"></DataGridTextColumn>
                                         <DataGridTextColumn ElementStyle="{StaticResource DataGridTextColumnCenter}" Width="*" MinWidth="100" Header="Цена (без доп. услуг)" Binding="{Binding Path=RoomPrice}"></DataGridTextColumn>
@@ -109,14 +123,14 @@
                                         <DataGridTextColumn ElementStyle="{StaticResource DataGridTextColumnCenter}" Width="*" MinWidth="100" Header="Дата начала" Binding="{Binding Path=StartDateString}"></DataGridTextColumn>
                                         <DataGridTextColumn ElementStyle="{StaticResource DataGridTextColumnCenter}" Width="*" MinWidth="100" Header="Дата окончания" Binding="{Binding Path=EndDateString}"></DataGridTextColumn>
                                         <DataGridTextColumn ElementStyle="{StaticResource DataGridTextColumnCenter}" Width="*" MinWidth="100" Header="Оказанные доп. услуги" Binding="{Binding Path=ServicesString}"></DataGridTextColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-                            </Border>
-                        </TabItem>
-                    </TabControl>
-                </materialDesign:Card>
-            </Grid>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </Border>
+                    </TabItem>
+                </TabControl>
+            </materialDesign:Card>
         </Grid>
+    </Grid>
 
 </Page>

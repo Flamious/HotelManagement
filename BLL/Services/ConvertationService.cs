@@ -7,9 +7,9 @@ namespace BLL.Services
 {
     public class ConvertationService : IConvertationService
     {
-        public FoundAccount Convert(AccountData accountData)
+        public AccountFullData Convert(AccountData accountData)
         {
-            return accountData == null ? null : new FoundAccount()
+            return accountData == null ? null : new AccountFullData()
             {
                 AccountID = accountData.AccountID,
                 Login = accountData.Login,
@@ -18,9 +18,9 @@ namespace BLL.Services
             };
         }
 
-        public FoundGuest Convert(GuestData guestData)
+        public GuestFullData Convert(GuestData guestData)
         {
-            return new FoundGuest()
+            return new GuestFullData()
             {
                 AccountID = guestData.AccountID,
                 GuestID = guestData.GuestID,
@@ -34,11 +34,11 @@ namespace BLL.Services
             };
         }
 
-        public List<FoundGuestCheckIn> Convert(List<CheckInDataGuest> checkInDataList)
+        public List<GuestCheckInFullData> Convert(List<CheckInDataGuest> checkInDataList)
         {
             if (checkInDataList.Count == 0) return null;
-            FoundGuestCheckIn guestCheckIns;
-            List<FoundGuestCheckIn> result = new List<FoundGuestCheckIn>();
+            GuestCheckInFullData guestCheckIns;
+            List<GuestCheckInFullData> result = new List<GuestCheckInFullData>();
             foreach (CheckInDataGuest checkInData in checkInDataList)
             {
                 guestCheckIns = Convert(checkInData);
@@ -47,10 +47,10 @@ namespace BLL.Services
             return result;
         }
 
-        public FoundGuestCheckIn Convert(CheckInDataGuest checkInDataGuest)
+        public GuestCheckInFullData Convert(CheckInDataGuest checkInDataGuest)
         {
             if (checkInDataGuest == null) return null;
-            FoundGuestCheckIn result = new FoundGuestCheckIn()
+            GuestCheckInFullData result = new GuestCheckInFullData()
             {
                 GuestId = checkInDataGuest.GuestId,
                 RoomNumber = checkInDataGuest.RoomNumber,

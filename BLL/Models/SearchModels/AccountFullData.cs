@@ -1,6 +1,6 @@
 ﻿namespace BLL.Models
 {
-    public class FoundAccount
+    public class AccountFullData
     {
         public int AccountID { get; set; }
         public string Login { get; set; }

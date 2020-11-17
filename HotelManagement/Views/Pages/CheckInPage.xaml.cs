@@ -1,5 +1,4 @@
-﻿using HotelManagement.Guest;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HotelManagement.Views.Pages
+namespace HotelManagement.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для RegistrationPage.xaml
+    /// Логика взаимодействия для Кegistration.xaml
     /// </summary>
-    public partial class RegistrationPage : Page
+    public partial class CheckInPage : Page
     {
-        public RegistrationPage()
-        {
-            InitializeComponent();
-        }
-
-        public RegistrationPage(IGuest guest)
+        public CheckInPage()
         {
             InitializeComponent();
         }

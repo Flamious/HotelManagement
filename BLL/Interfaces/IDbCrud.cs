@@ -12,11 +12,11 @@ namespace BLL.Interfaces
         List<AccountModel> GetAllAccounts();
         List<GuestModel> GetAllGuests();
         List<ModifierModel> GetAllModifiers();
-        List<RoomModel> getAllRooms();
+        List<RoomModel> GetAllRooms();
         List<RoomTypeModel> GetAllRoomTypes();
         List<CheckInModel> GetAllChecksIn();
         List<ServiceModel> GetAllServices();
-        List<CheckInServicesModel> GetCheckInServices();
+        List<CheckInServicesModel> GetAllCheckInServices();
 
         void CreateGuest(GuestModel guest);
         void CreateAccount(AccountModel account);
