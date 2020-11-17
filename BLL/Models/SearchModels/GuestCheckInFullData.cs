@@ -12,7 +12,7 @@ namespace BLL.Models
         public string ServiceName { get; set; }
         public int Number { get; set; }
     }
-    public class CheckInFullData
+    public class GuestCheckInFullData
     {
         public int GuestId { get; set; }
         public int CheckInId { get; set; } = -1;

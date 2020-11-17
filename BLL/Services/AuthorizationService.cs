@@ -19,9 +19,20 @@ namespace BLL.Services
         {
             return convertationService.Convert(db.Login.FindAccount(login, password));
         }
-        public List<CheckInFullData> FindAllCheckIns(int guestid)
+
+        public GuestFullData FindGuest(int accountId)
+        {
+            return convertationService.Convert(db.Login.FindGuest(accountId));
+        }
+
+        public List<GuestCheckInFullData> FindAllCheckIns(int guestid)
         {
             return convertationService.Convert(db.Login.FindAllPreviousCheckIns(guestid));
+        }
+
+        public GuestCheckInFullData FindClosestCheckIn(int guestId)
+        {
+            return convertationService.Convert(db.Login.FindClosestCheckIn(guestId));
         }
     }
 }

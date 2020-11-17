@@ -13,15 +13,12 @@ namespace DAL
         }
 
         public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<Adult> Adult { get; set; }
         public virtual DbSet<CheckIn> CheckIn { get; set; }
-        public virtual DbSet<Child> Child { get; set; }
         public virtual DbSet<Guest> Guest { get; set; }
         public virtual DbSet<Modifier> Modifier { get; set; }
         public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<RoomType> RoomType { get; set; }
         public virtual DbSet<Service> Service { get; set; }
-        public virtual DbSet<CheckInGuest> CheckInGuest { get; set; }
         public virtual DbSet<CheckInServices> CheckInServices { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,51 +32,14 @@ namespace DAL
                 .IsFixedLength();
 
             modelBuilder.Entity<Account>()
-                .Property(e => e.Sruname)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Account>()
-                .Property(e => e.Username)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Account>()
-                .Property(e => e.Patronymic)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.CheckIn)
-                .WithOptional(e => e.Account)
-                .HasForeignKey(e => e.LastEmployeeId);
-
-            modelBuilder.Entity<Adult>()
-                .Property(e => e.PassportNumber)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Adult>()
-                .Property(e => e.PassportInfo)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Adult>()
-                .HasOptional(e => e.Guest)
-                .WithRequired(e => e.Adult);
-
-            modelBuilder.Entity<CheckIn>()
-                .HasMany(e => e.CheckInGuest)
-                .WithRequired(e => e.CheckIn)
+                .HasMany(e => e.Guest)
+                .WithRequired(e => e.Account)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CheckIn>()
                 .HasMany(e => e.CheckInServices)
                 .WithRequired(e => e.CheckIn)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Child>()
-                .Property(e => e.BirthCertificate)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Child>()
-                .HasOptional(e => e.Guest)
-                .WithRequired(e => e.Child);
 
             modelBuilder.Entity<Guest>()
                 .Property(e => e.Surname)
@@ -98,7 +58,7 @@ namespace DAL
                 .IsFixedLength();
 
             modelBuilder.Entity<Guest>()
-                .HasMany(e => e.CheckInGuest)
+                .HasMany(e => e.CheckIn)
                 .WithRequired(e => e.Guest)
                 .WillCascadeOnDelete(false);
 
@@ -109,11 +69,6 @@ namespace DAL
             modelBuilder.Entity<Modifier>()
                 .HasMany(e => e.Account)
                 .WithRequired(e => e.Modifier)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Room>()
-                .HasMany(e => e.CheckIn)
-                .WithRequired(e => e.Room)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<RoomType>()
