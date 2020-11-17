@@ -15,9 +15,12 @@ namespace BLL.ServiceModules
     {
         public override void Load()
         {
+            Bind<IDbCrud>().To<DbCrud>().InSingletonScope();
             Bind<IDbManager>().To<DbManager>().InSingletonScope();
             Bind<IConvertationService>().To<ConvertationService>().InSingletonScope();
             Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
+            Bind<IRegistrationService>().To<RegistrationService>().InSingletonScope();
+            Bind<IRegistrationRepository>().To<RegistrationRepository>().InSingletonScope();
         }
     }
 }

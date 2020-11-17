@@ -13,11 +13,11 @@ namespace HotelManagement.Guest
         event PropertyChangedEventHandler CurrentGuestChanged;
         event PropertyChangedEventHandler PreviousChecksInChanged;
         event PropertyChangedEventHandler ClosestCheckInChanged;
-        FoundGuest Guest { get; set; }
-        List<FoundGuestCheckIn> AllCheckIns { get; set; }
-        FoundGuestCheckIn ClosestCheckIn { get; set; }
-        void ChangeGuest(FoundGuest guest);
-        void FillPreviousCheckList(List<FoundGuestCheckIn> checkIns);
-        void FillClosestCheckIn(FoundGuestCheckIn foundGuestCheckIn);
+        GuestFullData Guest { get; set; }
+        List<GuestCheckInFullData> AllCheckIns { get; set; }
+        GuestCheckInFullData ClosestCheckIn { get; set; }
+        void ChangeGuest(GuestFullData guest);
+        void FillPreviousCheckList(List<GuestCheckInFullData> checkIns);
+        void FillClosestCheckIn(GuestCheckInFullData foundGuestCheckIn);
     }
 }

@@ -5,9 +5,9 @@ namespace BLL.Interfaces
 {
     public interface IAuthorizationService
     {
-        FoundAccount FindAccount(string login, string password);
-        FoundGuest FindGuest(int accountId);
-        List<FoundGuestCheckIn> FindAllCheckIns(int guestId);
-        FoundGuestCheckIn FindClosestCheckIn(int guestId);
+        AccountFullData FindAccount(string login, string password);
+        GuestFullData FindGuest(int accountId);
+        List<GuestCheckInFullData> FindAllCheckIns(int guestId);
+        GuestCheckInFullData FindClosestCheckIn(int guestId);
     }
 }

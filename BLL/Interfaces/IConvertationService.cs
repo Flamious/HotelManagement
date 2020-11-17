@@ -6,9 +6,9 @@ namespace BLL.Interfaces
 {
     public interface IConvertationService
     {
-        FoundAccount Convert(AccountData accountData);
-        FoundGuest Convert(GuestData guestData);
-        List<FoundGuestCheckIn> Convert(List<CheckInDataGuest> checkInDataGuest);
-        FoundGuestCheckIn Convert(CheckInDataGuest checkInDataGuest);
+        AccountFullData Convert(AccountData accountData);
+        GuestFullData Convert(GuestData guestData);
+        List<GuestCheckInFullData> Convert(List<CheckInDataGuest> checkInDataGuest);
+        GuestCheckInFullData Convert(CheckInDataGuest checkInDataGuest);
     }
 }

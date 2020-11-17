@@ -44,19 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbCrud.cs" />
     <Compile Include="Interfaces\IAuthorizationService.cs" />
     <Compile Include="Interfaces\IConvertationService.cs" />
-    <Compile Include="Models\FoundAccount.cs" />
+    <Compile Include="Interfaces\IDbCrud.cs" />
+    <Compile Include="Interfaces\IRegistrationService.cs" />
+    <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckInServicesModel.cs" />
+    <Compile Include="Models\RegistrationModels\RegistrationFullData.cs" />
+    <Compile Include="Models\SearchModels\AccountFullData.cs" />
     <Compile Include="Models\AccountModel.cs" />
-    <Compile Include="Models\FoundGuest.cs" />
-    <Compile Include="Models\FoundGuestCheckIn.cs" />
+    <Compile Include="Models\SearchModels\GuestFullData.cs" />
+    <Compile Include="Models\SearchModels\GuestCheckInFullData.cs" />
     <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\ModifierModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\RoomTypeModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModules\IoC.cs" />
     <Compile Include="ServiceModules\ServiceModule.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
     <Compile Include="Services\ConvertationService.cs" />
+    <Compile Include="Services\RegistrationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

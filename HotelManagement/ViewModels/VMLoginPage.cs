@@ -4,6 +4,7 @@ using BLL.Services;
 using HotelManagement.Guest;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
+using HotelManagement.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace HotelManagement.ViewModels
                 return loginCommand ?? (loginCommand = new RelayCommand(obj =>
                 {
                     var data = obj as LoginData;
-                    FoundAccount account = new FoundAccount();
+                    if (string.IsNullOrEmpty(data.Login) || string.IsNullOrEmpty(data.PasswordBox.Password)) return;
+                    AccountFullData account = new AccountFullData();
                     account = authorization.FindAccount(data.Login, data.PasswordBox.Password) ?? null;
 
                     if (account == null) return;
@@ -38,8 +40,8 @@ namespace HotelManagement.ViewModels
                         case "Guest":
                             var currentGuest = authorization.FindGuest(account.AccountID);
                             guest.ChangeGuest(currentGuest);
-                            guest.FillPreviousCheckList(authorization.FindAllCheckIns(currentGuest.GuestID) ?? new List<FoundGuestCheckIn>());
-                            guest.FillClosestCheckIn(authorization.FindClosestCheckIn(currentGuest.GuestID) ?? new FoundGuestCheckIn());
+                            guest.FillPreviousCheckList(authorization.FindAllCheckIns(currentGuest.GuestID) ?? new List<GuestCheckInFullData>());
+                            guest.FillClosestCheckIn(authorization.FindClosestCheckIn(currentGuest.GuestID) ?? new GuestCheckInFullData());
                             navigation.Navigate(new GuestPage());
                             break;
                         default:
@@ -50,6 +52,17 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        private RelayCommand openRegistrationCommand;
+        public RelayCommand OpenRegistrationCommand
+        {
+            get
+            {
+                return openRegistrationCommand ?? (openRegistrationCommand = new RelayCommand(obj =>
+                {
+                    navigation.Navigate(new RegistrationPage());
+                }));
+            }
+        }
         public VMLoginPage()
         {
             navigation = IoC.Get<INavigation>();

@@ -24,9 +24,9 @@ namespace HotelManagement.ViewModels
                 {
                     if(CurrentPage is GuestPage)
                     {
-                        guest.ChangeGuest(new FoundGuest());
-                        guest.FillPreviousCheckList(new List<FoundGuestCheckIn>());
-                        guest.FillClosestCheckIn(new FoundGuestCheckIn());
+                        guest.ChangeGuest(new GuestFullData());
+                        guest.FillPreviousCheckList(new List<GuestCheckInFullData>());
+                        guest.FillClosestCheckIn(new GuestCheckInFullData());
                     }
                     navigation.Navigate(new LoginPage());
                     navigation.ChangeVisibility(Visibility.Hidden);

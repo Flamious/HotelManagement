@@ -15,6 +15,7 @@ namespace HotelManagement
         {
             Bind<INavigation>().To<MainNavigation>().InSingletonScope();
             Bind<IGuest>().To<CurrentGuest>().InSingletonScope();
+            Bind<IRegistration>().To<CurrentRegistration>().InSingletonScope();
         }
     }
 }

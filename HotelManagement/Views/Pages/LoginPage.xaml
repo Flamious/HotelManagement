@@ -47,6 +47,7 @@
                         materialDesign:HintAssist.Hint="Пароль"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{DynamicResource MaterialDesignPasswordBox}" />
+                    <StackPanel Orientation="Horizontal"></StackPanel>
                     <Button
                         Width="180"
                         Command="{Binding LoginCommand}"
@@ -59,6 +60,17 @@
                                 <Binding ElementName="Password" />
                             </MultiBinding>
                         </Button.CommandParameter>
+                    </Button>
+                    
+                    <Button
+                        Width="90"
+                        Margin="5"
+                        Command="{Binding OpenRegistrationCommand}"
+                        Style="{DynamicResource MaterialDesignToolButton}"
+                        Content="Регистрация"
+                        FontSize="10"
+                        VerticalContentAlignment="Top"
+                        Height="22">
                     </Button>
                 </StackPanel>
             </Grid>
