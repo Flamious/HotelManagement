@@ -6,93 +6,175 @@
         xmlns:local="clr-namespace:HotelManagement"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      Width="800" Height="800"
+        xmlns:viewmodels="clr-namespace:HotelManagement.ViewModels"
+      Height="412" Width="475"
         >
-
+    <Page.DataContext>
+        <viewmodels:VMCheckInRoomPage />
+    </Page.DataContext>
     <Grid>
         <materialDesign:Card Margin="7" Padding="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.62*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.62*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="0">ФИО</TextBlock>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="0" Grid.Column="1">Фамилия И.О.</TextBlock>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1">Дата рождения</TextBlock>
-                <Border BorderBrush="Gray" BorderThickness="0 0 0 1" Grid.Row="1" Grid.ColumnSpan="2"></Border>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" Grid.Column="1">08.03.1990</TextBlock>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="2">Паспорт</TextBlock>
-                <TextBox FontSize="17" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}" Grid.Row="2" Grid.Column="1"></TextBox>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="3">Тип комнаты</TextBlock>
-                <ComboBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignComboBox}" FontSize="17" Grid.Row="3" Grid.Column="1">
-                    <ComboBoxItem IsSelected="True">
-                        <TextBlock >Не выбрано</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock>Люкс</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock>Стандарт</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock>Бюджет</TextBlock>
-                    </ComboBoxItem>
-                </ComboBox>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="4">Номер комнаты</TextBlock>
-                <ComboBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignComboBox}" FontSize="17" Grid.Row="4" Grid.Column="1">
-                    <ComboBoxItem IsSelected="True">
-                        <TextBlock >Не выбрано</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock>1</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock>2</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock>3</TextBlock>
-                    </ComboBoxItem>
-                </ComboBox>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="5">Доп. услуги</TextBlock>
-                <ComboBox VerticalAlignment="Center" Style="{DynamicResource MaterialDesignComboBox}" FontSize="17" Grid.Row="5" Grid.Column="1">
-                    <ComboBoxItem IsSelected="True">
-                        <TextBlock>Нажмите, чтобы выбрать</TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <CheckBox>1</CheckBox>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <CheckBox>2</CheckBox>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <CheckBox>3</CheckBox>
-                    </ComboBoxItem>
-                </ComboBox>
-
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="6">Дата начала</TextBlock>
-                <DatePicker VerticalAlignment="Center" Style="{DynamicResource MaterialDesignDatePicker}" Grid.Row="6" Grid.Column="1"></DatePicker>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="7">Дата окончания</TextBlock>
-                <DatePicker VerticalAlignment="Center" Style="{DynamicResource MaterialDesignDatePicker}" Grid.Row="7" Grid.Column="1"></DatePicker>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="8">Стоимость</TextBlock>
-                <TextBlock VerticalAlignment="Center" Style="{DynamicResource MaterialDesignHeadline5TextBlock}" Grid.Row="8" Grid.Column="1">12000 руб.</TextBlock>
-                <Button Grid.Row="9" Grid.Column="0" Margin="0 0 5 0">Отменить</Button>
-                <Button Grid.Row="9" Grid.Column="1" Margin="5 0 0 0">Регистрация</Button>
-                <Image  Margin="5" Source="/Images/Room.jpg" Grid.Column="3" Grid.Row="0" Grid.RowSpan="5"></Image>
-                <Image Margin="5" Source="/Images/View.jpg" Grid.Column="3" Grid.Row="5"  Grid.RowSpan="5"></Image>
-            </Grid>
+            <StackPanel>
+                <Grid>
+                    <Button 
+                    Height="35" Width="35" 
+                    HorizontalContentAlignment="Center" 
+                    BorderBrush="White"
+                    Margin="5 2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Отмена"
+                        Command="{Binding BackCommand}">
+                        <materialDesign:PackIcon Kind="Close" />
+                    </Button>
+                    <TextBlock
+                        Text="Новое заселение"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Style="{DynamicResource MaterialDesignHeadline5TextBlock}"
+                        FontFamily="{DynamicResource MaterialDesignFont}"></TextBlock>
+                    <Button 
+                    Height="35" Width="35" 
+                    HorizontalContentAlignment="Center" 
+                    BorderBrush="White"
+                    Margin="5 2"
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                        ToolTip="Добавление гостей"
+                        Command="{Binding ForwardCommand}">
+                        <materialDesign:PackIcon Kind="ArrowRight" />
+                    </Button>
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock
+                            Margin="5"
+                            Text="Основная информация"
+                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                            TextAlignment="Center">
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="25"
+                                Style="{DynamicResource MaterialDesignTextBlock}"
+                                VerticalAlignment="Center"
+                                Margin="5">Д/н</TextBlock>
+                            <DatePicker
+                            Width="165"
+                            SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            DisplayDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{DynamicResource MaterialDesignDatePicker}"
+                            materialDesign:HintAssist.Hint="Дата начала"
+                            Margin="5">
+                            </DatePicker>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="25"
+                                Style="{DynamicResource MaterialDesignTextBlock}"
+                                VerticalAlignment="Center"
+                                Margin="5">Д/о</TextBlock>
+                            <DatePicker
+                            SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            DisplayDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Width="165"
+                                Style="{DynamicResource MaterialDesignDatePicker}"
+                                materialDesign:HintAssist.Hint="Дата окончания"
+                                materialDesign:HintAssist.IsFloating="False"
+                                Margin="5">
+                            </DatePicker>
+                        </StackPanel>
+                        <ComboBox
+                            ItemsSource="{Binding RoomTypes}"
+                            DisplayMemberPath="TypeName"
+                            SelectedItem="{Binding CurrentRoomType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                            Margin="5"
+                        Style="{DynamicResource MaterialDesignComboBox}"
+                        materialDesign:HintAssist.Hint="Тип комнаты"
+                        IsEditable="False">
+                        </ComboBox>
+                        <ComboBox
+                            ItemsSource="{Binding AvailableRominess}"
+                            DisplayMemberPath="NumberString"
+                            SelectedItem="{Binding CurrentRoominess, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                            Margin="5"
+                        Style="{DynamicResource MaterialDesignComboBox}"
+                        materialDesign:HintAssist.Hint="Вместительность комнаты"
+                        IsEditable="False">
+                        </ComboBox>
+                        <ComboBox
+                            SelectedItem="{Binding CurrentRoom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding FreeRooms}"
+                            DisplayMemberPath="RoomNumber"
+                        Width="200"
+                            Margin="5"
+                        Style="{DynamicResource MaterialDesignComboBox}"
+                        materialDesign:HintAssist.Hint="{Binding IsFreeRoomExist}"
+                        IsEditable="False">
+                        </ComboBox>
+                    </StackPanel>
+                    <Border BorderBrush="Gray" BorderThickness="1 0 0 0" Margin="3" Width="1"></Border>
+                    <StackPanel Width="225">
+                        <TextBlock
+                            Text="Доп. услуги"
+                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                            TextAlignment="Center"
+                            Margin="5">
+                        </TextBlock>
+                        <ListBox
+                            Margin="5"
+                            ItemsSource="{Binding Services}"
+                            DisplayMemberPath="DisplayedName"
+                            SelectedValue="{Binding CurrentService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding CurrentService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ListBox>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox
+                                IsEnabled="{Binding IsEnabled}"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Name="ProvisionNumber"
+                                Width="170"
+                            Style="{DynamicResource MaterialDesignTextBox}"
+                            materialDesign:HintAssist.Hint="Количество"
+                            Margin="5"></TextBox>
+                            <Button 
+                                IsEnabled="{Binding IsEnabled}"
+                                Command="{Binding AddProvisionNumber}"
+                                CommandParameter="{Binding ElementName=ProvisionNumber, Path=Text}"
+                            Height="35" Width="35" 
+                            HorizontalContentAlignment="Center" 
+                            BorderBrush="White"
+                            Margin="5 2"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="Редактировать">
+                                <materialDesign:PackIcon Kind="Add" />
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock 
+                    Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+                    TextAlignment="Left"
+                    Margin="5"
+                    Text="{Binding RoomPrice}"></TextBlock>
+                <TextBlock 
+                    Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+                    TextAlignment="Left"
+                    Margin="5"
+                    Text="{Binding ServicePrice}"></TextBlock>
+                <TextBlock 
+                    Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+                    TextAlignment="Left"
+                    Margin="5"
+                    Text="{Binding FinalPrice}"></TextBlock>
+                <TextBlock 
+                    Style="{DynamicResource MaterialDesignSubtitle1TextBlock}"
+                    Foreground="Red"
+                    TextAlignment="Center"
+                    Text="{Binding Error}"></TextBlock>
+            </StackPanel>
         </materialDesign:Card>
     </Grid>
 </Page>

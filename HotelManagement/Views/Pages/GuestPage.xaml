@@ -1,0 +1,117 @@
+﻿<Page x:Class="HotelManagement.Views.Pages.GuestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HotelManagement.Views.Pages"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewmodels="clr-namespace:HotelManagement.ViewModels"
+      Background="{DynamicResource MaterialDesignLightBackground}"
+      Title="GuestPage"
+      Width="250" Height="275">
+    <Page.DataContext>
+        <viewmodels:VMCheckInGuestsPage />
+    </Page.DataContext>
+    <Grid>
+        <materialDesign:Card Margin="5">
+        <StackPanel>
+            <Grid>
+                <Button 
+                    Command="{Binding BackCommand}"
+                    Height="35" Width="35" 
+                    HorizontalContentAlignment="Center" 
+                    BorderBrush="White"
+                    Margin="5 2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Отмена">
+                    <materialDesign:PackIcon Kind="ArrowLeft" />
+                </Button>
+                    <TextBlock
+                        Text="Новый гость"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                        FontFamily="{DynamicResource MaterialDesignFont}"></TextBlock>
+                <Button 
+                    Command="{Binding ForwardCommand}"
+                    Height="35" Width="35" 
+                    HorizontalContentAlignment="Center" 
+                    BorderBrush="White"
+                    Margin="5 2"
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="Редактировать">
+                    <materialDesign:PackIcon Kind="ArrowRight" />
+                </Button>
+            </Grid>
+            <TextBox
+                Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                
+                        Width="200"
+                        Style="{DynamicResource MaterialDesignTextBox}"
+                        materialDesign:HintAssist.Hint="Фамилия"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Margin="5">
+            </TextBox>
+            <TextBox
+                Text="{Binding GuestName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                        Style="{DynamicResource MaterialDesignTextBox}"
+                        materialDesign:HintAssist.Hint="Имя"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Margin="5">
+            </TextBox>
+            <TextBox
+                Text="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                        Style="{DynamicResource MaterialDesignTextBox}"
+                        materialDesign:HintAssist.Hint="Отчество"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Margin="5">
+            </TextBox>
+            <DatePicker
+                SelectedDate="{Binding BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                        Style="{DynamicResource MaterialDesignDatePicker}"
+                        materialDesign:HintAssist.Hint="Дата рождения"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Margin="5">
+            </DatePicker>
+                <StackPanel Orientation="Horizontal" Width="200" HorizontalAlignment="Center">
+                    <TextBox
+                    Text="{Binding Document, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    HorizontalAlignment="Stretch"
+                    Width="170"
+                        Style="{DynamicResource MaterialDesignTextBox}"
+                        materialDesign:HintAssist.Hint="Серия/номер паспорта"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Margin="0 5 5 0">
+                    </TextBox>
+                    <Button 
+                            Height="20" Width="20" 
+                            HorizontalContentAlignment="Right" 
+                            BorderBrush="White"
+                            Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            ToolTip="Поиск">
+                        <materialDesign:PackIcon Kind="Search" />
+                    </Button>
+                </StackPanel>
+                <CheckBox
+                    IsChecked="{Binding IsChild, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Width="200"
+                    Content="Свидетельство о рождении"
+                    FontSize="8"></CheckBox>
+                <TextBox
+                Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                        Style="{DynamicResource MaterialDesignTextBox}"
+                        materialDesign:HintAssist.Hint="Номер телефона"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Margin="5 0 5 0">
+                </TextBox>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Page>

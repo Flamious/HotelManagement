@@ -19,6 +19,8 @@ namespace BLL.ServiceModules
             Bind<IDbManager>().To<DbManager>().InSingletonScope();
             Bind<IConvertationService>().To<ConvertationService>().InSingletonScope();
             Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
+            Bind<ICheckInMakingRepository>().To<CheckInMakingRepository>().InSingletonScope();
+            Bind<ICheckInService>().To<CheckInService>().InSingletonScope();
         }
     }
 }

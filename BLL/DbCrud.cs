@@ -19,7 +19,14 @@ namespace BLL
             this.db = db;
         }
 
-
+        public List<RoomTypeModel> GetAllRoomTypes()
+        {
+            return db.RoomTypes.GetList().Select(i => new RoomTypeModel(i)).ToList();
+        }
+        public List<ServiceModel> GetAllServices()
+        {
+            return db.Services.GetList().Select(i => new ServiceModel(i)).ToList();
+        }
         public void CreateGuest(GuestModel guest)
         {
             //db.Guests.Create(new Guest()
@@ -33,7 +40,7 @@ namespace BLL
             //});
             //Save();
         }
-        public void CreateCheckIn(CheckInModel checkIn, List<ServiceModel> services, List<GuestModel> guests)
+        public void CreateCheckIn(CheckInModel checkIn)
         {
             //db.ChecksIn.Create(new CheckIn()
             //{
@@ -46,7 +53,14 @@ namespace BLL
             //});
             //Save();
         }
+        public void CreateCheckInGuestConnection(CheckInGuestModel connection)
+        {
 
+        }
+        public void CreateCheckInServiceConnection(CheckInServiceModel connection)
+        {
+
+        }
         public void UpdateGuest(GuestModel guest)
         {
             //Guest prevGuest = db.Guests.GetItem(guest.GuestId);

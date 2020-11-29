@@ -59,10 +59,12 @@
     <Compile Include="Entities\CheckInGuest.cs" />
     <Compile Include="Entities\CheckInServices.cs" />
     <Compile Include="Entities\Child.cs" />
-    <Compile Include="Entities\Data\CheckInDataGuest.cs" />
+    <Compile Include="Entities\Data\CheckInData.cs" />
     <Compile Include="Entities\Data\AccountData.cs" />
+    <Compile Include="Entities\Data\RoomData.cs" />
     <Compile Include="Entities\Guest.cs" />
     <Compile Include="HotelDB.cs" />
+    <Compile Include="Interfaces\ICheckInMakingRepository.cs" />
     <Compile Include="Interfaces\IDbManager.cs" />
     <Compile Include="Interfaces\IDirectory.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\AdultRepository.cs" />
     <Compile Include="Repositories\CheckInGuestRepository.cs" />
+    <Compile Include="Repositories\CheckInMakingRepository.cs" />
     <Compile Include="Repositories\CheckInRepository.cs" />
     <Compile Include="Repositories\CheckInServiceRepository.cs" />
     <Compile Include="Repositories\ChildRepository.cs" />

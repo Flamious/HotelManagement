@@ -1,4 +1,6 @@
-﻿using HotelManagement.Navigation;
+﻿using HotelManagement.CheckInMaking;
+using HotelManagement.CompleteCheckInModel;
+using HotelManagement.Navigation;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,9 @@ namespace HotelManagement
         public override void Load()
         {
             Bind<INavigation>().To<MainNavigation>().InSingletonScope();
+            Bind<ICheckInRoom>().To<CheckInRoom>().InSingletonScope();
+            Bind<ICompleteCheckIn>().To<CompleteCheckIn>().InSingletonScope();
+            Bind<ICheckInGuest>().To<CheckInGuest>().InSingletonScope();
         }
     }
 }

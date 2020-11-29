@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class ServiceDataGuest
+    public class ServiceData
     {
         public int ServiceId { get; set; }
         public string ServiceName { get; set; }
         public int Number { get; set; }
     }
 
-    public class CheckInDataGuest
+    public class CheckInData
     {
         public int GuestId { get; set; }
         public int CheckInId { get; set; }
@@ -23,6 +23,6 @@ namespace DAL.Entities
         public int RoomPrice { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<ServiceDataGuest> Services { get; set; }
+        public List<ServiceData> Services { get; set; }
     }
 }

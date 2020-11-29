@@ -1,0 +1,363 @@
+﻿using BLL.Interfaces;
+using BLL.Models;
+using BLL.Models.SearchModels;
+using HotelManagement.CompleteCheckInModel;
+using HotelManagement.Structures;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HotelManagement.CheckInMaking
+{
+    public class CheckInRoom : ICheckInRoom
+    {
+        public event PropertyChangedEventHandler RoomInfoChanged;
+        public event PropertyChangedEventHandler RoomNumberChanged;
+        private readonly ICheckInService checkInService;
+        private readonly IDbCrud dbCrud;
+        private readonly ICompleteCheckIn completeCheckIn;
+        public CheckInRoom()
+        {
+            checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
+            dbCrud = BLL.ServiceModules.IoC.Get<IDbCrud>();
+            completeCheckIn = IoC.Get<ICompleteCheckIn>();
+            RoomTypes = dbCrud.GetAllRoomTypes();
+            AvailableRoominess = new List<Roominess>();
+            for (int i = 0; i < 4; i++) AvailableRoominess.Add(new Roominess() { Number = i + 1 });
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddDays(1);
+            Services = dbCrud.GetAllServices().Select(i => new ServiceData(i)).ToList();
+            IsFreeRoomExist = "Введите данные";
+
+        }
+        private bool isEnabled;
+        private string isFreeRoomExist;
+        private DateTime startDate;
+        private DateTime endDate;
+        private List<RoomTypeModel> roomTypes;
+        private List<ServiceData> services;
+        private ServiceData currentService;
+        private RoomTypeModel currentRoomType;
+        private RoomCheckInData currentRoom;
+        private List<RoomCheckInData> freeRooms;
+        private List<Roominess> availableRoominess;
+        private Roominess rominess;
+        private string error;
+        private string roomPrice;
+        private string servicePrice;
+        private string finalPrice;
+        public string RoomPrice
+        {
+            get
+            {
+                return roomPrice;
+            }
+            set
+            {
+                roomPrice = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("RoomPrice"));
+            }
+        }
+        public string ServicePrice
+        {
+            get
+            {
+                return servicePrice;
+            }
+            set
+            {
+                servicePrice = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("ServicePrice"));
+            }
+        }
+        public string FinalPrice
+        {
+            get
+            {
+                return finalPrice;
+            }
+            set
+            {
+                finalPrice = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("FinalPrice"));
+            }
+        }
+        public bool IsEnabled
+        {
+            get
+            {
+                return isEnabled;
+            }
+            set
+            {
+                isEnabled = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("IsEnabled"));
+            }
+        }
+        public string IsFreeRoomExist
+        {
+            get
+            {
+                return isFreeRoomExist;
+            }
+            set
+            {
+                isFreeRoomExist = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("IsFreeRoomExist"));
+            }
+        }
+        public DateTime StartDate
+        {
+            get
+            {
+                return startDate;
+            }
+            set
+            {
+                startDate = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("StartDate"));
+                GetFreeRooms();
+            }
+        }
+        public DateTime EndDate
+        {
+            get
+            {
+                return endDate;
+            }
+            set
+            {
+                endDate = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("EndDate"));
+                GetFreeRooms();
+            }
+        }
+        public List<RoomTypeModel> RoomTypes
+        {
+            get
+            {
+                return roomTypes;
+            }
+            set
+            {
+                roomTypes = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("RoomTypes"));
+            }
+        }
+        public List<ServiceData> Services
+        {
+            get
+            {
+                return services;
+            }
+            set
+            {
+                services = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("Services"));
+            }
+        }
+        public ServiceData CurrentService
+        {
+            get
+            {
+                return currentService;
+            }
+            set
+            {
+                currentService = value;
+                if (value == null)
+                {
+                    IsEnabled = false;
+                    SetPrices();
+                }
+                else
+                {
+                    IsEnabled = true;
+                }
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("CurrentService"));
+            }
+        }
+        public RoomTypeModel CurrentRoomType
+        {
+            get
+            {
+                return currentRoomType;
+            }
+            set
+            {
+                currentRoomType = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("CurrentRoomType"));
+                GetFreeRooms();
+            }
+        }
+        public Roominess Roominess
+        {
+            get
+            {
+                return rominess;
+            }
+            set
+            {
+                rominess = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("Rominess"));
+                GetFreeRooms();
+            }
+        }
+        public RoomCheckInData CurrentRoom
+        {
+            get
+            {
+                return currentRoom;
+            }
+            set
+            {
+                currentRoom = value;
+                RoomNumberChanged?.Invoke(null, new PropertyChangedEventArgs("CurrentRoom"));
+            }
+        }
+        public List<RoomCheckInData> FreeRooms
+        {
+            get
+            {
+                return freeRooms;
+            }
+            set
+            {
+                freeRooms = value;
+                RoomNumberChanged?.Invoke(null, new PropertyChangedEventArgs("FreeRooms"));
+                if (value == null)
+                {
+                    IsFreeRoomExist = "Нет комнат";
+                }
+                else IsFreeRoomExist = "Номер комнаты";
+            }
+        }
+        public string Error
+        {
+            get
+            {
+                return error;
+            }
+            set
+            {
+                error = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("Error"));
+            }
+        }
+        public List<Roominess> AvailableRoominess
+        {
+            get
+            {
+                return availableRoominess;
+            }
+            set
+            {
+                availableRoominess = value;
+                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("AvailableRoominess"));
+            }
+        }
+        public void GetFreeRooms()
+        {
+            try
+            {
+                if ((StartDate - DateTime.Now).Days < 0) throw new Exception("Начальная дата меньше текущей");
+                if (EndDate <= StartDate) throw new Exception("Начальная дата должна быть меньше конечной");
+                if (CurrentRoomType == null || Roominess == null) throw new Exception("");
+                Error = "";
+                FreeRooms = checkInService.GetFreeRooms(StartDate, EndDate, CurrentRoomType.TypeName, Roominess.Number);
+            }
+            catch (Exception e)
+            {
+                Error = e.Message;
+                FreeRooms = null;
+                return;
+            }
+            finally
+            {
+                SetPrices();
+            }
+        }
+
+        public void AddServiceProvision(string numStr)
+        {
+            try
+            {
+                int num;
+                if (CurrentService == null) throw new Exception("Доп. услуга не выбрана");
+                if (!int.TryParse(numStr, out num)) throw new Exception("Неверный формат");
+                if (num < 0) throw new Exception("Число меньше нуля");
+                foreach (ServiceData service in Services)
+                {
+                    if (service.ServiceId == CurrentService.ServiceId)
+                    {
+                        service.NumberOfProvision = num;
+                        break;
+                    }
+                }
+                Services = new List<ServiceData>(Services);
+                CurrentService = null;
+            }
+            catch (Exception e)
+            {
+                Error = e.Message;
+                return;
+            }
+        }
+        private void SetPrices()
+        {
+            ServicePrice = "Цена доп. услуг: " + GetServicesPrice().ToString();
+            RoomPrice = "Цена комнаты: " + GetRoomPrice().ToString();
+            FinalPrice = "Всего: " + (GetRoomPrice() + GetServicesPrice()).ToString();
+        }
+        private int GetRoomPrice()
+        {
+            if (CurrentRoomType == null || Roominess == null || EndDate < StartDate) return 0;
+            return Roominess.Number * CurrentRoomType.PriceForOnePersonPerDay * (EndDate - StartDate).Days;
+        }
+        private int GetServicesPrice()
+        {
+            int result = 0;
+            if (Services != null)
+                foreach (ServiceData service in Services)
+                {
+                    result += service.NumberOfProvision * service.PriceForOneProvision;
+                }
+            return result;
+        }
+
+        public bool AddRoom()
+        {
+            if (CurrentRoom == null)
+            {
+                Error = "Комната не выбрана";
+                return false;
+            }
+            completeCheckIn.CheckIn = new CheckInModel()
+            {
+                RoomCost = GetRoomPrice(),
+                StartDate = StartDate,
+                EndDate = EndDate,
+                RoomId = CurrentRoom.RoomId,
+                ServicesCost = GetServicesPrice()
+            };
+            completeCheckIn.Roominess = Roominess.Number;
+            completeCheckIn.RoomType = CurrentRoomType;
+            completeCheckIn.Services = Services;
+            completeCheckIn.RoomNumber = CurrentRoom.RoomNumber;
+            return true;
+        }
+        public void RefillEverything()
+        {
+                CurrentRoomType = RoomTypes.Find(i => i.TypeId == completeCheckIn.RoomType.TypeId);
+                Roominess = AvailableRoominess.Find(i => i.Number == completeCheckIn.Roominess);
+                StartDate = completeCheckIn.CheckIn.StartDate;
+                EndDate = completeCheckIn.CheckIn.EndDate;
+                GetFreeRooms();
+                CurrentRoom = FreeRooms.Find(i => i.RoomId == completeCheckIn.CheckIn.RoomId);
+                Services = completeCheckIn.Services;
+        }
+    }
+}

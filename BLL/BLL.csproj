@@ -46,18 +46,24 @@
   <ItemGroup>
     <Compile Include="DbCrud.cs" />
     <Compile Include="Interfaces\IAuthorizationService.cs" />
+    <Compile Include="Interfaces\ICheckInService.cs" />
     <Compile Include="Interfaces\IConvertationService.cs" />
     <Compile Include="Interfaces\IDbCrud.cs" />
     <Compile Include="Models\AdultModel.cs" />
+    <Compile Include="Models\CheckInGuestModel.cs" />
     <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckInServiceModel.cs" />
     <Compile Include="Models\ChildModel.cs" />
     <Compile Include="Models\GuestModel.cs" />
+    <Compile Include="Models\RoomTypeModel.cs" />
     <Compile Include="Models\SearchModels\AccountFullData.cs" />
+    <Compile Include="Models\SearchModels\RoomCheckInData.cs" />
     <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModules\IoC.cs" />
     <Compile Include="ServiceModules\ServiceModule.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
+    <Compile Include="Services\CheckInService.cs" />
     <Compile Include="Services\ConvertationService.cs" />
   </ItemGroup>
   <ItemGroup>
