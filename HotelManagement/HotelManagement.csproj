@@ -85,6 +85,8 @@
     <Compile Include="CompleteCheckInModel\ICompleteCheckIn.cs" />
     <Compile Include="Converters\GuestInfoConverter.cs" />
     <Compile Include="Converters\LoginDataMultiConverter.cs" />
+    <Compile Include="Employee\EmployeeProperties.cs" />
+    <Compile Include="Employee\IEmployee.cs" />
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="IoC\NinjectRegistrations.cs" />
     <Compile Include="Navigation\INavigation.cs" />

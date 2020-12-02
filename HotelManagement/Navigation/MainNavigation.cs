@@ -36,7 +36,6 @@ namespace HotelManagement.Navigation
                 VisibilityChanged?.Invoke(null, new PropertyChangedEventArgs("CurrentVisibility"));
             }
         }
-
         public void Navigate(Page page)
         {
             CurrentPage = page;

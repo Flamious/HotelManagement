@@ -28,7 +28,7 @@ namespace DAL
         public int ModifierId { get; set; }
 
         [StringLength(30)]
-        public string Sruname { get; set; }
+        public string Surname { get; set; }
 
         [StringLength(30)]
         public string Username { get; set; }

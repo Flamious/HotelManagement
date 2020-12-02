@@ -49,11 +49,11 @@
     <Compile Include="Interfaces\ICheckInService.cs" />
     <Compile Include="Interfaces\IConvertationService.cs" />
     <Compile Include="Interfaces\IDbCrud.cs" />
-    <Compile Include="Models\AdultModel.cs" />
     <Compile Include="Models\CheckInGuestModel.cs" />
     <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckinModel\CompleteCheckIn.cs" />
+    <Compile Include="Models\CheckinModel\ServiceData.cs" />
     <Compile Include="Models\CheckInServiceModel.cs" />
-    <Compile Include="Models\ChildModel.cs" />
     <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\RoomTypeModel.cs" />
     <Compile Include="Models\SearchModels\AccountFullData.cs" />

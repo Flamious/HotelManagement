@@ -13,9 +13,7 @@ namespace DAL
         }
 
         public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<Adult> Adult { get; set; }
         public virtual DbSet<CheckIn> CheckIn { get; set; }
-        public virtual DbSet<Child> Child { get; set; }
         public virtual DbSet<Guest> Guest { get; set; }
         public virtual DbSet<Modifier> Modifier { get; set; }
         public virtual DbSet<Room> Room { get; set; }
@@ -35,7 +33,7 @@ namespace DAL
                 .IsFixedLength();
 
             modelBuilder.Entity<Account>()
-                .Property(e => e.Sruname)
+                .Property(e => e.Surname)
                 .IsFixedLength();
 
             modelBuilder.Entity<Account>()
@@ -51,18 +49,6 @@ namespace DAL
                 .WithOptional(e => e.Account)
                 .HasForeignKey(e => e.LastEmployeeId);
 
-            modelBuilder.Entity<Adult>()
-                .Property(e => e.PassportNumber)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Adult>()
-                .Property(e => e.PassportInfo)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Adult>()
-                .HasOptional(e => e.Guest)
-                .WithRequired(e => e.Adult);
-
             modelBuilder.Entity<CheckIn>()
                 .HasMany(e => e.CheckInGuest)
                 .WithRequired(e => e.CheckIn)
@@ -72,14 +58,6 @@ namespace DAL
                 .HasMany(e => e.CheckInServices)
                 .WithRequired(e => e.CheckIn)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Child>()
-                .Property(e => e.BirthCertificate)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Child>()
-                .HasOptional(e => e.Guest)
-                .WithRequired(e => e.Child);
 
             modelBuilder.Entity<Guest>()
                 .Property(e => e.Surname)
@@ -95,6 +73,10 @@ namespace DAL
 
             modelBuilder.Entity<Guest>()
                 .Property(e => e.PhoneNumber)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Guest>()
+                .Property(e => e.GuestDocument)
                 .IsFixedLength();
 
             modelBuilder.Entity<Guest>()

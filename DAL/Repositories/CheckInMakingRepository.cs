@@ -1,4 +1,5 @@
-﻿using DAL.Entities.Data;
+﻿using DAL.Entities;
+using DAL.Entities.Data;
 using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace DAL.Repositories
         public List<RoomData> GetAllRooms(string typeName, int rominess)
         {
             return db.Room
-                .Where(i=>i.NumberOfPlaces == rominess)
+                .Where(i => i.NumberOfPlaces == rominess)
                 .Join(db.RoomType, i => i.TypeId, j => j.TypeId, (i, j) => new RoomData()
                 {
                     RoomId = i.RoomId,
@@ -39,8 +40,8 @@ namespace DAL.Repositories
                     Roominess = i.NumberOfPlaces,
                     TypeId = i.TypeId
                 })
-                .Where(i=>(i.Startdate >= startDate && i.Startdate <= endDate) || (i.EndDate >= startDate && i.EndDate <= endDate))
-                .Where(i =>i.Roominess == rominess)
+                .Where(i => (i.Startdate >= startDate && i.Startdate <= endDate) || (i.EndDate >= startDate && i.EndDate <= endDate))
+                .Where(i => i.Roominess == rominess)
                 .Join(db.RoomType, i => i.TypeId, j => j.TypeId, (i, j) => new RoomData()
                 {
                     RoomId = i.RoomId,
@@ -48,6 +49,13 @@ namespace DAL.Repositories
                     TypeName = j.TypeName
                 }).Where(i => i.TypeName == typeName).ToList();
         }
-
+        public CheckIn GetCheckIn(int roomId, DateTime EndDate)
+        {
+            return db.CheckIn.First(i => i.EndDate == EndDate && i.RoomId == roomId);
+        }
+        public Guest GetGuest(string document)
+        {
+            return db.Guest.FirstOrDefault(i => i.GuestDocument == document);
+        }
     }
 }

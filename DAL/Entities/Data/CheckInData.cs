@@ -10,19 +10,18 @@ namespace DAL.Entities
     public class ServiceData
     {
         public int ServiceId { get; set; }
-        public string ServiceName { get; set; }
         public int Number { get; set; }
     }
 
-    public class CheckInData
+    public class GuestData
     {
         public int GuestId { get; set; }
-        public int CheckInId { get; set; }
-        public int RoomNumber { get; set; }
-        public int ServicesPrice { get; set; }
-        public int RoomPrice { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public List<ServiceData> Services { get; set; }
+        public string Surname { get; set; }
+        public string GuestName { get; set; }
+        public string Patronymic { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool IsChild { get; set; }
+        public string Document { get; set; }
     }
 }

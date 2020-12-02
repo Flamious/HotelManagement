@@ -11,10 +11,13 @@ namespace BLL.Services
         {
             return accountData == null ? null : new AccountFullData()
             {
-                AccountID = accountData.AccountID,
+                AccountId = accountData.AccountId,
                 Login = accountData.Login,
                 Password = accountData.Password,
-                Modifier = accountData.Modifier
+                Modifier = accountData.Modifier.TrimEnd(' '),
+                Surname = string.IsNullOrEmpty(accountData.Surname) ? "" : accountData.Surname.TrimEnd(' '),
+                Username = string.IsNullOrEmpty(accountData.Username) ? "" : accountData.Username.TrimEnd(' '),
+                Patronymic = string.IsNullOrEmpty(accountData.Patronymic) ? "" : accountData.Patronymic.TrimEnd(' ')
             };
         }
     }

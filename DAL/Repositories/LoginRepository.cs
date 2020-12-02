@@ -19,10 +19,13 @@ namespace DAL.Repositories
             return db.Account
                 .Join(db.Modifier, i => i.ModifierId, j => j.ModifierId, (i, j) => new AccountData()
                 {
-                    AccountID = i.AccountId,
+                    AccountId = i.AccountId,
                     Login = i.Login,
                     Password = i.Password,
-                    Modifier = j.ModifierName
+                    Modifier = j.ModifierName,
+                    Surname = i.Surname,
+                    Username = i.Username,
+                    Patronymic = i.Patronymic
                 })
                 .FirstOrDefault(i => i.Login == login && i.Password == password);
         }

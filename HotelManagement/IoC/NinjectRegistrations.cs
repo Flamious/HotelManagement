@@ -1,5 +1,6 @@
 ﻿using HotelManagement.CheckInMaking;
 using HotelManagement.CompleteCheckInModel;
+using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using Ninject.Modules;
 using System;
@@ -18,6 +19,7 @@ namespace HotelManagement
             Bind<ICheckInRoom>().To<CheckInRoom>().InSingletonScope();
             Bind<ICompleteCheckIn>().To<CompleteCheckIn>().InSingletonScope();
             Bind<ICheckInGuest>().To<CheckInGuest>().InSingletonScope();
+            Bind<IEmployee>().To<EmployeeProperties>().InSingletonScope();
         }
     }
 }

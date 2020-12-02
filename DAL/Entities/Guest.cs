@@ -35,9 +35,9 @@ namespace DAL
         [StringLength(11)]
         public string PhoneNumber { get; set; }
 
-        public virtual Adult Adult { get; set; }
-
-        public virtual Child Child { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string GuestDocument { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CheckInGuest> CheckInGuest { get; set; }

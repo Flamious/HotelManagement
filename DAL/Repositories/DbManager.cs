@@ -7,8 +7,6 @@ namespace DAL.Repositories
         private HotelDB db;
         private AccountRepository accountRepository;
         private GuestRepository guestRepository;
-        private AdultRepository adultRepository;
-        private ChildRepository childRepository;
         private ModifierRepository modifierRepository;
         private CheckInRepository checkInRepository;
         private CheckInServiceRepository checkInServiceRepository;
@@ -30,26 +28,6 @@ namespace DAL.Repositories
                 if (accountRepository == null)
                     accountRepository = new AccountRepository(db);
                 return accountRepository;
-            }
-        }
-
-        public IRepository<Adult> Adults
-        {
-            get
-            {
-                if (adultRepository == null)
-                    adultRepository = new AdultRepository(db);
-                return adultRepository;
-            }
-        }
-
-        public IRepository<Child> Children
-        {
-            get
-            {
-                if (childRepository == null)
-                    childRepository = new ChildRepository(db);
-                return childRepository;
             }
         }
 

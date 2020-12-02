@@ -22,5 +22,6 @@ namespace HotelManagement.CompleteCheckInModel
         void EditCheckIn();
         string GetServicesToAdmit();
         List<string> GetGuestsToAdmit();
+        void Clear();
     }
 }

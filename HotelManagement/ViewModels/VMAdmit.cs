@@ -1,5 +1,6 @@
 ﻿using HotelManagement.CheckInMaking;
 using HotelManagement.CompleteCheckInModel;
+using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
 using HotelManagement.Views.Pages;
@@ -17,6 +18,7 @@ namespace HotelManagement.ViewModels
         private readonly INavigation navigation;
         private readonly ICompleteCheckIn completeCheckIn;
         private readonly ICheckInGuest checkInGuest;
+        private readonly IEmployee employee;
 
         public string Room
         {
@@ -73,6 +75,7 @@ namespace HotelManagement.ViewModels
             navigation = IoC.Get<INavigation>();
             completeCheckIn = IoC.Get<ICompleteCheckIn>();
             checkInGuest = IoC.Get<ICheckInGuest>();
+            employee = IoC.Get<IEmployee>();
 
             Visibilities = new List<Visibility>();
             GuestsHeaders = new List<string>();
@@ -89,6 +92,19 @@ namespace HotelManagement.ViewModels
             }
         }
 
+        private RelayCommand forwardCommand;
+        public RelayCommand ForwardCommand
+        {
+            get
+            {
+                return forwardCommand ?? (forwardCommand = new RelayCommand(obj =>
+                {
+                    completeCheckIn.CheckIn.LastEmployeeId = employee.Id;
+                    completeCheckIn.AddCheckIn();
+                    navigation.Navigate(new EmployeePage());
+                }));
+            }
+        }
         private RelayCommand backCommand;
         public RelayCommand BackCommand
         {

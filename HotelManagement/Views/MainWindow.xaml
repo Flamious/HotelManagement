@@ -24,6 +24,7 @@
             </Grid.RowDefinitions>
             <Grid Background="#673ab7">
                 <StackPanel Height="35" Grid.Row="0" Visibility="{Binding CurrentVisibility}" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource MaterialDesignTextBlock}"></TextBlock>
                     <Button Content="Выйти" BorderBrush="White" Margin="5 3 5 2" Height="30" Command="{Binding LogOutCommand}"></Button>
                 </StackPanel>
             </Grid>

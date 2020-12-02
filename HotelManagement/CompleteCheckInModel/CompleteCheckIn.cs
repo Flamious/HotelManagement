@@ -13,7 +13,7 @@ namespace HotelManagement.CompleteCheckInModel
 {
     public class CompleteCheckIn : ICompleteCheckIn
     {
-        IDbCrud dbCrud;
+        ICheckInService checkInService;
         private CheckInModel checkIn;
         private List<GuestModel> guests;
         private List<ServiceData> services;
@@ -21,9 +21,18 @@ namespace HotelManagement.CompleteCheckInModel
         private List<GuestDocuments> guestDocuments;
         private int roominess;
         private int roomNumber;
+        public void Clear()
+        {
+            CheckIn = new CheckInModel();
+            Guests.Clear();
+            Services.Clear();
+            RoomType = new RoomTypeModel();
+            GuestDocuments.Clear();
+            roominess = roomNumber = -1;
+        }
         public CompleteCheckIn()
         {
-            dbCrud = BLL.ServiceModules.IoC.Get<IDbCrud>();
+            checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
             checkIn = new CheckInModel();
             guests = new List<GuestModel>();
             services = new List<ServiceData>();
@@ -107,15 +116,30 @@ namespace HotelManagement.CompleteCheckInModel
         }
         public void AddCheckIn()
         {
-            Console.WriteLine(CheckIn.StartDate.ToString("dd.MM.yyyy"), CheckIn.EndDate.ToString("dd.MM.yyyy"), CheckIn.RoomId, CheckIn.RoomCost, CheckIn.ServicesCost);
-            foreach(ServiceData service in Services)
+            List<string> documents = new List<string>();
+            foreach (GuestDocuments guestDocument in GuestDocuments)
             {
-                Console.WriteLine(service.ServiceName, service.PriceForOneProvision, service.NumberOfProvision);
+                documents.Add(guestDocument.Document);
             }
-            foreach(GuestModel guest in Guests)
+            List<BLL.Models.CheckinModel.ServiceData> services = new List<BLL.Models.CheckinModel.ServiceData>();
+            foreach (ServiceData service in Services)
             {
-                Console.WriteLine(guest.Surname, guest.GuestName, guest.Patronymic);
+                services.Add(new BLL.Models.CheckinModel.ServiceData()
+                {
+                    ServiceId = service.ServiceId,
+                    NumberOfProvision = service.NumberOfProvision
+                });
             }
+
+            BLL.Models.CheckinModel.CompleteCheckIn completeCheckIn = new BLL.Models.CheckinModel.CompleteCheckIn()
+            {
+                CheckIn = CheckIn,
+                GuestDocuments = documents,
+                Guests = Guests,
+                Services = services
+            };
+            checkInService.CreateCheckIn(completeCheckIn);
+            Clear();
         }
         public void EditCheckIn()
         {
@@ -126,7 +150,7 @@ namespace HotelManagement.CompleteCheckInModel
         {
             string result = "";
             if (Services.Count == 0) return "Доп. услуги остутствуют";
-            for(int i = 0; i < Services.Count; i++)
+            for (int i = 0; i < Services.Count; i++)
             {
                 if (Services[i].NumberOfProvision == 0) continue;
                 if (i != 0 && result != "") result += "\n";
@@ -138,7 +162,7 @@ namespace HotelManagement.CompleteCheckInModel
         {
             string tem;
             List<string> result = new List<string>();
-            for(int i = 0; i < Guests.Count; i++)
+            for (int i = 0; i < Guests.Count; i++)
             {
                 tem = "";
                 tem += "Фамилия: " + Guests[i].Surname + "\n"

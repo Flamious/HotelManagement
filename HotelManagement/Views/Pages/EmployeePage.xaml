@@ -18,54 +18,59 @@
             <Grid Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.75*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="0.75*
+                                          "></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <ComboBox Width="150" Margin="10 2" IsEditable="False">
-                            <ComboBoxItem IsSelected="True">
-                                <TextBlock>Текущие заселения</TextBlock>
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <TextBlock>Предстоящие заселения</TextBlock>
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <TextBlock>Прошедшие заселения</TextBlock>
-                            </ComboBoxItem>
-                        </ComboBox>
-                        <Button 
+
+                    <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1 0 1 0" Margin="0 2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ComboBox Width="150" Margin="10 2" IsEditable="False">
+                                <ComboBoxItem IsSelected="True">
+                                    <TextBlock>Текущие заселения</TextBlock>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock>Предстоящие заселения</TextBlock>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock>Прошедшие заселения</TextBlock>
+                                </ComboBoxItem>
+                            </ComboBox>
+                            <Button 
                     Height="35" Width="35" 
                     HorizontalContentAlignment="Center" 
                     BorderBrush="White"
-                    Margin="5 2"
+                    Margin="5 0"
                     VerticalAlignment="Top" HorizontalAlignment="Left"
                     Style="{StaticResource MaterialDesignIconButton}"
                     ToolTip="Добавить"
                             Command="{Binding OpenCheckInPageCommand}">
-                            <materialDesign:PackIcon Kind="Plus" />
-                        </Button>
-                        <Button 
+                                <materialDesign:PackIcon Kind="Plus" />
+                            </Button>
+                            <Button 
                     Height="35" Width="35" 
                     HorizontalContentAlignment="Center" 
                     BorderBrush="White"
-                    Margin="5 2"
+                    Margin="5 0"
                     VerticalAlignment="Top" HorizontalAlignment="Left"
                     Style="{StaticResource MaterialDesignIconButton}"
                     ToolTip="Редактировать">
-                            <materialDesign:PackIcon Kind="Edit" />
-                        </Button>
-                        <Button 
+                                <materialDesign:PackIcon Kind="Edit" />
+                            </Button>
+                            <Button 
                     Height="35" Width="35" 
                     HorizontalContentAlignment="Center" 
                     BorderBrush="White"
-                    Margin="5 2"
+                    Margin="5 0"
                     VerticalAlignment="Top" HorizontalAlignment="Left"
                     Style="{StaticResource MaterialDesignIconButton}"
                     ToolTip="Удалить">
-                            <materialDesign:PackIcon Kind="Delete" />
-                        </Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                                <materialDesign:PackIcon Kind="Delete" />
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Margin="0 2">
 
                         <TextBox HorizontalAlignment="Stretch" 
                          Width="150" 
@@ -76,18 +81,25 @@
                          BorderBrush="White"
                          materialDesign:HintAssist.Hint="Поиск"
                                  materialDesign:HintAssist.IsFloating="False"
-                         Margin="2"></TextBox>
+                         Margin="2 0"></TextBox>
                         <Button 
                     Height="35" Width="35" 
                     HorizontalContentAlignment="Center" 
                     BorderBrush="White"
-                    Margin="5 2"
+                    Margin="5 0"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                     ToolTip="Поиск">
                             <materialDesign:PackIcon Kind="Search" />
                         </Button>
                     </StackPanel>
+                    <TextBlock 
+                        Grid.Column="2"
+                        Text="{Binding Username}"
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        Margin="5 2"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center"></TextBlock>
                 </Grid>
             </Grid>
 

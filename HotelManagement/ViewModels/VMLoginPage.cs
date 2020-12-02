@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using BLL.Services;
+using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
 using System;
@@ -16,6 +17,7 @@ namespace HotelManagement.ViewModels
     {
         private readonly INavigation navigation;
         private readonly IAuthorizationService authorization;
+        private readonly IEmployee employee;
 
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
@@ -24,24 +26,24 @@ namespace HotelManagement.ViewModels
             {
                 return loginCommand ?? (loginCommand = new RelayCommand(obj =>
                 {
-                    //var data = obj as LoginData;
-                    //if (string.IsNullOrEmpty(data.Login) || string.IsNullOrEmpty(data.PasswordBox.Password)) return;
-                    //AccountFullData account = new AccountFullData();
-                    //account = authorization.FindAccount(data.Login, data.PasswordBox.Password) ?? null;
+                    var data = obj as LoginData;
+                    if (string.IsNullOrEmpty(data.Login) || string.IsNullOrEmpty(data.PasswordBox.Password)) return;
+                    AccountFullData account = authorization.FindAccount(data.Login, data.PasswordBox.Password) ?? null;
 
-                    //if (account == null) return;
+                    if (account == null) return;
 
-                    //Console.WriteLine(account.Modifier);
-                    //switch (account.Modifier.Trim(' '))
-                    //{
-                    //    case "Guest":
-
-                    //        break;
-                    //    default:
-                    //        return;
-                    //}
-                    navigation.Navigate(new EmployeePage());
-                    navigation.ChangeVisibility(Visibility.Visible);
+                    Console.WriteLine(account.Modifier);
+                    switch (account.Modifier.Trim(' '))
+                    {
+                        case "Employee":
+                            employee.Username = account.GetFullName();
+                            employee.Id = account.AccountId;
+                            navigation.Navigate(new EmployeePage());
+                            navigation.ChangeVisibility(Visibility.Visible);
+                            break;
+                        default:
+                            return;
+                    }
                 }));
             }
         }
@@ -50,8 +52,10 @@ namespace HotelManagement.ViewModels
         {
             navigation = IoC.Get<INavigation>();
             authorization = BLL.ServiceModules.IoC.Get<IAuthorizationService>();
+            employee = IoC.Get<IEmployee>();
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            employee.UserChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
     }
 }

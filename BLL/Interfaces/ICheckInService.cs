@@ -1,4 +1,5 @@
 ﻿using BLL.Models;
+using BLL.Models.CheckinModel;
 using BLL.Models.SearchModels;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace BLL.Interfaces
     public interface ICheckInService
     {
         List<RoomCheckInData> GetFreeRooms(DateTime startDate, DateTime endDate, string typeName, int roominess);
+        void CreateCheckIn(CompleteCheckIn checkIn); 
     }
 }

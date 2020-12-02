@@ -29,37 +29,49 @@ namespace BLL
         }
         public void CreateGuest(GuestModel guest)
         {
-            //db.Guests.Create(new Guest()
-            //{
-            //    Surname = guest.Surname,
-            //    GuestName = guest.GuestName,
-            //    Patronymic = guest.Patronymic,
-            //    AccountId = guest.AccountId,
-            //    BirthDate = guest.BirthDate,
-            //    PhoneNumber = guest.PhoneNumber
-            //});
-            //Save();
+            db.Guests.Create(new Guest()
+            {
+                Surname = guest.Surname,
+                GuestName = guest.GuestName,
+                Patronymic = guest.Patronymic,
+                BirthDate = guest.BirthDate,
+                PhoneNumber = guest.PhoneNumber,
+                GuestDocument = guest.Document
+            });
+            Save();
         }
         public void CreateCheckIn(CheckInModel checkIn)
         {
-            //db.ChecksIn.Create(new CheckIn()
-            //{
-            //    GuestId = checkIn.GuestId,
-            //    EndDate = checkIn.EndDate,
-            //    RoomCost = checkIn.RoomCost,
-            //    RoomId = checkIn.RoomId,
-            //    ServicesCost = checkIn.ServicesCost,
-            //    StartDate = checkIn.StartDate
-            //});
-            //Save();
+            db.ChecksIn.Create(new CheckIn()
+            {
+                StartDate = checkIn.StartDate,
+                EndDate = checkIn.EndDate,
+                RoomId = checkIn.RoomId,
+                RoomCost = checkIn.RoomCost,
+                ServicesCost = checkIn.ServicesCost,
+                LastEmployeeId = checkIn.LastEmployeeId
+            });
+            Save();
         }
         public void CreateCheckInGuestConnection(CheckInGuestModel connection)
         {
-
+            db.CheckInGuests.Create(new CheckInGuest()
+            {
+                CheckInId = connection.CheckInId,
+                GuestID = connection.GuestID,
+                VisitNumber = 0
+            });
+            Save();
         }
         public void CreateCheckInServiceConnection(CheckInServiceModel connection)
         {
-
+            db.CheckInServices.Create(new CheckInServices()
+            {
+                CheckInId = connection.CheckInId,
+                ServiceId = connection.ServiceId,
+                Number = connection.Number
+            });
+            Save();
         }
         public void UpdateGuest(GuestModel guest)
         {
