@@ -77,6 +77,12 @@ namespace HotelManagement.ViewModels
             checkInGuest = IoC.Get<ICheckInGuest>();
             employee = IoC.Get<IEmployee>();
 
+            navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            checkInGuest.GuestInfoChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            employee.ListChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            employee.UserChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            
             Visibilities = new List<Visibility>();
             GuestsHeaders = new List<string>();
 
@@ -101,6 +107,7 @@ namespace HotelManagement.ViewModels
                 {
                     completeCheckIn.CheckIn.LastEmployeeId = employee.Id;
                     completeCheckIn.AddCheckIn();
+                    employee.LoadList();
                     navigation.Navigate(new EmployeePage());
                 }));
             }

@@ -12,6 +12,7 @@ namespace BLL.Interfaces
     public interface ICheckInService
     {
         List<RoomCheckInData> GetFreeRooms(DateTime startDate, DateTime endDate, string typeName, int roominess);
-        void CreateCheckIn(CompleteCheckIn checkIn); 
+        void CreateCheckIn(CompleteCheckIn checkIn);
+        void DeleteCheckIn(int checkInId);
     }
 }

@@ -12,7 +12,7 @@
 
         public string GetFullName()
         {
-            return Surname + " " + Username[0] + ". " + Patronymic[0] + ". (" + Modifier + ") [id: " + AccountId + "]";
+            return Surname + " " + Username[0] + ". " + Patronymic[0] + ". [id: " + AccountId + "]";
         }
     }
 }

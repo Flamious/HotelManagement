@@ -18,100 +18,100 @@
             <Grid Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.75*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.75*
-                                          "></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1 0 1 0" Margin="0 2">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <ComboBox Width="150" Margin="10 2" IsEditable="False">
-                                <ComboBoxItem IsSelected="True">
-                                    <TextBlock>Текущие заселения</TextBlock>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock>Предстоящие заселения</TextBlock>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock>Прошедшие заселения</TextBlock>
-                                </ComboBoxItem>
-                            </ComboBox>
-                            <Button 
-                    Height="35" Width="35" 
-                    HorizontalContentAlignment="Center" 
-                    BorderBrush="White"
-                    Margin="5 0"
-                    VerticalAlignment="Top" HorizontalAlignment="Left"
-                    Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="Добавить"
-                            Command="{Binding OpenCheckInPageCommand}">
-                                <materialDesign:PackIcon Kind="Plus" />
-                            </Button>
-                            <Button 
-                    Height="35" Width="35" 
-                    HorizontalContentAlignment="Center" 
-                    BorderBrush="White"
-                    Margin="5 0"
-                    VerticalAlignment="Top" HorizontalAlignment="Left"
-                    Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="Редактировать">
-                                <materialDesign:PackIcon Kind="Edit" />
-                            </Button>
-                            <Button 
-                    Height="35" Width="35" 
-                    HorizontalContentAlignment="Center" 
-                    BorderBrush="White"
-                    Margin="5 0"
-                    VerticalAlignment="Top" HorizontalAlignment="Left"
-                    Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="Удалить">
-                                <materialDesign:PackIcon Kind="Delete" />
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Margin="0 2">
-
-                        <TextBox HorizontalAlignment="Stretch" 
-                         Width="150" 
-                         Style="{DynamicResource MaterialDesignTextBox}" 
-                         FontSize="10" 
-                         VerticalAlignment="Center" 
-                         HorizontalContentAlignment="Stretch" 
-                         BorderBrush="White"
-                         materialDesign:HintAssist.Hint="Поиск"
-                                 materialDesign:HintAssist.IsFloating="False"
-                         Margin="2 0"></TextBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 2">
+                        <ComboBox 
+                            Width="150" 
+                            Margin="10 2" 
+                            IsEditable="False" 
+                            ItemsSource="{Binding Periods}" 
+                            DisplayMemberPath="Name" 
+                            SelectedIndex="{Binding CurrentPeriodIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        </ComboBox>
                         <Button 
-                    Height="35" Width="35" 
-                    HorizontalContentAlignment="Center" 
-                    BorderBrush="White"
-                    Margin="5 0"
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                    ToolTip="Поиск">
-                            <materialDesign:PackIcon Kind="Search" />
+                            Height="35" Width="35" 
+                            HorizontalContentAlignment="Center" 
+                            BorderBrush="White"
+                            Margin="5 0"
+                            VerticalAlignment="Top" HorizontalAlignment="Left"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="Добавить"
+                            Command="{Binding OpenCheckInPageCommand}">
+                            <materialDesign:PackIcon Kind="Plus" />
+                        </Button>
+                        <Button 
+                            Height="35" Width="35" 
+                            HorizontalContentAlignment="Center" 
+                            BorderBrush="White"
+                            Margin="5 0"
+                            VerticalAlignment="Top" HorizontalAlignment="Left"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="Редактировать">
+                            <materialDesign:PackIcon Kind="Edit" />
+                        </Button>
+                        <Button 
+                            Command="{Binding DeleteCheckIn}"
+                            Height="35" Width="35" 
+                            HorizontalContentAlignment="Center" 
+                            BorderBrush="White"
+                            Margin="5 0"
+                            VerticalAlignment="Top" HorizontalAlignment="Left"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            ToolTip="Удалить">
+                            <materialDesign:PackIcon Kind="Delete" />
                         </Button>
                     </StackPanel>
                     <TextBlock 
-                        Grid.Column="2"
+                        Grid.Column="1"
                         Text="{Binding Username}"
                         Style="{DynamicResource MaterialDesignTextBlock}"
-                        Margin="5 2"
-                        TextAlignment="Center"
+                        Margin="10 2"
+                        TextAlignment="Right"
                         VerticalAlignment="Center"></TextBlock>
                 </Grid>
             </Grid>
 
             <materialDesign:Card Margin="5 4">
-                <DataGrid>
+                <DataGrid SelectedIndex="{Binding CurrentCheckInIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    HorizontalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    ItemsSource="{Binding CheckIns}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Гость" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Комната" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Общая стоимость услуг" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Дата начала" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Дата окончания" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=Id}"
+                            Header="Id" 
+                            Width="60"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=Dates}"
+                            Header="Даты" 
+                            Width="150"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=Room}"
+                            Header="Комната" 
+                            Width="150"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=Guests}"
+                            Header="Гости" 
+                            Width="250"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=Services}"
+                            Header="Доп. усуги" 
+                            Width="200"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=Prices}"
+                            Header="Сумма" 
+                            Width="175"></DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Path=LastEmployee}"
+                            Header="Последнее действие" 
+                            Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </materialDesign:Card>

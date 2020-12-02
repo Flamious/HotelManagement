@@ -59,39 +59,6 @@ namespace BLL.Services
         }
         public void CreateCheckIn(CompleteCheckIn checkIn)
         {
-            //CheckIn newCheckIn = new CheckIn()
-            //{
-            //    StartDate = checkIn.CheckIn.StartDate,
-            //    EndDate = checkIn.CheckIn.EndDate,
-            //    RoomCost = checkIn.CheckIn.RoomCost,
-            //    ServicesCost = checkIn.CheckIn.ServicesCost,
-            //    LastEmployeeId = checkIn.CheckIn.LastEmployeeId,
-            //    RoomId = checkIn.CheckIn.RoomId
-            //};
-            //List<DAL.Entities.GuestData> guestData = new List<DAL.Entities.GuestData>();
-            //foreach (GuestModel guestModel in checkIn.Guests)
-            //{
-            //    guestData.Add(new DAL.Entities.GuestData()
-            //    {
-            //        Surname = guestModel.Surname,
-            //        GuestName = guestModel.GuestName,
-            //        Patronymic = guestModel.Patronymic,
-            //        BirthDate = guestModel.BirthDate,
-            //        PhoneNumber = guestModel.PhoneNumber,
-            //        Document = guestModel.PhoneNumber,
-            //        IsChild = guestModel is ChildModel
-            //    });
-            //}
-            //List<DAL.Entities.ServiceData> serviceData = new List<DAL.Entities.ServiceData>();
-            //foreach(ServiceData service in checkIn.Services)
-            //{
-            //    serviceData.Add(new DAL.Entities.ServiceData()
-            //    {
-            //        ServiceId = service.ServiceId,
-            //        Number = service.NumberOfProvision
-            //    });
-            //}
-            //checkInService.CreateCheckIn(newCheckIn, guestData, serviceData, checkIn.CheckIn.LastEmployeeId);
 
             crud.CreateCheckIn(new CheckInModel()
             {
@@ -131,13 +98,20 @@ namespace BLL.Services
 
             foreach (ServiceData service in checkIn.Services)
             {
-                crud.CreateCheckInServiceConnection(new CheckInServiceModel()
-                {
-                    ServiceId = service.ServiceId,
-                    CheckInId = checkInId,
-                    Number = service.NumberOfProvision
-                });
+                if (service.NumberOfProvision > 0)
+                    crud.CreateCheckInServiceConnection(new CheckInServiceModel()
+                    {
+                        ServiceId = service.ServiceId,
+                        CheckInId = checkInId,
+                        Number = service.NumberOfProvision
+                    });
             }
+        }
+        public void DeleteCheckIn(int checkInId)
+        {
+            db.CheckInGuests.Delete(checkInId, true);
+            db.CheckInServices.Delete(checkInId, true);
+            db.ChecksIn.Delete(checkInId);
         }
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Structures\GuestDocuments.cs" />
     <Compile Include="Structures\LoginData.cs" />
+    <Compile Include="Structures\Period.cs" />
     <Compile Include="Structures\RegistrationData.cs" />
     <Compile Include="Structures\Roominess.cs" />
     <Compile Include="Structures\ServiceData.cs" />

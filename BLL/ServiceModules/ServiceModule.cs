@@ -21,6 +21,7 @@ namespace BLL.ServiceModules
             Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
             Bind<ICheckInMakingRepository>().To<CheckInMakingRepository>().InSingletonScope();
             Bind<ICheckInService>().To<CheckInService>().InSingletonScope();
+            Bind<IDbInfo>().To<DbInfoService>().InSingletonScope();
         }
     }
 }

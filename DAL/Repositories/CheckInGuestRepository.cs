@@ -45,7 +45,10 @@ namespace DAL.Repositories
                 if (isCheckInId) item = db.CheckInGuest.FirstOrDefault(i => i.CheckInId == id);
                 else item = db.CheckInGuest.FirstOrDefault(i => i.GuestID == id);
                 if (item != null)
+                {
                     db.CheckInGuest.Remove(item);
+                    Save();
+                }
                 else
                     break;
             }

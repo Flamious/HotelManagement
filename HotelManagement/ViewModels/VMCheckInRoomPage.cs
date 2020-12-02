@@ -2,6 +2,7 @@
 using BLL.Models;
 using BLL.Models.SearchModels;
 using HotelManagement.CheckInMaking;
+using HotelManagement.CompleteCheckInModel;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
 using HotelManagement.Views.Pages;
@@ -17,7 +18,7 @@ namespace HotelManagement.ViewModels
     {
         private readonly ICheckInRoom checkInRoom;
         private readonly INavigation navigation;
-        private readonly ICheckInService checkInService;
+        private readonly ICompleteCheckIn completeCheckIn;
 
         public string RoomPrice => checkInRoom.RoomPrice;
         public string ServicePrice => checkInRoom.ServicePrice;
@@ -95,7 +96,7 @@ namespace HotelManagement.ViewModels
         {
             navigation = IoC.Get<INavigation>();
             checkInRoom = IoC.Get<ICheckInRoom>();
-            checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
+            completeCheckIn = IoC.Get<ICompleteCheckIn>();
             checkInRoom.RoomInfoChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             checkInRoom.RoomNumberChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
@@ -134,6 +135,7 @@ namespace HotelManagement.ViewModels
             {
                 return backCommand ?? (backCommand = new RelayCommand(obj =>
                 {
+                    completeCheckIn.Clear();
                     navigation.Navigate(new EmployeePage());
                 }));
             }

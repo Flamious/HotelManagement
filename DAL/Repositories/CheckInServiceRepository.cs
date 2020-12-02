@@ -26,7 +26,6 @@ namespace DAL.Repositories
         {
             return db.CheckInServices.FirstOrDefault(i=>i.CheckInId == checkInId && i.ServiceId == serviceId);
         }
-
         public void Create(CheckInServices item)
         {
             db.CheckInServices.Add(item);
@@ -45,16 +44,19 @@ namespace DAL.Repositories
                 if (isCheckInId) item = db.CheckInServices.FirstOrDefault(i => i.CheckInId == id);
                 else item = db.CheckInServices.FirstOrDefault(i => i.ServiceId == id);
                 if (item != null)
+                {
                     db.CheckInServices.Remove(item);
+                    Save();
+                }
                 else
                     break;
             }
         }
         public void Delete(int checkInId, int serviceId)
         {
-            CheckInServices item = db.CheckInServices.FirstOrDefault(i=>i.CheckInId == checkInId && i.ServiceId == serviceId);
-                if (item != null)
-                    db.CheckInServices.Remove(item);
+            CheckInServices item = db.CheckInServices.FirstOrDefault(i => i.CheckInId == checkInId && i.ServiceId == serviceId);
+            if (item != null)
+                db.CheckInServices.Remove(item);
         }
 
         public bool Save()

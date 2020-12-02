@@ -38,6 +38,8 @@ namespace HotelManagement.ViewModels
                         case "Employee":
                             employee.Username = account.GetFullName();
                             employee.Id = account.AccountId;
+                            employee.CurrentPeriodIndex = 0;
+                            employee.LoadList();
                             navigation.Navigate(new EmployeePage());
                             navigation.ChangeVisibility(Visibility.Visible);
                             break;
@@ -56,6 +58,7 @@ namespace HotelManagement.ViewModels
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             employee.UserChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            employee.ListChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
     }
 }

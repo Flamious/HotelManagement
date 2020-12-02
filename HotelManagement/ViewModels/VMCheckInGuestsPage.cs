@@ -106,6 +106,7 @@ namespace HotelManagement.ViewModels
             checkInRoom.RoomInfoChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             checkInRoom.RoomNumberChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             checkInGuest.GuestInfoChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
 

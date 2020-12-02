@@ -42,6 +42,7 @@ namespace DAL.Repositories
             CheckIn item = db.CheckIn.Find(id);
             if (item != null)
                 db.CheckIn.Remove(item);
+            Save();
         }
 
         public bool Save()

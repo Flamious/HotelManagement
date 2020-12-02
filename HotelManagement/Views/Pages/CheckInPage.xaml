@@ -98,7 +98,7 @@
                             ItemsSource="{Binding AvailableRominess}"
                             DisplayMemberPath="NumberString"
                             SelectedItem="{Binding CurrentRoominess, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Width="200"
+                            Width="200"
                             Margin="5"
                         Style="{DynamicResource MaterialDesignComboBox}"
                         materialDesign:HintAssist.Hint="Вместительность комнаты"

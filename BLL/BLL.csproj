@@ -49,8 +49,10 @@
     <Compile Include="Interfaces\ICheckInService.cs" />
     <Compile Include="Interfaces\IConvertationService.cs" />
     <Compile Include="Interfaces\IDbCrud.cs" />
+    <Compile Include="Interfaces\IDbInfo.cs" />
     <Compile Include="Models\CheckInGuestModel.cs" />
     <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckinModel\CheckInInfo.cs" />
     <Compile Include="Models\CheckinModel\CompleteCheckIn.cs" />
     <Compile Include="Models\CheckinModel\ServiceData.cs" />
     <Compile Include="Models\CheckInServiceModel.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Services\AuthorizationService.cs" />
     <Compile Include="Services\CheckInService.cs" />
     <Compile Include="Services\ConvertationService.cs" />
+    <Compile Include="Services\DbInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
