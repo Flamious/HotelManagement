@@ -17,6 +17,7 @@ namespace HotelManagement.ViewModels
     class VMCheckInRoomPage : VMBase
     {
         private readonly ICheckInRoom checkInRoom;
+        private readonly ICheckInGuest checkInGuest;
         private readonly INavigation navigation;
         private readonly ICompleteCheckIn completeCheckIn;
 
@@ -96,6 +97,7 @@ namespace HotelManagement.ViewModels
         {
             navigation = IoC.Get<INavigation>();
             checkInRoom = IoC.Get<ICheckInRoom>();
+            checkInGuest = IoC.Get<ICheckInGuest>();
             completeCheckIn = IoC.Get<ICompleteCheckIn>();
             checkInRoom.RoomInfoChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             checkInRoom.RoomNumberChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
@@ -121,9 +123,11 @@ namespace HotelManagement.ViewModels
             {
                 return forwardCommand ?? (forwardCommand = new RelayCommand(obj =>
                 {
-                    
-                    if(!checkInRoom.AddRoom()) return;
-                    navigation.Navigate(new GuestPage());
+                    if (!checkInRoom.AddRoom()) return;
+                    if (completeCheckIn.Id > 0)
+                        navigation.Navigate(new AdmitCheckInPage());
+                    else
+                        navigation.Navigate(new GuestPage());
                 }));
             }
         }
@@ -136,6 +140,8 @@ namespace HotelManagement.ViewModels
                 return backCommand ?? (backCommand = new RelayCommand(obj =>
                 {
                     completeCheckIn.Clear();
+                    checkInRoom.Clear();
+                    checkInGuest.Clear();
                     navigation.Navigate(new EmployeePage());
                 }));
             }

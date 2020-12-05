@@ -1,4 +1,5 @@
-﻿using BLL.Models;
+﻿using BLL.Interfaces;
+using BLL.Models;
 using HotelManagement.CompleteCheckInModel;
 using HotelManagement.Converters;
 using HotelManagement.Structures;
@@ -14,6 +15,7 @@ namespace HotelManagement.CheckInMaking
     public class CheckInGuest : ICheckInGuest
     {
         private readonly ICompleteCheckIn completeCheckIn;
+        private readonly IDbInfo dbInfo;
         public event PropertyChangedEventHandler GuestInfoChanged;
 
         private List<GuestModel> guests;
@@ -21,16 +23,14 @@ namespace HotelManagement.CheckInMaking
         private string surname, guestName, patronymic, phoneNumber;
         private DateTime birthDate;
         private int currentGuestIndex;
-        private string document;
+        private string document, error;
         private bool isChild;
 
         public CheckInGuest()
         {
             completeCheckIn = IoC.Get<ICompleteCheckIn>();
-            Guests = new List<GuestModel>();
-            guestDocuments = new List<GuestDocuments>();
-            CurrentGuestIndex = 0;
-            FillFields(true);
+            dbInfo = BLL.ServiceModules.IoC.Get<IDbInfo>();
+            Clear();
         }
         public List<GuestModel> Guests
         {
@@ -138,6 +138,18 @@ namespace HotelManagement.CheckInMaking
                 GuestInfoChanged?.Invoke(null, new PropertyChangedEventArgs("Document"));
             }
         }
+        public string Error
+        {
+            get
+            {
+                return error;
+            }
+            set
+            {
+                error = value;
+                GuestInfoChanged?.Invoke(null, new PropertyChangedEventArgs("Error"));
+            }
+        }
         public bool IsChild
         {
             get
@@ -151,12 +163,14 @@ namespace HotelManagement.CheckInMaking
             }
         }
 
-        public void AddGuest()
+        public bool AddGuest()
         {
+            if (!CheckData()) return false;
             if (currentGuestIndex == Guests.Count)
             {
                 Guests.Add(new GuestModel()
                 {
+                    GuestId = -1,
                     Surname = Surname,
                     GuestName = GuestName,
                     Patronymic = Patronymic,
@@ -181,9 +195,12 @@ namespace HotelManagement.CheckInMaking
             CurrentGuestIndex++;
             if (CurrentGuestIndex == Guests.Count) FillFields(true);
             else FillFields(false);
+
+            return true;
         }
         public void Back()
         {
+            Error = "";
             CurrentGuestIndex--;
             FillFields(false);
         }
@@ -216,6 +233,143 @@ namespace HotelManagement.CheckInMaking
                 Document = GuestDocuments[CurrentGuestIndex].Document;
             }
 
+        }
+
+        public void LoadGuests()
+        {
+            Guests = completeCheckIn.Guests;
+            GuestDocuments = completeCheckIn.GuestDocuments;
+            CurrentGuestIndex = 0;
+            FillFields(false);
+        }
+
+        public void Clear()
+        {
+            Error = "";
+            Guests = new List<GuestModel>();
+            guestDocuments = new List<GuestDocuments>();
+            CurrentGuestIndex = 0;
+            FillFields(true);
+        }
+
+        public bool FindGuest()
+        {
+            GuestModel guest = dbInfo.FindGuest(Document);
+            if (guest == null) return false;
+            if (!dbInfo.CheckGuest(guest.GuestId, completeCheckIn.CheckIn.StartDate, completeCheckIn.CheckIn.EndDate))
+            {
+                Error = "Гость уже заселен";
+                return false;
+            }
+            for (int i = 0; i < Guests.Count; i++)
+            {
+                if (i == CurrentGuestIndex) continue;
+                else
+                {
+                    if (GuestDocuments[i].Document == Document)
+                    {
+                        Error = "Гость уже в списке";
+                        if (CurrentGuestIndex != Guests.Count)
+                            Guests[CurrentGuestIndex] = new GuestModel() { GuestId = -1 };
+                        return false;
+                    }
+                }
+            }
+            bool isChildLocal = guest.Document.Length == 10 ? false : true;
+            if (currentGuestIndex == Guests.Count)
+            {
+                Guests.Add(guest);
+                GuestDocuments.Add(new GuestDocuments(isChildLocal, guest.Document));
+            }
+            else
+            {
+                Guests[CurrentGuestIndex] = guest;
+                GuestDocuments[CurrentGuestIndex] = new GuestDocuments(isChildLocal, guest.Document);
+            }
+            FillFields(false);
+            return true;
+        }
+
+        public void ClearFoundGuest()
+        {
+            Guests[CurrentGuestIndex].GuestId = -1;
+            FillFields(true);
+        }
+        public bool IsGuestExist
+        {
+            get
+            {
+                if (currentGuestIndex == Guests.Count) return false;
+                else
+                {
+                    if (Guests[CurrentGuestIndex].GuestId > 0) return true;
+                    else return false;
+                }
+            }
+        }
+
+        private bool CheckData()
+        {
+            if (string.IsNullOrEmpty(Surname))
+            {
+                Error = "Введите фамилию";
+                return false;
+            }
+            if (string.IsNullOrEmpty(GuestName))
+            {
+                Error = "Введите имя";
+                return false;
+            }
+            if (string.IsNullOrEmpty(Patronymic))
+            {
+                Error = "Введите отчество";
+                return false;
+            }
+            if (IsChild == true)
+            {
+                if (Document.Length != 6)
+                {
+                    Error = "Неверно введен документ";
+                    return false;
+                }
+            }
+            else
+            {
+                if (Document.Length != 10)
+                {
+                    Error = "Неверно введен документ";
+                    return false;
+                }
+            }
+            if (string.IsNullOrEmpty(PhoneNumber))
+            {
+                PhoneNumber = "";
+            }
+            else
+            if (PhoneNumber.Length != 11)
+            {
+                Error = "Неверно введен телефон";
+                return false;
+            }
+
+            if (dbInfo.FindGuest(Document) != null)
+            {
+                if (CurrentGuestIndex == Guests.Count)
+                {
+                    Error = "Гость уже есть в базе данных.\n Используйте кнопку поиска для уточнения данных";
+                    return false;
+                }
+                else
+                {
+                    if (Guests[CurrentGuestIndex].GuestId < 0)
+                    {
+                        Error = "Гость уже есть в базе данных.\n Используйте кнопку поиска для уточнения данных";
+                        return false;
+                    }
+                }
+            }
+            Error = "";
+            return true;
         }
     }
 }

@@ -11,12 +11,14 @@ namespace BLL.Interfaces
     {
         List<RoomTypeModel> GetAllRoomTypes();
         List<ServiceModel> GetAllServices();
+        CheckInModel GetCheckIn(int id);
+        RoomModel GetRoom(int id);
+        ServiceModel GetService(int id);
+        RoomTypeModel GetRoomType(int id);
         void CreateGuest(GuestModel guest);
         void CreateCheckIn(CheckInModel checkIn);
         void CreateCheckInGuestConnection(CheckInGuestModel connection);
         void CreateCheckInServiceConnection(CheckInServiceModel connection);
-        void UpdateGuest(GuestModel guest);
-        void UpdateCheckIn(CheckInModel checkIn, List<ServiceModel> services, List<GuestModel> guests);
-        void DeleteCheckIn(int checkInid);
+        void UpdateCheckIn(CheckInModel checkIn, List<CheckInServiceModel> connection);
     }
 }

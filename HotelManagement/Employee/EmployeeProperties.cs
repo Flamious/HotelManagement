@@ -1,5 +1,7 @@
 ﻿using BLL.Interfaces;
 using BLL.Models.CheckinModel;
+using HotelManagement.CheckInMaking;
+using HotelManagement.CompleteCheckInModel;
 using HotelManagement.Structures;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,9 @@ namespace HotelManagement.Employee
     {
         private readonly IDbInfo dbInfo;
         private readonly ICheckInService checkInService;
+        private readonly ICompleteCheckIn completeCheckIn;
+        private readonly ICheckInRoom checkInRoom;
+        private readonly ICheckInGuest checkInGuest;
         public event PropertyChangedEventHandler UserChanged;
         public event PropertyChangedEventHandler ListChanged;
         private List<CheckInInfo> checkIns;
@@ -27,11 +32,14 @@ namespace HotelManagement.Employee
         {
             dbInfo = BLL.ServiceModules.IoC.Get<IDbInfo>();
             checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
+            completeCheckIn = IoC.Get<ICompleteCheckIn>();
+            checkInRoom = IoC.Get<ICheckInRoom>();
+            checkInGuest = IoC.Get<ICheckInGuest>();
             Periods = new List<Period>();
-            Periods.Add(new Period(-1, "Прошедшие заселения"));
             Periods.Add(new Period(0, "Текущие заселения"));
             Periods.Add(new Period(1, "Предстоящие заселения"));
-            currentPeriodIndex = 0;
+            Periods.Add(new Period(-1, "Прошедшие заселения"));
+            CurrentPeriodIndex = 0;
         }
         public int? Id
         {
@@ -115,6 +123,13 @@ namespace HotelManagement.Employee
         {
             checkInService.DeleteCheckIn(CheckIns[CurrentCheckInIndex].Id);
             LoadList();
+        }
+        public void EditElement()
+        {
+            completeCheckIn.Id = CheckIns[CurrentCheckInIndex].Id;
+            completeCheckIn.LoadData(CheckIns[CurrentCheckInIndex].Id);
+            checkInRoom.LoadData();
+            checkInGuest.LoadGuests();
         }
     }
 }

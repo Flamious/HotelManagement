@@ -107,11 +107,49 @@ namespace BLL.Services
                     });
             }
         }
+        public void EditCheckIn(CompleteCheckIn checkIn)
+        {
+            List<CheckInServiceModel> result = new List<CheckInServiceModel>();
+            foreach (ServiceData service in checkIn.Services)
+            {
+                if (service.NumberOfProvision > 0)
+                    result.Add(new CheckInServiceModel()
+                    {
+                        ServiceId = service.ServiceId,
+                        CheckInId = checkIn.CheckIn.CheckInId,
+                        Number = service.NumberOfProvision
+                    });
+            }
+            crud.UpdateCheckIn(new CheckInModel()
+            {
+                StartDate = checkIn.CheckIn.StartDate,
+                EndDate = checkIn.CheckIn.EndDate,
+                RoomId = checkIn.CheckIn.RoomId,
+                RoomCost = checkIn.CheckIn.RoomCost,
+                ServicesCost = checkIn.CheckIn.ServicesCost,
+                LastEmployeeId = checkIn.CheckIn.LastEmployeeId
+            }, result);
+        }
         public void DeleteCheckIn(int checkInId)
         {
             db.CheckInGuests.Delete(checkInId, true);
             db.CheckInServices.Delete(checkInId, true);
             db.ChecksIn.Delete(checkInId);
+        }
+
+        public bool IsOldRoomFree(DateTime oldStart, DateTime oldEnd, DateTime start, DateTime end, int roomId, int checkInId)
+        {
+            if (oldStart <= start && oldEnd >= end) return true;
+            else
+            {
+                List<CheckIn> checkIns = db.ChecksIn.GetList().Where(i => i.RoomId == roomId && i.CheckInId != checkInId).ToList();
+                foreach(CheckIn checkIn in checkIns)
+                {
+                    if (start >= checkIn.StartDate && start <= checkIn.EndDate) return false;
+                    if (end >= checkIn.StartDate && end <= checkIn.EndDate) return false;
+                }
+            }
+            return true;
         }
     }
 }

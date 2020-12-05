@@ -15,15 +15,21 @@ namespace HotelManagement.CheckInMaking
         List<GuestModel> Guests { get; set; }
         int CurrentGuestIndex { get; set; }
         string Document { get; set; }
+        string Error { get; set; }
         bool IsChild { get; set; }
+        bool IsGuestExist { get; }
         List<GuestDocuments> GuestDocuments { get; set; }
         string Surname { get; set; }
         string GuestName { get; set; }
         string Patronymic { get; set; }
         DateTime BirthDate { get; set; }
         string PhoneNumber { get; set; }
-        void AddGuest();
+        bool AddGuest();
+        void LoadGuests();
         void Back();
         void EndAdding();
+        void Clear();
+        bool FindGuest();
+        void ClearFoundGuest();
     }
 }

@@ -24,6 +24,10 @@ namespace HotelManagement.CheckInMaking
             checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
             dbCrud = BLL.ServiceModules.IoC.Get<IDbCrud>();
             completeCheckIn = IoC.Get<ICompleteCheckIn>();
+            Clear();
+        }
+        public void Clear()
+        {
             RoomTypes = dbCrud.GetAllRoomTypes();
             AvailableRoominess = new List<Roominess>();
             for (int i = 0; i < 4; i++) AvailableRoominess.Add(new Roominess() { Number = i + 1 });
@@ -31,17 +35,17 @@ namespace HotelManagement.CheckInMaking
             EndDate = DateTime.Now.AddDays(1);
             Services = dbCrud.GetAllServices().Select(i => new ServiceData(i)).ToList();
             IsFreeRoomExist = "Введите данные";
-
+            lastRoom = null;
         }
         private bool isEnabled;
         private string isFreeRoomExist;
-        private DateTime startDate;
-        private DateTime endDate;
+        private DateTime startDate, oldStart;
+        private DateTime endDate, oldEnd;
         private List<RoomTypeModel> roomTypes;
         private List<ServiceData> services;
         private ServiceData currentService;
         private RoomTypeModel currentRoomType;
-        private RoomCheckInData currentRoom;
+        private RoomCheckInData currentRoom, lastRoom = null;
         private List<RoomCheckInData> freeRooms;
         private List<Roominess> availableRoominess;
         private Roominess rominess;
@@ -267,7 +271,13 @@ namespace HotelManagement.CheckInMaking
                 if (EndDate <= StartDate) throw new Exception("Начальная дата должна быть меньше конечной");
                 if (CurrentRoomType == null || Roominess == null) throw new Exception("");
                 Error = "";
-                FreeRooms = checkInService.GetFreeRooms(StartDate, EndDate, CurrentRoomType.TypeName, Roominess.Number);
+                FreeRooms = checkInService.GetFreeRooms(StartDate, EndDate, CurrentRoomType.TypeName, Roominess.Number) ?? new List<RoomCheckInData>();
+                if (lastRoom != null)
+                    if (checkInService.IsOldRoomFree(oldStart, oldEnd, StartDate, EndDate, lastRoom.RoomId, completeCheckIn.CheckIn.CheckInId))
+                    {
+                        FreeRooms.Add(lastRoom);
+                        FreeRooms = new List<RoomCheckInData>(FreeRooms);
+                    }
             }
             catch (Exception e)
             {
@@ -351,13 +361,28 @@ namespace HotelManagement.CheckInMaking
         }
         public void RefillEverything()
         {
-                CurrentRoomType = RoomTypes.Find(i => i.TypeId == completeCheckIn.RoomType.TypeId);
-                Roominess = AvailableRoominess.Find(i => i.Number == completeCheckIn.Roominess);
-                StartDate = completeCheckIn.CheckIn.StartDate;
-                EndDate = completeCheckIn.CheckIn.EndDate;
-                GetFreeRooms();
-                CurrentRoom = FreeRooms.Find(i => i.RoomId == completeCheckIn.CheckIn.RoomId);
-                Services = completeCheckIn.Services;
+            CurrentRoomType = RoomTypes.Find(i => i.TypeId == completeCheckIn.RoomType.TypeId);
+            Roominess = AvailableRoominess.Find(i => i.Number == completeCheckIn.Roominess);
+            StartDate = completeCheckIn.CheckIn.StartDate;
+            EndDate = completeCheckIn.CheckIn.EndDate;
+            GetFreeRooms();
+            CurrentRoom = FreeRooms.Find(i => i.RoomId == completeCheckIn.CheckIn.RoomId);
+            Services = dbCrud.GetAllServices().Select(i => new ServiceData(i)).ToList();
+            foreach (ServiceData service in completeCheckIn.Services)
+            {
+                Services.Find(i => i.ServiceId == service.ServiceId).NumberOfProvision = service.NumberOfProvision;
+            }
+        }
+        public void LoadData()
+        {
+            oldEnd = completeCheckIn.CheckIn.EndDate;
+            oldStart = completeCheckIn.CheckIn.StartDate;
+            lastRoom = new RoomCheckInData()
+            {
+                RoomId = completeCheckIn.CheckIn.RoomId,
+                RoomNumber = completeCheckIn.RoomNumber
+            };
+            RefillEverything();
         }
     }
 }

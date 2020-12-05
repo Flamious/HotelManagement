@@ -13,6 +13,8 @@ namespace BLL.Interfaces
     {
         List<RoomCheckInData> GetFreeRooms(DateTime startDate, DateTime endDate, string typeName, int roominess);
         void CreateCheckIn(CompleteCheckIn checkIn);
+        void EditCheckIn(CompleteCheckIn checkIn);
         void DeleteCheckIn(int checkInId);
+        bool IsOldRoomFree(DateTime oldStart, DateTime oldEnd, DateTime start, DateTime end, int roomId, int checkInId);
     }
 }

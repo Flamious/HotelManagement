@@ -36,5 +36,7 @@ namespace HotelManagement.CheckInMaking
         void AddServiceProvision(string numStr);
         bool AddRoom();
         void RefillEverything();
+        void LoadData();
+        void Clear();
     }
 }

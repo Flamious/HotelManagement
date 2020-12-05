@@ -21,5 +21,6 @@ namespace HotelManagement.Employee
         int CurrentPeriodIndex { get; set; }
         void LoadList();
         void DeleteElement();
+        void EditElement();
     }
 }

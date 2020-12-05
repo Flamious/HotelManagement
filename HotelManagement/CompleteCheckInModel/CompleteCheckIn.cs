@@ -14,6 +14,8 @@ namespace HotelManagement.CompleteCheckInModel
     public class CompleteCheckIn : ICompleteCheckIn
     {
         ICheckInService checkInService;
+        IDbCrud dbCrud;
+        IDbInfo dbInfo;
         private CheckInModel checkIn;
         private List<GuestModel> guests;
         private List<ServiceData> services;
@@ -21,6 +23,7 @@ namespace HotelManagement.CompleteCheckInModel
         private List<GuestDocuments> guestDocuments;
         private int roominess;
         private int roomNumber;
+        private int id;
         public void Clear()
         {
             CheckIn = new CheckInModel();
@@ -29,13 +32,17 @@ namespace HotelManagement.CompleteCheckInModel
             RoomType = new RoomTypeModel();
             GuestDocuments.Clear();
             roominess = roomNumber = -1;
+            id = 0;
         }
         public CompleteCheckIn()
         {
             checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
+            dbInfo = BLL.ServiceModules.IoC.Get<IDbInfo>();
+            dbCrud = BLL.ServiceModules.IoC.Get<IDbCrud>();
             checkIn = new CheckInModel();
             guests = new List<GuestModel>();
             services = new List<ServiceData>();
+            guestDocuments = new List<GuestDocuments>();
         }
         public int RoomNumber
         {
@@ -46,6 +53,17 @@ namespace HotelManagement.CompleteCheckInModel
             set
             {
                 roomNumber = value;
+            }
+        }
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
             }
         }
         public List<GuestDocuments> GuestDocuments
@@ -117,6 +135,7 @@ namespace HotelManagement.CompleteCheckInModel
         public void AddCheckIn()
         {
             List<string> documents = new List<string>();
+            CheckIn.EndDate = CheckIn.EndDate;
             foreach (GuestDocuments guestDocument in GuestDocuments)
             {
                 documents.Add(guestDocument.Document);
@@ -143,7 +162,19 @@ namespace HotelManagement.CompleteCheckInModel
         }
         public void EditCheckIn()
         {
-
+            CheckIn.CheckInId = Id;
+            List<CheckInServiceModel> connection = new List<CheckInServiceModel>();
+            foreach(ServiceData service in Services)
+            {
+                connection.Add(new CheckInServiceModel()
+                {
+                    ServiceId = service.ServiceId,
+                    Number = service.NumberOfProvision,
+                    CheckInId = CheckIn.CheckInId
+                });
+            }
+            dbCrud.UpdateCheckIn(CheckIn, connection);
+            Clear();
         }
 
         public string GetServicesToAdmit()
@@ -174,6 +205,27 @@ namespace HotelManagement.CompleteCheckInModel
                 result.Add(tem);
             }
             return result;
+        }
+
+        public void LoadData(int checkInId)
+        {
+            CheckIn = dbCrud.GetCheckIn(checkInId);
+            Guests = dbInfo.FindGuests(checkInId);
+            GuestDocuments = new List<GuestDocuments>();
+            foreach(GuestModel guest in Guests)
+            {
+                GuestDocuments.Add(new GuestDocuments(guest.Document.TrimEnd(' ')));
+            }
+            RoomModel room = dbCrud.GetRoom(CheckIn.RoomId);
+            Roominess = room.NumberOfPlaces;
+            RoomNumber = room.RoomNumber;
+            Services = new List<ServiceData>();
+            List<CheckInServiceModel> checkInServices = dbInfo.FindServices(checkInId);
+            foreach(CheckInServiceModel checkInServiceModel in checkInServices)
+            {
+                Services.Add(new ServiceData(dbCrud.GetService(checkInServiceModel.ServiceId), checkInServiceModel.Number));
+            }
+            RoomType = dbCrud.GetRoomType(room.TypeId);
         }
     }
 }

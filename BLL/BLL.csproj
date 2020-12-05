@@ -57,6 +57,7 @@
     <Compile Include="Models\CheckinModel\ServiceData.cs" />
     <Compile Include="Models\CheckInServiceModel.cs" />
     <Compile Include="Models\GuestModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\RoomTypeModel.cs" />
     <Compile Include="Models\SearchModels\AccountFullData.cs" />
     <Compile Include="Models\SearchModels\RoomCheckInData.cs" />

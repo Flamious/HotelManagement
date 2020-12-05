@@ -18,10 +18,12 @@ namespace HotelManagement.CompleteCheckInModel
         RoomTypeModel RoomType { get; set; }
         int RoomNumber { get; set; }
         int Roominess { get; set; }
+        int Id { get; set; }
         void AddCheckIn();
         void EditCheckIn();
         string GetServicesToAdmit();
         List<string> GetGuestsToAdmit();
+        void LoadData(int checkInId);
         void Clear();
     }
 }

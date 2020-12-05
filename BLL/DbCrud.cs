@@ -19,6 +19,22 @@ namespace BLL
             this.db = db;
         }
 
+        public CheckInModel GetCheckIn(int id)
+        {
+            return new CheckInModel(db.ChecksIn.GetItem(id));
+        }
+        public RoomModel GetRoom(int id)
+        {
+            return new RoomModel(db.Rooms.GetItem(id));
+        }
+        public ServiceModel GetService(int id)
+        {
+            return new ServiceModel(db.Services.GetItem(id));
+        }
+        public RoomTypeModel GetRoomType(int id)
+        {
+            return new RoomTypeModel(db.RoomTypes.GetItem(id));
+        }
         public List<RoomTypeModel> GetAllRoomTypes()
         {
             return db.RoomTypes.GetList().Select(i => new RoomTypeModel(i)).ToList();
@@ -73,42 +89,33 @@ namespace BLL
             });
             Save();
         }
-        public void UpdateGuest(GuestModel guest)
+        public void UpdateCheckIn(CheckInModel checkIn, List<CheckInServiceModel> connection)
         {
-            //Guest prevGuest = db.Guests.GetItem(guest.GuestId);
-            //prevGuest.Surname = guest.Surname;
-            //prevGuest.GuestName = guest.GuestName;
-            //prevGuest.Patronymic = guest.Patronymic;
-            //prevGuest.BirthDate = guest.BirthDate;
-            //prevGuest.PhoneNumber = guest.PhoneNumber;
-            //Save();
-        }
-        public void UpdateCheckIn(CheckInModel checkIn, List<ServiceModel> services, List<GuestModel> guests)
-        {
-            //CheckIn prevCheckIn = db.ChecksIn.GetItem(checkIn.CheckInId);
-            //prevCheckIn.RoomId = checkIn.RoomId;
-            //prevCheckIn.RoomCost = checkIn.RoomCost;
-            //prevCheckIn.ServicesCost = checkIn.ServicesCost;
-            //prevCheckIn.StartDate = checkIn.StartDate;
-            //prevCheckIn.EndDate = checkIn.EndDate;
-            //Save();
-        }
+            CheckIn prevCheckIn = db.ChecksIn.GetItem(checkIn.CheckInId);
+            prevCheckIn.RoomId = checkIn.RoomId;
+            prevCheckIn.RoomCost = checkIn.RoomCost;
+            prevCheckIn.ServicesCost = checkIn.ServicesCost;
+            prevCheckIn.StartDate = checkIn.StartDate;
+            prevCheckIn.EndDate = checkIn.EndDate;
+            prevCheckIn.LastEmployeeId = checkIn.LastEmployeeId;
 
-        public void DeleteCheckIn(int checkInId)
-        {
-            //CheckIn checkIn = db.ChecksIn.GetItem(checkInId);
-            //if (checkIn != null)
-            //{
-            //    db.CheckInServices.Delete(checkIn.CheckInId, true);
-            //    db.ChecksIn.Delete(checkIn.CheckInId);
-            //    Save();
-            //}
+            db.CheckInServices.Delete(checkIn.CheckInId, true);
+            foreach (CheckInServiceModel checkInService in connection)
+            {
+                db.CheckInServices.Create(new CheckInServices()
+                {
+                    ServiceId = checkInService.ServiceId,
+                    CheckInId = checkInService.CheckInId,
+                    Number = checkInService.Number
+                });
+            }
+            Save();
         }
-
         public bool Save()
         {
             if (db.Save() > 0) return true;
             return false;
         }
+
     }
 }

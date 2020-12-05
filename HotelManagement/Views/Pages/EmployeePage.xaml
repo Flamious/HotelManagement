@@ -43,6 +43,8 @@
                             <materialDesign:PackIcon Kind="Plus" />
                         </Button>
                         <Button 
+                            IsEnabled="{Binding IsEditEnabled, UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding EditCheckIn}"
                             Height="35" Width="35" 
                             HorizontalContentAlignment="Center" 
                             BorderBrush="White"

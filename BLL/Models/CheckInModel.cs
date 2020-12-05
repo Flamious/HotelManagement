@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,17 @@ namespace BLL.Models
         public int RoomCost { get; set; }
         public int ServicesCost { get; set; }
         public int? LastEmployeeId { get; set; }
+
+        public CheckInModel() { }
+        public CheckInModel(CheckIn checkIn)
+        {
+            CheckInId = checkIn.CheckInId;
+            RoomId = checkIn.RoomId;
+            StartDate = checkIn.StartDate;
+            EndDate = checkIn.EndDate;
+            RoomCost = checkIn.RoomCost;
+            ServicesCost = checkIn.ServicesCost;
+            LastEmployeeId = checkIn.LastEmployeeId;
+        }
     }
 }

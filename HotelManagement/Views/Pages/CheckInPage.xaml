@@ -28,7 +28,7 @@
                         <materialDesign:PackIcon Kind="Close" />
                     </Button>
                     <TextBlock
-                        Text="Новое заселение"
+                        Text="Комната и услуги"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Style="{DynamicResource MaterialDesignHeadline5TextBlock}"

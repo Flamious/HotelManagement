@@ -20,6 +20,9 @@ namespace HotelManagement.ViewModels
         private readonly ICheckInGuest checkInGuest;
         private readonly ICompleteCheckIn completeCheckIn;
 
+        public string Error => checkInGuest.Error;
+        public bool IsGuestAbsent => !checkInGuest.IsGuestExist;
+        public string Button => checkInGuest.IsGuestExist ? "Close" : "Search";
         public string Surname
         {
             get
@@ -144,6 +147,26 @@ namespace HotelManagement.ViewModels
                     else
                     {
                         checkInGuest.Back();
+                        navigation.Navigate(new GuestPage());
+                    }
+                }));
+            }
+        }
+        private RelayCommand searchCommand;
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                return searchCommand ?? (searchCommand = new RelayCommand(obj =>
+                {
+                    if (!checkInGuest.IsGuestExist)
+                    {
+                        if (checkInGuest.FindGuest())
+                            navigation.Navigate(new GuestPage());
+                    }
+                    else
+                    {
+                        checkInGuest.ClearFoundGuest();
                         navigation.Navigate(new GuestPage());
                     }
                 }));

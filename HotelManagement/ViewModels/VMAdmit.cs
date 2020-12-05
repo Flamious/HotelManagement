@@ -2,6 +2,7 @@
 using HotelManagement.CompleteCheckInModel;
 using HotelManagement.Employee;
 using HotelManagement.Navigation;
+using HotelManagement.Pages;
 using HotelManagement.Structures;
 using HotelManagement.Views.Pages;
 using System;
@@ -18,6 +19,7 @@ namespace HotelManagement.ViewModels
         private readonly INavigation navigation;
         private readonly ICompleteCheckIn completeCheckIn;
         private readonly ICheckInGuest checkInGuest;
+        private readonly ICheckInRoom checkInRoom;
         private readonly IEmployee employee;
 
         public string Room
@@ -75,6 +77,7 @@ namespace HotelManagement.ViewModels
             navigation = IoC.Get<INavigation>();
             completeCheckIn = IoC.Get<ICompleteCheckIn>();
             checkInGuest = IoC.Get<ICheckInGuest>();
+            checkInRoom = IoC.Get<ICheckInRoom>();
             employee = IoC.Get<IEmployee>();
 
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
@@ -82,7 +85,7 @@ namespace HotelManagement.ViewModels
             checkInGuest.GuestInfoChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             employee.ListChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             employee.UserChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
-            
+
             Visibilities = new List<Visibility>();
             GuestsHeaders = new List<string>();
 
@@ -106,7 +109,15 @@ namespace HotelManagement.ViewModels
                 return forwardCommand ?? (forwardCommand = new RelayCommand(obj =>
                 {
                     completeCheckIn.CheckIn.LastEmployeeId = employee.Id;
-                    completeCheckIn.AddCheckIn();
+                    if (completeCheckIn.Id > 0)
+                    {
+                        completeCheckIn.EditCheckIn();
+                    }
+                    else
+                        completeCheckIn.AddCheckIn();
+                    checkInRoom.Clear();
+                    checkInGuest.Clear();
+                    completeCheckIn.Clear();
                     employee.LoadList();
                     navigation.Navigate(new EmployeePage());
                 }));
@@ -119,8 +130,16 @@ namespace HotelManagement.ViewModels
             {
                 return backCommand ?? (backCommand = new RelayCommand(obj =>
                 {
-                    checkInGuest.Back();
-                    navigation.Navigate(new GuestPage());
+                    if (completeCheckIn.Id > 0)
+                    {
+                        checkInRoom.RefillEverything();
+                        navigation.Navigate(new CheckInPage());
+                    }
+                    else
+                    {
+                        checkInGuest.Back();
+                        navigation.Navigate(new GuestPage());
+                    }
                 }));
             }
         }
