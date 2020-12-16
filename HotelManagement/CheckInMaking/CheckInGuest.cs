@@ -200,9 +200,19 @@ namespace HotelManagement.CheckInMaking
         }
         public void Back()
         {
+            if(Guests.Count == 0)
+            {
+                FillFields(true);
+            }
+            else
+            {
+                if (CurrentGuestIndex > 0)
+                {
+                    CurrentGuestIndex--;
+                    FillFields(false);
+                }
+            }
             Error = "";
-            CurrentGuestIndex--;
-            FillFields(false);
         }
 
         public void EndAdding()
@@ -261,20 +271,7 @@ namespace HotelManagement.CheckInMaking
                 Error = "Гость уже заселен";
                 return false;
             }
-            for (int i = 0; i < Guests.Count; i++)
-            {
-                if (i == CurrentGuestIndex) continue;
-                else
-                {
-                    if (GuestDocuments[i].Document == Document)
-                    {
-                        Error = "Гость уже в списке";
-                        if (CurrentGuestIndex != Guests.Count)
-                            Guests[CurrentGuestIndex] = new GuestModel() { GuestId = -1 };
-                        return false;
-                    }
-                }
-            }
+            if (!CheckList()) return false;
             bool isChildLocal = guest.Document.Length == 10 ? false : true;
             if (currentGuestIndex == Guests.Count)
             {
@@ -327,7 +324,7 @@ namespace HotelManagement.CheckInMaking
             }
             if (IsChild == true)
             {
-                if (Document.Length != 6)
+                if (Document.Length != 6 || !IsDigitOnly(Document))
                 {
                     Error = "Неверно введен документ";
                     return false;
@@ -335,7 +332,7 @@ namespace HotelManagement.CheckInMaking
             }
             else
             {
-                if (Document.Length != 10)
+                if (Document.Length != 10 || !IsDigitOnly(Document))
                 {
                     Error = "Неверно введен документ";
                     return false;
@@ -346,7 +343,7 @@ namespace HotelManagement.CheckInMaking
                 PhoneNumber = "";
             }
             else
-            if (PhoneNumber.Length != 11)
+            if (PhoneNumber.Length != 11 || !IsDigitOnly(PhoneNumber))
             {
                 Error = "Неверно введен телефон";
                 return false;
@@ -356,19 +353,49 @@ namespace HotelManagement.CheckInMaking
             {
                 if (CurrentGuestIndex == Guests.Count)
                 {
-                    Error = "Гость уже есть в базе данных.\n Используйте кнопку поиска для уточнения данных";
+                    Error = "Гость уже есть в базе данных.\nИспользуйте поиск";
                     return false;
                 }
                 else
                 {
                     if (Guests[CurrentGuestIndex].GuestId < 0)
                     {
-                        Error = "Гость уже есть в базе данных.\n Используйте кнопку поиска для уточнения данных";
+                        Error = "Гость уже есть в базе данных.\nИспользуйте поиск";
                         return false;
                     }
                 }
             }
+            if (!CheckList()) return false;
             Error = "";
+            return true;
+        }
+
+        private bool CheckList()
+        {
+
+            for (int i = 0; i < Guests.Count; i++)
+            {
+                if (i == CurrentGuestIndex) continue;
+                else
+                {
+                    if (GuestDocuments[i].Document == Document)
+                    {
+                        Error = "Гость с такими документами\nуже в списке";
+                        if (CurrentGuestIndex != Guests.Count)
+                            Guests[CurrentGuestIndex] = new GuestModel() { GuestId = -1 };
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        private bool IsDigitOnly(string s)
+        {
+            foreach(char c in s)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
             return true;
         }
     }

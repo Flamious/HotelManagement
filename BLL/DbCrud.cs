@@ -89,7 +89,7 @@ namespace BLL
             });
             Save();
         }
-        public void UpdateCheckIn(CheckInModel checkIn, List<CheckInServiceModel> connection)
+        public void UpdateCheckIn(CheckInModel checkIn)
         {
             CheckIn prevCheckIn = db.ChecksIn.GetItem(checkIn.CheckInId);
             prevCheckIn.RoomId = checkIn.RoomId;
@@ -99,15 +99,21 @@ namespace BLL
             prevCheckIn.EndDate = checkIn.EndDate;
             prevCheckIn.LastEmployeeId = checkIn.LastEmployeeId;
 
-            db.CheckInServices.Delete(checkIn.CheckInId, true);
-            foreach (CheckInServiceModel checkInService in connection)
+            
+            Save();
+        }
+        public void UpdateCheckInService(List<CheckInServiceModel> connections)
+        {
+            db.CheckInServices.Delete(connections[0].CheckInId, true);
+            foreach (CheckInServiceModel checkInService in connections)
             {
-                db.CheckInServices.Create(new CheckInServices()
-                {
-                    ServiceId = checkInService.ServiceId,
-                    CheckInId = checkInService.CheckInId,
-                    Number = checkInService.Number
-                });
+                if (checkInService.Number > 0)
+                    db.CheckInServices.Create(new CheckInServices()
+                    {
+                        ServiceId = checkInService.ServiceId,
+                        CheckInId = checkInService.CheckInId,
+                        Number = checkInService.Number
+                    });
             }
             Save();
         }

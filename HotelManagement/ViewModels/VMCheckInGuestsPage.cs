@@ -141,6 +141,7 @@ namespace HotelManagement.ViewModels
                 {
                     if (checkInGuest.CurrentGuestIndex == 0)
                     {
+                        checkInGuest.Back();
                         checkInRoom.RefillEverything();
                         navigation.Navigate(new CheckInPage());
                     }

@@ -19,43 +19,11 @@ namespace BLL.Services
         IDbManager db;
         IDbCrud crud;
         ICheckInMakingRepository checkInMaking;
-        public CheckInService(IDbManager repos)
+        public CheckInService()
         {
-            db = repos;
+            db = IoC.Get<IDbManager>();
             crud = IoC.Get<IDbCrud>();
             checkInMaking = IoC.Get<ICheckInMakingRepository>();
-        }
-
-
-        public List<RoomCheckInData> GetFreeRooms(DateTime startDate, DateTime endDate, string typeName, int roominess)
-        {
-            List<RoomData> AllRooms = db.CheckInMaking.GetAllRooms(typeName, roominess);
-            List<RoomData> OccupiedRoom = db.CheckInMaking.GetOccupiedRooms(startDate, endDate, typeName, roominess);
-
-            if (!(OccupiedRoom.Count == 0))
-            {
-                foreach (RoomData room in OccupiedRoom)
-                {
-                    foreach (RoomData freeRoom in AllRooms.ToArray())
-                    {
-                        if (freeRoom.RoomId == room.RoomId)
-                        {
-                            AllRooms.Remove(freeRoom);
-                        }
-                    }
-                }
-            }
-            List<RoomCheckInData> result = new List<RoomCheckInData>();
-            if (AllRooms.Count == 0) return null;
-            foreach (RoomData room in AllRooms)
-            {
-                result.Add(new RoomCheckInData()
-                {
-                    RoomId = room.RoomId,
-                    RoomNumber = room.RoomNumber,
-                });
-            }
-            return result;
         }
         public void CreateCheckIn(CompleteCheckIn checkIn)
         {
@@ -107,28 +75,10 @@ namespace BLL.Services
                     });
             }
         }
-        public void EditCheckIn(CompleteCheckIn checkIn)
+        public void EditCheckIn(CheckInModel checkIn, List<CheckInServiceModel> connection)
         {
-            List<CheckInServiceModel> result = new List<CheckInServiceModel>();
-            foreach (ServiceData service in checkIn.Services)
-            {
-                if (service.NumberOfProvision > 0)
-                    result.Add(new CheckInServiceModel()
-                    {
-                        ServiceId = service.ServiceId,
-                        CheckInId = checkIn.CheckIn.CheckInId,
-                        Number = service.NumberOfProvision
-                    });
-            }
-            crud.UpdateCheckIn(new CheckInModel()
-            {
-                StartDate = checkIn.CheckIn.StartDate,
-                EndDate = checkIn.CheckIn.EndDate,
-                RoomId = checkIn.CheckIn.RoomId,
-                RoomCost = checkIn.CheckIn.RoomCost,
-                ServicesCost = checkIn.CheckIn.ServicesCost,
-                LastEmployeeId = checkIn.CheckIn.LastEmployeeId
-            }, result);
+            crud.UpdateCheckIn(checkIn);
+            crud.UpdateCheckInService(connection);
         }
         public void DeleteCheckIn(int checkInId)
         {
@@ -137,20 +87,6 @@ namespace BLL.Services
             db.ChecksIn.Delete(checkInId);
         }
 
-        public bool IsOldRoomFree(DateTime oldStart, DateTime oldEnd, DateTime start, DateTime end, int roomId, int checkInId)
-        {
-            if (oldStart <= start && oldEnd >= end) return true;
-            else
-            {
-                List<CheckIn> checkIns = db.ChecksIn.GetList().Where(i => i.RoomId == roomId && i.CheckInId != checkInId).ToList();
-                foreach(CheckIn checkIn in checkIns)
-                {
-                    if (start >= checkIn.StartDate && start <= checkIn.EndDate) return false;
-                    if (end >= checkIn.StartDate && end <= checkIn.EndDate) return false;
-                }
-            }
-            return true;
-        }
     }
 }
 

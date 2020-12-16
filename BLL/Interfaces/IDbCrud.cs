@@ -19,6 +19,7 @@ namespace BLL.Interfaces
         void CreateCheckIn(CheckInModel checkIn);
         void CreateCheckInGuestConnection(CheckInGuestModel connection);
         void CreateCheckInServiceConnection(CheckInServiceModel connection);
-        void UpdateCheckIn(CheckInModel checkIn, List<CheckInServiceModel> connection);
+        void UpdateCheckIn(CheckInModel checkIn);
+        void UpdateCheckInService(List<CheckInServiceModel> connections);
     }
 }

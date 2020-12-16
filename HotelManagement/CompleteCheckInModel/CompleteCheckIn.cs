@@ -24,16 +24,6 @@ namespace HotelManagement.CompleteCheckInModel
         private int roominess;
         private int roomNumber;
         private int id;
-        public void Clear()
-        {
-            CheckIn = new CheckInModel();
-            Guests.Clear();
-            Services.Clear();
-            RoomType = new RoomTypeModel();
-            GuestDocuments.Clear();
-            roominess = roomNumber = -1;
-            id = 0;
-        }
         public CompleteCheckIn()
         {
             checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
@@ -173,7 +163,8 @@ namespace HotelManagement.CompleteCheckInModel
                     CheckInId = CheckIn.CheckInId
                 });
             }
-            dbCrud.UpdateCheckIn(CheckIn, connection);
+            checkInService.EditCheckIn(CheckIn, connection);
+            //dbCrud.UpdateCheckIn(CheckIn, connection);
             Clear();
         }
 
@@ -199,6 +190,7 @@ namespace HotelManagement.CompleteCheckInModel
                 tem += "Фамилия: " + Guests[i].Surname + "\n"
                     + "Имя: " + Guests[i].GuestName + "\n"
                     + "Отчество: " + Guests[i].Patronymic + "\n"
+                    + "Дата рождения: " + Guests[i].BirthDate.ToString("dd.MM.yyyy") + "\n"
                     + (GuestDocuments[i].IsChild ? "№ Свидетельства о рождении: " : "Серия/номер паспорта: ")
                     + (GuestDocuments[i].IsChild ? GuestDocuments[i].Document : GuestInfoConverter.ConvertPassport(GuestDocuments[i].Document)) + "\n"
                     + (string.IsNullOrEmpty(Guests[i].PhoneNumber) ? "" : "Телефон: " + GuestInfoConverter.ConvertPhone(Guests[i].PhoneNumber));
@@ -226,6 +218,16 @@ namespace HotelManagement.CompleteCheckInModel
                 Services.Add(new ServiceData(dbCrud.GetService(checkInServiceModel.ServiceId), checkInServiceModel.Number));
             }
             RoomType = dbCrud.GetRoomType(room.TypeId);
+        }
+        public void Clear()
+        {
+            CheckIn = new CheckInModel();
+            Guests.Clear();
+            Services.Clear();
+            RoomType = new RoomTypeModel();
+            GuestDocuments.Clear();
+            roominess = roomNumber = -1;
+            id = 0;
         }
     }
 }

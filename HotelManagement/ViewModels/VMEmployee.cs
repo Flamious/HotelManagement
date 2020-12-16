@@ -1,16 +1,9 @@
-﻿using BLL.Interfaces;
-using BLL.Models.CheckinModel;
-using HotelManagement.CompleteCheckInModel;
+﻿using BLL.Models.CheckinModel;
 using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using HotelManagement.Pages;
 using HotelManagement.Structures;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace HotelManagement.ViewModels
 {
@@ -18,9 +11,7 @@ namespace HotelManagement.ViewModels
     {
         private readonly INavigation navigation;
         private readonly IEmployee employee;
-        private readonly ICompleteCheckIn completeCheckIn;
 
-        public bool IsEditEnabled => employee.CurrentPeriodIndex == 2 ? false : true;
         public string Username => employee.Username;
         public List<Period> Periods => employee.Periods;
         public int CurrentCheckInIndex
@@ -64,7 +55,7 @@ namespace HotelManagement.ViewModels
             {
                 return deleteCheckIn ?? (deleteCheckIn = new RelayCommand(obj =>
                 {
-                    if (CurrentCheckInIndex > 0) employee.DeleteElement();
+                    if (CurrentCheckInIndex > -1) employee.DeleteElement();
                 }));
             }
         }
@@ -75,7 +66,7 @@ namespace HotelManagement.ViewModels
             {
                 return editCheckIn ?? (editCheckIn = new RelayCommand(obj =>
                 {
-                    if (CurrentCheckInIndex > 0)
+                    if (CurrentCheckInIndex > -1)
                     {
                         employee.EditElement();
                         navigation.Navigate(new CheckInPage());
@@ -87,7 +78,6 @@ namespace HotelManagement.ViewModels
         {
             navigation = IoC.Get<INavigation>();
             employee = IoC.Get<IEmployee>();
-            completeCheckIn = IoC.Get<ICompleteCheckIn>();
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             employee.UserChanged += (sender, e) => OnPropertyChanged(e.PropertyName);

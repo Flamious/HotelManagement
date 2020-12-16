@@ -25,7 +25,7 @@
                     Margin="5 2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"
                     Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="Отмена">
+                    ToolTip="Назад">
                         <materialDesign:PackIcon Kind="Close" />
                     </Button>
                     <TextBlock
@@ -42,7 +42,7 @@
                     Margin="5 2"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="Редактировать">
+                    ToolTip="Добавить">
                         <materialDesign:PackIcon Kind="ArrowRight" />
                     </Button>
                 </Grid>

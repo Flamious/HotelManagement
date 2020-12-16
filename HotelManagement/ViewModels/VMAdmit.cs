@@ -3,13 +3,8 @@ using HotelManagement.CompleteCheckInModel;
 using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using HotelManagement.Pages;
-using HotelManagement.Structures;
 using HotelManagement.Views.Pages;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HotelManagement.ViewModels

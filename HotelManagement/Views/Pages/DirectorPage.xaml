@@ -6,21 +6,20 @@
         xmlns:local="clr-namespace:HotelManagement"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodels="clr-namespace:HotelManagement.ViewModels"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignLightBackground}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
         >
+    <Page.DataContext>
+        <viewmodels:VMDirector />
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <materialDesign:Card Grid.Row="0" Margin="5 4" Height="42">
+        <materialDesign:Card Grid.Row="0" Margin="5 4">
             <Grid VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -28,28 +27,67 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
                     <ColumnDefinition Width="0.3*"></ColumnDefinition>
                     <ColumnDefinition Width="0.3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Style="{DynamicResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0">Начало</TextBlock>
-                <DatePicker Margin="10 0.5" Grid.Column="1" Grid.Row="0"></DatePicker>
+                <DatePicker Margin="10 2" Grid.Column="1" Grid.Row="0" SelectedDate="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
                 <TextBlock Style="{DynamicResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1">Конец</TextBlock>
-                <DatePicker Margin="10 0.5" Grid.Column="1" Grid.Row="1"></DatePicker>
-                <Button Grid.Column="2" Grid.RowSpan="2" Height="40" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" BorderBrush="White">Получить отчет</Button>
-                <Button Grid.Column="3" Grid.RowSpan="2" Height="40" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" BorderBrush="White">Сохранить отчет</Button>
+                <DatePicker Margin="10 2" Grid.Column="1" Grid.Row="1" SelectedDate="{Binding End, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                <Button Grid.Column="2" Grid.RowSpan="2" Height="40" Margin="5 3"  VerticalAlignment="Center" HorizontalContentAlignment="Stretch" BorderBrush="White" Command="{Binding GerReport}">Получить отчет</Button>
+                <TextBlock Grid.Column="3" TextAlignment="Right" Grid.RowSpan="2" VerticalAlignment="Center" Margin="5 3" Style="{DynamicResource MaterialDesignTextBlock}" Text="{Binding Username}"></TextBlock>
             </Grid>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="1" Margin="5 4">
-            <DataGrid>
+            <DataGrid
+                Background="#ffffff"
+                HorizontalAlignment="Center"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    HorizontalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    ItemsSource="{Binding Report}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Фамилия" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Имя" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Отчество" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Комната" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата начала" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата окончания" Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Общая стоимость" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=Id}"
+                            Header="Id" 
+                            MinWidth="60"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=Dates}"
+                            Header="Даты" 
+                            Width="150"
+                            MinWidth="150"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=Room}"
+                            Header="Комната" 
+                            Width="150"
+                            MinWidth="150"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=Guests}"
+                            Header="Гости" 
+                            Width="250"
+                            MinWidth="250"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=Services}"
+                            Header="Доп. усуги" 
+                        Width="200"
+                            MinWidth="200"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=Prices}"
+                            Header="Сумма" 
+                        Width="175"
+                            MinWidth="175"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Binding="{Binding Path=LastEmployee}"
+                            Header="Последнее действие" Width="175"
+                            MinWidth="175"></DataGridTextColumn>
+                    <DataGridTextColumn
+                            Width="*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </materialDesign:Card>
@@ -59,8 +97,14 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Style="{DynamicResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center">Всего посетителей:</TextBlock>
-                <TextBlock Grid.Column="1" Style="{DynamicResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center">Прибыль:</TextBlock>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Left" Margin="5 0" Text="{Binding Guests}"></TextBlock>
+                    <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Left" Margin="5 2" Text="{Binding CompleteRevenue}"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Left" Margin="5 0" Text="{Binding RoomRevenue}"></TextBlock>
+                    <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Left" Margin="5 2" Text="{Binding ServiceRevenue}"></TextBlock>
+                </StackPanel>
             </Grid>
         </materialDesign:Card>
     </Grid>

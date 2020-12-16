@@ -10,7 +10,8 @@
     Title="Hotel Management"
     Icon="/Views/Images/icon.ico"
     WindowState="Maximized"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+      MinWidth="830" MinHeight="470">
 
     <Window.DataContext>
         <viewmodels:VMMainWindow />

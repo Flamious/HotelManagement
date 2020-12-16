@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using BLL.Services;
+using HotelManagement.DirectorPageData;
 using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using HotelManagement.Structures;
@@ -18,6 +19,7 @@ namespace HotelManagement.ViewModels
         private readonly INavigation navigation;
         private readonly IAuthorizationService authorization;
         private readonly IEmployee employee;
+        private readonly IDirector director;
 
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
@@ -43,6 +45,12 @@ namespace HotelManagement.ViewModels
                             navigation.Navigate(new EmployeePage());
                             navigation.ChangeVisibility(Visibility.Visible);
                             break;
+                        case "Director":
+                            director.Clear();
+                            director.Username = account.GetFullName();
+                            navigation.Navigate(new DirectorPage());
+                            navigation.ChangeVisibility(Visibility.Visible);
+                            break;
                         default:
                             return;
                     }
@@ -55,6 +63,7 @@ namespace HotelManagement.ViewModels
             navigation = IoC.Get<INavigation>();
             authorization = BLL.ServiceModules.IoC.Get<IAuthorizationService>();
             employee = IoC.Get<IEmployee>();
+            director = IoC.Get<IDirector>();
             navigation.CurrentPageChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             navigation.VisibilityChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
             employee.UserChanged += (sender, e) => OnPropertyChanged(e.PropertyName);

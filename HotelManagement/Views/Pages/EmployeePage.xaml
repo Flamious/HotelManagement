@@ -43,7 +43,6 @@
                             <materialDesign:PackIcon Kind="Plus" />
                         </Button>
                         <Button 
-                            IsEnabled="{Binding IsEditEnabled, UpdateSourceTrigger=PropertyChanged}"
                             Command="{Binding EditCheckIn}"
                             Height="35" Width="35" 
                             HorizontalContentAlignment="Center" 
@@ -78,6 +77,8 @@
 
             <materialDesign:Card Margin="5 4">
                 <DataGrid SelectedIndex="{Binding CurrentCheckInIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Background="#fff"
+                          HorizontalAlignment="Center"
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     HorizontalScrollBarVisibility="Auto"
@@ -87,13 +88,17 @@
                     ItemsSource="{Binding CheckIns}">
                     <DataGrid.Columns>
                         <DataGridTextColumn
+                            Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn
                             Binding="{Binding Path=Id}"
                             Header="Id" 
-                            Width="60"></DataGridTextColumn>
+                            Width="60"
+                            MinWidth="60"></DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Path=Dates}"
                             Header="Даты" 
-                            Width="150"></DataGridTextColumn>
+                            Width="150"
+                            MinWidth="150"></DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Path=Room}"
                             Header="Комната" 
@@ -101,18 +106,24 @@
                         <DataGridTextColumn
                             Binding="{Binding Path=Guests}"
                             Header="Гости" 
-                            Width="250"></DataGridTextColumn>
+                            Width="250"
+                            MinWidth="250"></DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Path=Services}"
                             Header="Доп. усуги" 
-                            Width="200"></DataGridTextColumn>
+                            Width="200"
+                            MinWidth="200"></DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Path=Prices}"
                             Header="Сумма" 
-                            Width="175"></DataGridTextColumn>
+                            Width="175"
+                            MinWidth="175"></DataGridTextColumn>
                         <DataGridTextColumn
                             Binding="{Binding Path=LastEmployee}"
                             Header="Последнее действие" 
+                            Width="175"
+                            MinWidth="175"></DataGridTextColumn>
+                        <DataGridTextColumn
                             Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

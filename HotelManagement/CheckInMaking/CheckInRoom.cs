@@ -16,26 +16,15 @@ namespace HotelManagement.CheckInMaking
     {
         public event PropertyChangedEventHandler RoomInfoChanged;
         public event PropertyChangedEventHandler RoomNumberChanged;
-        private readonly ICheckInService checkInService;
         private readonly IDbCrud dbCrud;
+        private readonly IDbInfo dbInfo;
         private readonly ICompleteCheckIn completeCheckIn;
         public CheckInRoom()
         {
-            checkInService = BLL.ServiceModules.IoC.Get<ICheckInService>();
+            dbInfo = BLL.ServiceModules.IoC.Get<IDbInfo>();
             dbCrud = BLL.ServiceModules.IoC.Get<IDbCrud>();
             completeCheckIn = IoC.Get<ICompleteCheckIn>();
             Clear();
-        }
-        public void Clear()
-        {
-            RoomTypes = dbCrud.GetAllRoomTypes();
-            AvailableRoominess = new List<Roominess>();
-            for (int i = 0; i < 4; i++) AvailableRoominess.Add(new Roominess() { Number = i + 1 });
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now.AddDays(1);
-            Services = dbCrud.GetAllServices().Select(i => new ServiceData(i)).ToList();
-            IsFreeRoomExist = "Введите данные";
-            lastRoom = null;
         }
         private bool isEnabled;
         private string isFreeRoomExist;
@@ -267,13 +256,13 @@ namespace HotelManagement.CheckInMaking
         {
             try
             {
-                if ((StartDate - DateTime.Now).Days < 0) throw new Exception("Начальная дата меньше текущей");
                 if (EndDate <= StartDate) throw new Exception("Начальная дата должна быть меньше конечной");
                 if (CurrentRoomType == null || Roominess == null) throw new Exception("");
                 Error = "";
-                FreeRooms = checkInService.GetFreeRooms(StartDate, EndDate, CurrentRoomType.TypeName, Roominess.Number) ?? new List<RoomCheckInData>();
+                FreeRooms = dbInfo.GetFreeRooms(StartDate, EndDate, CurrentRoomType.TypeName, Roominess.Number);
+                if (FreeRooms == null) FreeRooms = new List<RoomCheckInData>();
                 if (lastRoom != null)
-                    if (checkInService.IsOldRoomFree(oldStart, oldEnd, StartDate, EndDate, lastRoom.RoomId, completeCheckIn.CheckIn.CheckInId))
+                    if (dbInfo.IsOldRoomFree(oldStart, oldEnd, StartDate, EndDate, lastRoom.RoomId, completeCheckIn.CheckIn.CheckInId, Roominess.Number, CurrentRoomType))
                     {
                         FreeRooms.Add(lastRoom);
                         FreeRooms = new List<RoomCheckInData>(FreeRooms);
@@ -383,6 +372,17 @@ namespace HotelManagement.CheckInMaking
                 RoomNumber = completeCheckIn.RoomNumber
             };
             RefillEverything();
+        }
+        public void Clear()
+        {
+            RoomTypes = dbCrud.GetAllRoomTypes();
+            AvailableRoominess = new List<Roominess>();
+            for (int i = 0; i < 4; i++) AvailableRoominess.Add(new Roominess() { Number = i + 1 });
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddDays(1);
+            Services = dbCrud.GetAllServices().Select(i => new ServiceData(i)).ToList();
+            IsFreeRoomExist = "Введите данные";
+            lastRoom = null;
         }
     }
 }

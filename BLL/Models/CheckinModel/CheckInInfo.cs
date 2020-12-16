@@ -16,4 +16,20 @@ namespace BLL.Models.CheckinModel
         public string Prices { get; set; }
         public string LastEmployee { get; set; }
     }
+
+    public class CheckInInfoExpanded
+    {
+        public List<CheckInInfo> Info { get; set; }
+        public int TotalRoomRevenue { get; set; }
+        public int TotalServiceRevenue { get; set; }
+        public int CompleteRevenue => TotalRoomRevenue + TotalServiceRevenue;
+        public int GuestNumber { get; set; }
+        public CheckInInfoExpanded()
+        {
+            Info = new List<CheckInInfo>();
+            TotalRoomRevenue = 0;
+            TotalServiceRevenue = 0;
+        }
+
+    }
 }

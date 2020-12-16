@@ -86,6 +86,8 @@
     <Compile Include="Converters\GuestInfoConverter.cs" />
     <Compile Include="Converters\LoginDataMultiConverter.cs" />
     <Compile Include="Converters\NegateConverter.cs" />
+    <Compile Include="DirectorPageData\Director.cs" />
+    <Compile Include="DirectorPageData\IDirector.cs" />
     <Compile Include="Employee\EmployeeProperties.cs" />
     <Compile Include="Employee\IEmployee.cs" />
     <Compile Include="IoC\IoC.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="ViewModels\VMBase.cs" />
     <Compile Include="ViewModels\VMCheckInGuestsPage.cs" />
     <Compile Include="ViewModels\VMCheckInRoomPage.cs" />
+    <Compile Include="ViewModels\VMDirector.cs" />
     <Compile Include="ViewModels\VMEmployee.cs" />
     <Compile Include="ViewModels\VMLoginPage.cs" />
     <Compile Include="ViewModels\VMMainWindow.cs" />
