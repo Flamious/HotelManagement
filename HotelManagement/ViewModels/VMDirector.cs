@@ -45,13 +45,24 @@ namespace HotelManagement.ViewModels
             director.DataChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
         private RelayCommand getReport;
-        public RelayCommand GerReport
+        public RelayCommand GetReport
         {
             get
             {
                 return getReport ?? (getReport = new RelayCommand(obj =>
                 {
                     director.GetReport();
+                }));
+            }
+        }
+        private RelayCommand saveReport;
+        public RelayCommand SaveReport
+        {
+            get
+            {
+                return saveReport ?? (saveReport = new RelayCommand(obj =>
+                {
+                    director.SaveReportToFile();
                 }));
             }
         }

@@ -2,6 +2,9 @@
 using BLL.Models.CheckinModel;
 using System;
 using System.ComponentModel;
+using System.IO;
+using System.Windows;
+using Xceed.Words.NET;
 
 namespace HotelManagement.DirectorPageData
 {
@@ -118,6 +121,54 @@ namespace HotelManagement.DirectorPageData
         }
 
         public void GetReport() => Report = dbInfo.GetReport(start, end);
+        public void SaveReportToFile()
+        {
+            GetReport();
+            string template = "../../Reports/template.docx";
+            string report = "../../Reports/Reports/" + Start.ToString("dd.MM.yyyy") + "-" + End.ToString("dd.MM.yyyy") + ".docx";
+
+            try
+            {
+                if (File.Exists(report))
+                    File.Delete(report);
+                File.Copy(template, report);
+            }
+            catch
+            {
+                MessageBoxResult result = MessageBox.Show("Отсутствует файл шаблона", "Ошибка", MessageBoxButton.OK);
+                return;
+            }
+
+            DocX doc = DocX.Load(report);
+            doc.ReplaceText("CURRENT_DATE", DateTime.Now.ToString("dd.MM.yyyy"));
+            doc.ReplaceText("CHECKS_IN", Report.Info.Count.ToString());
+            doc.ReplaceText("GUESTS", Report.GuestNumber.ToString());
+            doc.ReplaceText("TOTAL_REVENUE", Report.CompleteRevenue.ToString());
+            doc.ReplaceText("ROOM_REVENUE", Report.TotalRoomRevenue.ToString());
+            doc.ReplaceText("SERVICE_REVENUE", Report.TotalServiceRevenue.ToString());
+            doc.ReplaceText("PERIOD", Start.ToString("dd.MM.yyyy") + "-" + End.ToString("dd.MM.yyyy"));
+            doc.ReplaceText("DIRECTOR_NAME", Username.Split('[')[0].TrimEnd(' '));
+            var table = doc.AddTable(Report.Info.Count + 1, 6);
+            table.Rows[0].Cells[0].Paragraphs[0].Append("Id");
+            table.Rows[0].Cells[1].Paragraphs[0].Append("Даты");
+            table.Rows[0].Cells[2].Paragraphs[0].Append("Комната");
+            table.Rows[0].Cells[3].Paragraphs[0].Append("Гости");
+            table.Rows[0].Cells[4].Paragraphs[0].Append("Доп. услуги");
+            table.Rows[0].Cells[5].Paragraphs[0].Append("Сумма");
+
+            for (int i = 0; i < Report.Info.Count; i++)
+            {
+                table.Rows[i + 1].Cells[0].Paragraphs[0].Append(Report.Info[i].Id.ToString());
+                table.Rows[i + 1].Cells[1].Paragraphs[0].Append(Report.Info[i].Dates);
+                table.Rows[i + 1].Cells[3].Paragraphs[0].Append(Report.Info[i].Room.ToString());
+                table.Rows[i + 1].Cells[4].Paragraphs[0].Append(Report.Info[i].Guests);
+                table.Rows[i + 1].Cells[5].Paragraphs[0].Append(Report.Info[i].Services);
+                table.Rows[i + 1].Cells[2].Paragraphs[0].Append(Report.Info[i].Prices);
+            }
+
+            doc.ReplaceTextWithObject("TABLE_PLACE", table);
+            doc.Save();
+        }
         public void Clear()
         {
             Username = "";

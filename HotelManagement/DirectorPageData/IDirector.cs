@@ -20,6 +20,7 @@ namespace HotelManagement.DirectorPageData
         string ServiceRevenue { get; set; }
         string CompleteRevenue { get; set; }
         void GetReport();
+        void SaveReportToFile();
         void Clear();
 
     }
