@@ -3,7 +3,6 @@ using BLL.Models;
 using BLL.Models.CheckinModel;
 using BLL.Models.SearchModels;
 using DAL;
-using DAL.Entities.Data;
 using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -122,8 +121,32 @@ namespace BLL.Services
 
         public List<RoomCheckInData> GetFreeRooms(DateTime startDate, DateTime endDate, string typeName, int roominess)
         {
-            List<RoomData> AllRooms = db.CheckInMaking.GetAllRooms(typeName, roominess);
-            List<RoomData> OccupiedRoom = db.CheckInMaking.GetOccupiedRooms(startDate, endDate, typeName, roominess);
+            List<RoomData> AllRooms = db.Rooms.GetList()
+                .Where(i => i.NumberOfPlaces == roominess)
+                .Join(db.RoomTypes.GetList(), i => i.TypeId, j => j.TypeId, (i, j) => new RoomData()
+                {
+                    RoomId = i.RoomId,
+                    RoomNumber = i.RoomNumber,
+                    TypeName = j.TypeName
+                }).Where(i => i.TypeName == typeName).ToList();
+            List<RoomData> OccupiedRoom = db.Rooms.GetList()
+                .Join(db.ChecksIn.GetList(), i => i.RoomId, j => j.RoomId, (i, j) => new
+                {
+                    Startdate = j.StartDate,
+                    EndDate = j.EndDate,
+                    RoomId = i.RoomId,
+                    RoomNumber = i.RoomNumber,
+                    Roominess = i.NumberOfPlaces,
+                    TypeId = i.TypeId
+                })
+                .Where(i => (i.Startdate >= startDate && i.Startdate <= endDate) || (i.EndDate >= startDate && i.EndDate <= endDate))
+                .Where(i => i.Roominess == roominess)
+                .Join(db.RoomTypes.GetList(), i => i.TypeId, j => j.TypeId, (i, j) => new RoomData()
+                {
+                    RoomId = i.RoomId,
+                    RoomNumber = i.RoomNumber,
+                    TypeName = j.TypeName
+                }).Where(i => i.TypeName == typeName).ToList();
 
             if (!(OccupiedRoom.Count == 0))
             {

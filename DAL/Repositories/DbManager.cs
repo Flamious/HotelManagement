@@ -14,8 +14,6 @@ namespace DAL.Repositories
         private RoomRepository roomRepository;
         private RoomTypeRepository roomTypeRepository;
         private ServiceRepository serviceRepository;
-        private LoginRepository loginRepository;
-        private CheckInMakingRepository checkInMakingRepository;
         public DbManager()
         {
             db = new HotelDB();
@@ -107,26 +105,6 @@ namespace DAL.Repositories
             }
         }
 
-
-        public ILoginRepository Login
-        {
-            get
-            {
-                if (loginRepository == null)
-                    loginRepository = new LoginRepository(db);
-                return loginRepository;
-            }
-        }
-
-        public ICheckInMakingRepository CheckInMaking
-        {
-            get
-            {
-                if (checkInMakingRepository == null)
-                    checkInMakingRepository = new CheckInMakingRepository(db);
-                return checkInMakingRepository;
-            }
-        }
         public int Save()
         {
             return db.SaveChanges();

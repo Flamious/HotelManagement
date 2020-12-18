@@ -18,12 +18,10 @@ namespace BLL.Services
     {
         IDbManager db;
         IDbCrud crud;
-        ICheckInMakingRepository checkInMaking;
         public CheckInService()
         {
             db = IoC.Get<IDbManager>();
             crud = IoC.Get<IDbCrud>();
-            checkInMaking = IoC.Get<ICheckInMakingRepository>();
         }
         public void CreateCheckIn(CompleteCheckIn checkIn)
         {
@@ -38,11 +36,11 @@ namespace BLL.Services
                 LastEmployeeId = checkIn.CheckIn.LastEmployeeId
             });
 
-            int checkInId = checkInMaking.GetCheckIn(checkIn.CheckIn.RoomId, checkIn.CheckIn.EndDate).CheckInId;
+            int checkInId = db.ChecksIn.GetList().First(i => i.EndDate == checkIn.CheckIn.EndDate && i.RoomId == checkIn.CheckIn.RoomId).CheckInId;
             for (int i = 0; i < checkIn.Guests.Count; i++)
             {
                 int guestId;
-                if (checkInMaking.GetGuest(checkIn.GuestDocuments[i]) == null)
+                if(db.Guests.GetList().FirstOrDefault(j => j.GuestDocument == checkIn.GuestDocuments[i]) == null)
                 {
                     crud.CreateGuest(new GuestModel
                     {
@@ -54,7 +52,7 @@ namespace BLL.Services
                         Document = checkIn.GuestDocuments[i]
                     });
                 }
-                guestId = checkInMaking.GetGuest(checkIn.GuestDocuments[i]).GuestId;
+                guestId = db.Guests.GetList().FirstOrDefault(j => j.GuestDocument == checkIn.GuestDocuments[i]).GuestId;
 
                 crud.CreateCheckInGuestConnection(new CheckInGuestModel()
                 {

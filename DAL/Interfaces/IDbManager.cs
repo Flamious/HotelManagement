@@ -11,8 +11,6 @@
         IDirectory<CheckInGuest> CheckInGuests { get; }
         IRepository<Room> Rooms { get; }
         IRepository<RoomType> RoomTypes { get; }
-        ILoginRepository Login { get; }
-        ICheckInMakingRepository CheckInMaking { get; }
         int Save();
     }
 }
