@@ -1,16 +1,10 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using BLL.Models.CheckinModel;
-using BLL.Models.SearchModels;
 using BLL.ServiceModules;
-using DAL;
-using DAL.Entities.Data;
 using DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -40,7 +34,7 @@ namespace BLL.Services
             for (int i = 0; i < checkIn.Guests.Count; i++)
             {
                 int guestId;
-                if(db.Guests.GetList().FirstOrDefault(j => j.GuestDocument == checkIn.GuestDocuments[i]) == null)
+                if (db.Guests.GetList().FirstOrDefault(j => j.GuestDocument == checkIn.GuestDocuments[i]) == null)
                 {
                     crud.CreateGuest(new GuestModel
                     {

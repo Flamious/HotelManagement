@@ -1,14 +1,10 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using HotelManagement.CompleteCheckInModel;
-using HotelManagement.Converters;
 using HotelManagement.Structures;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.CheckInMaking
 {
@@ -191,7 +187,6 @@ namespace HotelManagement.CheckInMaking
                 };
                 GuestDocuments[CurrentGuestIndex] = new GuestDocuments(IsChild, Document);
             }
-            Console.WriteLine(Guests[CurrentGuestIndex].Surname);
             CurrentGuestIndex++;
             if (CurrentGuestIndex == Guests.Count) FillFields(true);
             else FillFields(false);
@@ -200,7 +195,7 @@ namespace HotelManagement.CheckInMaking
         }
         public void Back()
         {
-            if(Guests.Count == 0)
+            if (Guests.Count == 0)
             {
                 FillFields(true);
             }
@@ -210,6 +205,7 @@ namespace HotelManagement.CheckInMaking
                 {
                     CurrentGuestIndex--;
                     FillFields(false);
+                    FindGuest();
                 }
             }
             Error = "";
@@ -391,7 +387,7 @@ namespace HotelManagement.CheckInMaking
         }
         private bool IsDigitOnly(string s)
         {
-            foreach(char c in s)
+            foreach (char c in s)
             {
                 if (c < '0' || c > '9')
                     return false;

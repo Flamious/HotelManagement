@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.CheckInMaking
 {
@@ -123,9 +121,17 @@ namespace HotelManagement.CheckInMaking
             }
             set
             {
-                endDate = value;
-                RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("EndDate"));
-                GetFreeRooms();
+                if (completeCheckIn.Id > 0)
+                {
+                    endDate = value;
+                    RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("EndDate"));
+                }
+                else
+                {
+                    endDate = value;
+                    RoomInfoChanged?.Invoke(null, new PropertyChangedEventArgs("EndDate"));
+                    GetFreeRooms();
+                }
             }
         }
         public List<RoomTypeModel> RoomTypes
@@ -334,6 +340,17 @@ namespace HotelManagement.CheckInMaking
                 Error = "Комната не выбрана";
                 return false;
             }
+            if(completeCheckIn.Id > 0)
+                if(oldEnd < EndDate)
+                {
+                    Error = "Нельзя увеличивать период.\nСоздайте новое заселение";
+                    return false;
+                }
+            if(StartDate>=EndDate)
+            {
+                Error = "Начальная дата должна быть меньше конечной";
+                return false;
+            }
             completeCheckIn.CheckIn = new CheckInModel()
             {
                 RoomCost = GetRoomPrice(),
@@ -371,6 +388,7 @@ namespace HotelManagement.CheckInMaking
                 RoomId = completeCheckIn.CheckIn.RoomId,
                 RoomNumber = completeCheckIn.RoomNumber
             };
+
             RefillEverything();
         }
         public void Clear()

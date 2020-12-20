@@ -1,6 +1,4 @@
-﻿using BLL.Models;
-using HotelManagement.Navigation;
-using System.Collections.Generic;
+﻿using HotelManagement.Navigation;
 using System.Windows;
 using System.Windows.Controls;
 

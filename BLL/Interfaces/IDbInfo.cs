@@ -3,9 +3,6 @@ using BLL.Models.CheckinModel;
 using BLL.Models.SearchModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {

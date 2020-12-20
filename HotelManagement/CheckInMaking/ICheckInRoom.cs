@@ -1,13 +1,9 @@
-﻿using BLL.Interfaces;
-using BLL.Models;
+﻿using BLL.Models;
 using BLL.Models.SearchModels;
 using HotelManagement.Structures;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.CheckInMaking
 {
@@ -27,7 +23,7 @@ namespace HotelManagement.CheckInMaking
         List<Roominess> AvailableRoominess { get; set; }
         List<ServiceData> Services { get; set; }
         ServiceData CurrentService { get; set; }
-        RoomTypeModel CurrentRoomType{get;set;}
+        RoomTypeModel CurrentRoomType { get; set; }
         Roominess Roominess { get; set; }
         RoomCheckInData CurrentRoom { get; set; }
         List<RoomCheckInData> FreeRooms { get; set; }

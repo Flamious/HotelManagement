@@ -1,9 +1,4 @@
 ﻿using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Models
 {
@@ -14,7 +9,7 @@ namespace BLL.Models
         public int NumberOfPlaces { get; set; }
         public int TypeId { get; set; }
         public RoomModel() { }
-        public RoomModel(Room room) 
+        public RoomModel(Room room)
         {
             RoomId = room.RoomId;
             RoomNumber = room.RoomNumber;

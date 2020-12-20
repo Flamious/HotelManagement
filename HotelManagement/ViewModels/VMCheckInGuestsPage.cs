@@ -1,15 +1,9 @@
-﻿using BLL.Models;
-using HotelManagement.CheckInMaking;
+﻿using HotelManagement.CheckInMaking;
 using HotelManagement.CompleteCheckInModel;
-using HotelManagement.Converters;
 using HotelManagement.Navigation;
 using HotelManagement.Pages;
 using HotelManagement.Views.Pages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.ViewModels
 {

@@ -1,10 +1,7 @@
 ﻿using DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
@@ -22,9 +19,9 @@ namespace DAL.Repositories
             return db.CheckInServices.ToList();
         }
 
-        public CheckInServices GetItem(int checkInId, int serviceId) 
+        public CheckInServices GetItem(int checkInId, int serviceId)
         {
-            return db.CheckInServices.FirstOrDefault(i=>i.CheckInId == checkInId && i.ServiceId == serviceId);
+            return db.CheckInServices.FirstOrDefault(i => i.CheckInId == checkInId && i.ServiceId == serviceId);
         }
         public void Create(CheckInServices item)
         {

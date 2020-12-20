@@ -7,8 +7,6 @@ using DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -29,7 +27,7 @@ namespace BLL.Services
                                         select new CheckInInfo()
                                         {
                                             Id = ci.CheckInId,
-                                            Dates = ci.StartDate.ToString("dd.MM.yyyy") + "-" + ci.EndDate.ToString("dd.MM.yyyy"),
+                                            Dates = "Н.: " + ci.StartDate.ToString("dd.MM.yyyy") + "\nК.: " + ci.EndDate.ToString("dd.MM.yyyy"),
                                             Room = g.RoomNumber,
                                             LastEmployee = ac.Surname.TrimEnd(' ') + " " + ac.Username[0] + ". " + ac.Patronymic[0] + ". [id: " + ac.AccountId + "]",
                                             Prices = "Комната: " + ci.RoomCost + "\n" +
@@ -111,7 +109,7 @@ namespace BLL.Services
                                            }).ToList();
             endDate = endDate.AddDays(1).AddSeconds(-1);
 
-            foreach(CheckInModel checkIn in checksIn)
+            foreach (CheckInModel checkIn in checksIn)
             {
                 if (checkIn.StartDate >= startDate && checkIn.StartDate <= endDate) return false;
                 if (checkIn.EndDate >= startDate && checkIn.EndDate <= endDate) return false;
@@ -194,8 +192,8 @@ namespace BLL.Services
         {
             end = end.AddDays(1).AddSeconds(-1);
             CheckInInfoExpanded checkInInfo = new CheckInInfoExpanded();
-            var checksIn = db.ChecksIn.GetList().Where(i=>i.EndDate >= start && i.EndDate <= end);
-            foreach(CheckIn checkIn in checksIn)
+            var checksIn = db.ChecksIn.GetList().Where(i => i.EndDate >= start && i.EndDate <= end);
+            foreach (CheckIn checkIn in checksIn)
             {
                 checkInInfo.TotalRoomRevenue += checkIn.RoomCost;
                 checkInInfo.TotalServiceRevenue += checkIn.ServicesCost;
@@ -208,7 +206,7 @@ namespace BLL.Services
                                 select new CheckInInfo()
                                 {
                                     Id = ci.CheckInId,
-                                    Dates = ci.StartDate.ToString("dd.MM.yyyy") + "-" + ci.EndDate.ToString("dd.MM.yyyy"),
+                                    Dates = "Н.: " + ci.StartDate.ToString("dd.MM.yyyy") + "\nК.: " + ci.EndDate.ToString("dd.MM.yyyy"),
                                     Room = g.RoomNumber,
                                     LastEmployee = ac.Surname.TrimEnd(' ') + " " + ac.Username[0] + ". " + ac.Patronymic[0] + ". [id: " + ac.AccountId + "]",
                                     Prices = "Комната: " + ci.RoomCost + "\n" +
@@ -243,7 +241,7 @@ namespace BLL.Services
                 info.Services = serviceResult.TrimEnd('\n');
             }
 
-            
+
 
             return checkInInfo;
         }

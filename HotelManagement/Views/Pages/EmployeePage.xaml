@@ -14,8 +14,11 @@
         <viewmodels:VMEmployee />
     </Page.DataContext>
     <Grid>
-        <StackPanel>
-            <Grid Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -74,8 +77,12 @@
                         VerticalAlignment="Center"></TextBlock>
                 </Grid>
             </Grid>
-
-            <materialDesign:Card Margin="5 4">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Margin="5 4" Grid.Row="0">
                 <DataGrid SelectedIndex="{Binding CurrentCheckInIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Background="#fff"
                           HorizontalAlignment="Center"
@@ -128,6 +135,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </materialDesign:Card>
-        </StackPanel>
+            <Grid Grid.Row="1"></Grid>
+        </Grid>
     </Grid>
 </Page>

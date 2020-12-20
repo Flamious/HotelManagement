@@ -57,7 +57,6 @@
     <Compile Include="Entities\CheckIn.cs" />
     <Compile Include="Entities\CheckInGuest.cs" />
     <Compile Include="Entities\CheckInServices.cs" />
-    <Compile Include="Entities\Data\RoomData.cs" />
     <Compile Include="Entities\Guest.cs" />
     <Compile Include="HotelDB.cs" />
     <Compile Include="Interfaces\IDbManager.cs" />

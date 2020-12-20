@@ -1,5 +1,4 @@
-﻿using BLL.Interfaces;
-using BLL.Models;
+﻿using BLL.Models;
 using BLL.Models.SearchModels;
 using HotelManagement.CheckInMaking;
 using HotelManagement.CompleteCheckInModel;
@@ -8,9 +7,6 @@ using HotelManagement.Structures;
 using HotelManagement.Views.Pages;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.ViewModels
 {
@@ -21,6 +17,7 @@ namespace HotelManagement.ViewModels
         private readonly INavigation navigation;
         private readonly ICompleteCheckIn completeCheckIn;
 
+        public bool IsEditing => completeCheckIn.Id <= 0;
         public string RoomPrice => checkInRoom.RoomPrice;
         public string ServicePrice => checkInRoom.ServicePrice;
         public string FinalPrice => checkInRoom.FinalPrice;

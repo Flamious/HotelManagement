@@ -4,11 +4,6 @@ using HotelManagement.DirectorPageData;
 using HotelManagement.Employee;
 using HotelManagement.Navigation;
 using Ninject.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement
 {

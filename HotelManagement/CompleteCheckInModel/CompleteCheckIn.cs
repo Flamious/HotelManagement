@@ -1,13 +1,8 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
-using BLL.Models.SearchModels;
 using HotelManagement.Converters;
 using HotelManagement.Structures;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.CompleteCheckInModel
 {
@@ -154,7 +149,7 @@ namespace HotelManagement.CompleteCheckInModel
         {
             CheckIn.CheckInId = Id;
             List<CheckInServiceModel> connection = new List<CheckInServiceModel>();
-            foreach(ServiceData service in Services)
+            foreach (ServiceData service in Services)
             {
                 connection.Add(new CheckInServiceModel()
                 {
@@ -164,7 +159,6 @@ namespace HotelManagement.CompleteCheckInModel
                 });
             }
             checkInService.EditCheckIn(CheckIn, connection);
-            //dbCrud.UpdateCheckIn(CheckIn, connection);
             Clear();
         }
 
@@ -204,7 +198,7 @@ namespace HotelManagement.CompleteCheckInModel
             CheckIn = dbCrud.GetCheckIn(checkInId);
             Guests = dbInfo.FindGuests(checkInId);
             GuestDocuments = new List<GuestDocuments>();
-            foreach(GuestModel guest in Guests)
+            foreach (GuestModel guest in Guests)
             {
                 GuestDocuments.Add(new GuestDocuments(guest.Document.TrimEnd(' ')));
             }
@@ -213,7 +207,7 @@ namespace HotelManagement.CompleteCheckInModel
             RoomNumber = room.RoomNumber;
             Services = new List<ServiceData>();
             List<CheckInServiceModel> checkInServices = dbInfo.FindServices(checkInId);
-            foreach(CheckInServiceModel checkInServiceModel in checkInServices)
+            foreach (CheckInServiceModel checkInServiceModel in checkInServices)
             {
                 Services.Add(new ServiceData(dbCrud.GetService(checkInServiceModel.ServiceId), checkInServiceModel.Number));
             }

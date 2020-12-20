@@ -121,22 +121,11 @@
     <Compile Include="Views\Pages\GuestPage.xaml.cs">
       <DependentUpon>GuestPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Tables\CheckInTable.xaml.cs">
-      <DependentUpon>CheckInTable.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Views\Pages\AdminPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Pages\AdmitCheckInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\GuestPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Pages\Tables\CheckInTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,10 +137,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Tables\GuestsTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,9 +145,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Views\Pages\AdminPage.xaml.cs">
-      <DependentUpon>AdminPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -172,9 +154,6 @@
     </Compile>
     <Compile Include="Views\Pages\EmployeePage.xaml.cs">
       <DependentUpon>EmployeePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Pages\Tables\GuestsTable.xaml.cs">
-      <DependentUpon>GuestsTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

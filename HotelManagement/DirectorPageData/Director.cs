@@ -99,11 +99,11 @@ namespace HotelManagement.DirectorPageData
         {
             get
             {
-                return roomRev;
+                return serviceRev;
             }
             set
             {
-                roomRev = "Прибыль с доп. услуг: " + value;
+                serviceRev = "Прибыль с доп. услуг: " + value;
                 DataChanged?.Invoke(null, new PropertyChangedEventArgs("ServiceRevenue"));
             }
         }
@@ -111,11 +111,11 @@ namespace HotelManagement.DirectorPageData
         {
             get
             {
-                return roomRev;
+                return completeRev;
             }
             set
             {
-                roomRev = "Общая прибыль: " + value;
+                completeRev = "Общая прибыль: " + value;
                 DataChanged?.Invoke(null, new PropertyChangedEventArgs("CompleteRevenue"));
             }
         }
