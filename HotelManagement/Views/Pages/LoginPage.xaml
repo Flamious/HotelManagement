@@ -61,7 +61,11 @@
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>
-                    
+                    <TextBlock 
+                        Style="{DynamicResource MaterialDesignTextBlock}" 
+                        Foreground="Red"
+                        HorizontalAlignment="Center"
+                        Text="{Binding Error, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>

@@ -15,6 +15,7 @@ namespace HotelManagement.ViewModels
         private readonly IEmployee employee;
         private readonly IDirector director;
 
+        public string Error { get; set; }
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
         {
@@ -23,10 +24,20 @@ namespace HotelManagement.ViewModels
                 return loginCommand ?? (loginCommand = new RelayCommand(obj =>
                 {
                     var data = obj as LoginData;
-                    if (string.IsNullOrEmpty(data.Login) || string.IsNullOrEmpty(data.PasswordBox.Password)) return;
+                    if (string.IsNullOrEmpty(data.Login) || string.IsNullOrEmpty(data.PasswordBox.Password))
+                    {
+                        Error = "Поля не могут быть пустыми";
+                        OnPropertyChanged("Error");
+                        return;
+                    }
                     AccountFullData account = authorization.FindAccount(data.Login, data.PasswordBox.Password) ?? null;
 
-                    if (account == null) return;
+                    if (account == null)
+                    {
+                        Error = "Неверный логин/пароль";
+                        OnPropertyChanged("Error");
+                        return;
+                    }
 
                     switch (account.Modifier.Trim(' '))
                     {
@@ -47,12 +58,14 @@ namespace HotelManagement.ViewModels
                         default:
                             return;
                     }
+                    Error = "";
                 }));
             }
         }
 
         public VMLoginPage()
         {
+            Error = "";
             navigation = IoC.Get<INavigation>();
             authorization = BLL.ServiceModules.IoC.Get<IAuthorizationService>();
             employee = IoC.Get<IEmployee>();

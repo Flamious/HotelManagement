@@ -40,7 +40,7 @@
                     Margin="5 2"
                     VerticalAlignment="Top" HorizontalAlignment="Right"
                     Style="{StaticResource MaterialDesignIconButton}"
-                        ToolTip="Добавление гостей"
+                        ToolTip="Далее"
                         Command="{Binding ForwardCommand}">
                         <materialDesign:PackIcon Kind="ArrowRight" />
                     </Button>
@@ -152,7 +152,7 @@
                             Margin="5 2"
                             VerticalAlignment="Top" HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignIconButton}"
-                            ToolTip="Редактировать">
+                            ToolTip="Установить количество">
                                 <materialDesign:PackIcon Kind="Add" />
                             </Button>
                         </StackPanel>
