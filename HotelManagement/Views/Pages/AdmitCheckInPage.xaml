@@ -73,10 +73,12 @@
                     Text="Доп. услуги"
                             Margin="5 0"
                     Style="{DynamicResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                            <ScrollViewer MaxHeight="140" Margin="5 2" VerticalScrollBarVisibility="Auto">
                             <TextBlock
                     Text="{Binding Services}"
-                            Margin="5 0"
-                    Style="{DynamicResource MaterialDesignTextBlock}"></TextBlock>
+                    Style="{DynamicResource MaterialDesignTextBlock}">
+                            </TextBlock>
+                            </ScrollViewer>
 
                         </StackPanel>
                     </Border>
